@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public GameObject shotgunSprite;
     public float runSpeed = 40f;
     bool jump = false;
+    bool dash = false;
     float horizontalMove = 0f;
     public int playerHealth = 12;
     public string current_gun = "pistol";
@@ -30,6 +31,12 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
+        }
+
+        //Hardcoded af. change later
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            dash = true;
         }
 
         //HARDCODED AF... CHANGE LATER
@@ -54,9 +61,9 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         // Move our character
-        controller2D.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        controller2D.Move(horizontalMove * Time.fixedDeltaTime, false, jump, dash);
         jump = false;
-
+        dash = false;
     }
     //damage player based on the amount of dmg received
     public void DamagePlayer(int damage)
