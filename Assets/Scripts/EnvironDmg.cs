@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnvironDmg : MonoBehaviour
 {
-    public Player player_info;
+    //public Player player_info;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +21,7 @@ public class EnvironDmg : MonoBehaviour
     {
         if (col.gameObject.layer == 8)
         {
-            player_info.transform.position = player_info.spawn.position;
+            //player_info.transform.position = player_info.spawn.position;
         }
     }
 }

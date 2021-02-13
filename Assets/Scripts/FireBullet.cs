@@ -8,7 +8,7 @@ public class FireBullet : MonoBehaviour
     public GameObject bulletPrefab;
     public int shotgunPellets = 4;
 
-    public Player player;
+    //public Player player;
     public PlayerSoundManager soundManager;
     public Transform pistolFirePt;
     public Transform shotgunFirePt;
@@ -31,19 +31,19 @@ public class FireBullet : MonoBehaviour
 
     void Shoot()
     {
-        switch (player.current_gun)
-        {
-            case "pistol":
-                player.DamagePlayer(1);
-                StartCoroutine(FirePistol());
-                soundManager.PlayPistolFire();
-                break;
-            case "shotgun":
-                player.DamagePlayer(2);
-                FireShotgun();
-                soundManager.PlayShotgunFire();
-                break;
-        }
+        // switch (player.current_gun)
+        // {
+        //     case "pistol":
+        //         player.DamagePlayer(1);
+        //         StartCoroutine(FirePistol());
+        //         soundManager.PlayPistolFire();
+        //         break;
+        //     case "shotgun":
+        //         player.DamagePlayer(2);
+        //         FireShotgun();
+        //         soundManager.PlayShotgunFire();
+        //         break;
+        // }
     }
     
     IEnumerator FirePistol()

@@ -22,28 +22,28 @@ public class Ambient_Controller : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Player player = other.gameObject.GetComponentInParent<Player>();
-        if (player != null)
-        {
-            if (ambient_src.clip != ambient2)
-            {
-                ambient_src.clip = ambient2;
-                ambient_src.Play();
-            }
+        //Player player = other.gameObject.GetComponentInParent<Player>();
+        // if (player != null)
+        // {
+        //     if (ambient_src.clip != ambient2)
+        //     {
+        //         ambient_src.clip = ambient2;
+        //         ambient_src.Play();
+        //     }
             
-        }
+        // }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        Player player = other.gameObject.GetComponentInParent<Player>();
-        if (player != null)
-        {
-            if (ambient_src.clip == ambient2)
-            {
-                ambient_src.clip = ambient1;
-                ambient_src.Play();
-            }
-        }
+        //Player player = other.gameObject.GetComponentInParent<Player>();
+        // if (player != null)
+        // {
+        //     if (ambient_src.clip == ambient2)
+        //     {
+        //         ambient_src.clip = ambient1;
+        //         ambient_src.Play();
+        //     }
+        // }
     }
 }

@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     public float speed = 10f;
     public int shotgun_base_DMG = 1;
     public int pistol_base_DMG = 1;
-    public Player player;
+    //public Player player;
 
     public float damage_mult = 1.0f;
 
@@ -23,23 +23,23 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         Enemy enemy = col.GetComponent<Enemy>();
-        if (enemy != null)
-        {
-            switch (player.current_gun)
-            {
-                case "pistol":
-                    enemy.TakeDamage((int)(pistol_base_DMG*damage_mult));
-                    break;
-                case "shotgun":
-                    enemy.TakeDamage((int)(shotgun_base_DMG*damage_mult));
-                    break;
-            }
+        // if (enemy != null)
+        // {
+        //     switch (player.current_gun)
+        //     {
+        //         case "pistol":
+        //             enemy.TakeDamage((int)(pistol_base_DMG*damage_mult));
+        //             break;
+        //         case "shotgun":
+        //             enemy.TakeDamage((int)(shotgun_base_DMG*damage_mult));
+        //             break;
+        //     }
             
-        }
-        if (col.name != "player")
-        {
-            Destroy(gameObject);
-        }
+        // }
+        // if (col.name != "player")
+        // {
+        //     Destroy(gameObject);
+        // }
         
         
     }

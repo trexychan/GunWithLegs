@@ -7,7 +7,7 @@ public class PlayerSoundManager : MonoBehaviour
     public AudioSource footstep;
     public AudioClip[] pistol_fire;
     public AudioClip[] shotgun_fire;
-    public CharacterController2D player;
+    public StatePlayerController player;
     public float gun_volume = 0.5f;
     // Start is called before the first frame update
     void Start()
@@ -18,12 +18,12 @@ public class PlayerSoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.isGrounded() && player.getVelocity().magnitude > 2f && !footstep.isPlaying)
-        {
-            footstep.volume = Random.Range(0.8f, 1);
-            footstep.pitch = Random.Range(0.8f, 1.1f);
-            footstep.Play();
-        }
+        // if (player.isGrounded && player.getVelocity().magnitude > 2f && !footstep.isPlaying)
+        // {
+        //     footstep.volume = Random.Range(0.8f, 1);
+        //     footstep.pitch = Random.Range(0.8f, 1.1f);
+        //     footstep.Play();
+        // }
     }
 
     public void PlayPistolFire()
