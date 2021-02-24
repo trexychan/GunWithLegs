@@ -6,11 +6,10 @@ public class PlayerMovementTest : MonoBehaviour
 {
     public CharacterController2D controller;
     public float runSpeed = 40f;
+
     bool jump = false;
-    
     float horizontalMove = 0f;
 
-    // Update is called once per frame
     void Update()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
