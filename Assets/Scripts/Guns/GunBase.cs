@@ -8,6 +8,7 @@ public abstract class GunBase : MonoBehaviour
     public int shotCost;
     public Size size;
     public float damage;
+    public float maxRange;
     public float fireRate;
     public RuntimeAnimatorController animController;
     public Transform firePt;

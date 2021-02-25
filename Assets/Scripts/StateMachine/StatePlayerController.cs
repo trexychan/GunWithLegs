@@ -60,7 +60,7 @@ public class StatePlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         currentGun = 0;
         gunList = new List<GunBase>();
-        gunList.Add(new Pistol(this, firePoint, pistolHitEffect, pistolFireSound, GetComponent<LineRenderer>(), null));
+        gunList.Add(new Pistol(this, firePoint, pistolHitEffect, pistolFireSound, GetComponent<LineRenderer>(), null, 5f));
     }
 
     public void Update() {

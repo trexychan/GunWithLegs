@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pistol : RaycastGun
 {
     private IEnumerator coroutine;
-    public Pistol(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController) {
+    public Pistol(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController, float maxRange) {
         this.size = Size.LIGHT;
         this.shotCost = 1;
         this.damage = 10f;
@@ -16,6 +16,7 @@ public class Pistol : RaycastGun
         this.fireSound = fireSound;
         this.player = player;
         this.animController = animatorController;
+        this.maxRange = 5f;
     }
 
     public override void Shoot()
@@ -28,16 +29,11 @@ public class Pistol : RaycastGun
         }
         temp.y += Random.Range(-0.1f,0.1f);
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePt.position, temp);
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePt.position, temp, maxRange);
         Physics2D.IgnoreLayerCollision(8, Physics2D.IgnoreRaycastLayer);
-        Debug.Log(hitInfo.collider.gameObject.layer);
+        Debug.Log(hitInfo);
         if (hitInfo)
         {
-            // Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
-            // if (enemy != null)
-            // {
-            //     enemy.TakeDamage((int)(damage));
-            // }
             bulletTrail.SetPosition(0,firePt.position);
             bulletTrail.SetPosition(1,hitInfo.point);
 
@@ -46,8 +42,9 @@ public class Pistol : RaycastGun
 
         } else 
         {
+            Debug.Log("Nothing");
             bulletTrail.SetPosition(0,firePt.position);
-            bulletTrail.SetPosition(1,firePt.position + temp*100);
+            bulletTrail.SetPosition(1,firePt.position + temp*maxRange);
         }
         player.playSound(fireSound);
         player.showBulletTrail(bulletTrail);

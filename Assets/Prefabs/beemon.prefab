@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 522809591022391740}
   - component: {fileID: 522809591022391741}
   - component: {fileID: 522809591022391739}
-  - component: {fileID: 522809591022391738}
-  - component: {fileID: -1414420144186169735}
   m_Layer: 11
   m_Name: beemon
   m_TagString: Untagged
@@ -111,31 +109,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
---- !u!114 &522809591022391738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522809591022391742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3282285dbca2abf4f9e36eff2efcbcd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 4
---- !u!114 &-1414420144186169735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522809591022391742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9708c3ba7e8ffe4882a8d624fafb25a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 4
-  speed: -1
-  beemon: {fileID: 0}
