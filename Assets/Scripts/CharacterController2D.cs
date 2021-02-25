@@ -30,6 +30,9 @@ public class CharacterController2D : MonoBehaviour
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
+	private bool canDoubleJump, hasDoubleJumped = false;
+	private int currentJumpCount = 0;
+
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -54,6 +57,7 @@ public class CharacterController2D : MonoBehaviour
 			if (colliders[i].gameObject != gameObject)
 			{
 				m_Grounded = true;
+				hasDoubleJumped = false;
 				if (!wasGrounded)
 					OnLandEvent.Invoke();
 			}
@@ -129,6 +133,15 @@ public class CharacterController2D : MonoBehaviour
 			// Add a vertical force to the player.
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+		} else if (!m_Grounded && jump && canDoubleJump && !hasDoubleJumped) { // jump again if already in the air and can double jump
+			if (m_Rigidbody2D.velocity.y < 0 && m_Rigidbody2D.velocity.y > -2.0f) { // add some extra force if player jumps when falling down at a certain speed
+				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * 1.25f));
+			} else if (m_Rigidbody2D.velocity.y <= -2.0f) { 
+				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * 1.5f));
+			} else {
+				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			}
+			hasDoubleJumped = true;
 		}
 	}
 
@@ -149,5 +162,10 @@ public class CharacterController2D : MonoBehaviour
 	public Vector2 getVelocity()
 	{
 		return m_Rigidbody2D.velocity;
+	}
+
+	public void setDoubleJump(bool doubleJumpAbility)
+	{
+		canDoubleJump = doubleJumpAbility;
 	}
 }

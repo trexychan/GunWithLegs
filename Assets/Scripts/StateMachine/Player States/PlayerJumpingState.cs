@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerJumpingState : PlayerState {
-
     
     public override void Enter(PlayerStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
@@ -22,6 +21,12 @@ public class PlayerJumpingState : PlayerState {
 
         if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame()) {
             stateInput.playerController.Shoot();
+        }
+
+        if (stateInput.playerControls.InGame.Jump.WasPressedThisFrame() && stateInput.playerController.canJump())
+        {
+            stateInput.playerController.hasJumpedOnce = true;
+            stateInput.playerController.Jump();
         }
 
         if (stateInput.rb.velocity.y <= 0)

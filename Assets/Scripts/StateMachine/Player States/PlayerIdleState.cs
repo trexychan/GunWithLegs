@@ -23,7 +23,7 @@ public class PlayerIdleState : PlayerState {
             stateInput.playerController.Shoot();
         }
         
-        if (stateInput.playerControls.InGame.Jump.IsPressed() && stateInput.playerController.isGrounded)
+        if (stateInput.playerControls.InGame.Jump.WasPressedThisFrame() && stateInput.playerController.canJump())
         {
             stateInput.playerController.Jump();
             character.ChangeState<PlayerJumpingState>();
