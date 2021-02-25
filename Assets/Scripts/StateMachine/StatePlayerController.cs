@@ -39,6 +39,7 @@ public class StatePlayerController : MonoBehaviour
     public AudioClip pistolFireSound;
     public AudioSource audioSource;
     int currentGun;
+    public bool canDoubleJump = false, hasJumpedOnce = false, hasDoubleJumped = false;
 
     private void Awake() {
         playerControls = new PlayerControls();
@@ -75,7 +76,26 @@ public class StatePlayerController : MonoBehaviour
     //if you jump it changes your y velocity to the maxJumpVelocity
     public void Jump()
     {
-       rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity);
+        if (!isGrounded && canDoubleJump && hasJumpedOnce) {
+            rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity * 1.2f);
+            hasJumpedOnce = false;
+            hasDoubleJumped = true;
+            Debug.Log("second jump");
+        } else if (isGrounded && !hasJumpedOnce) {
+            rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity);
+            hasDoubleJumped = false;
+            Debug.Log("first jump");
+        }
+    }
+
+    public bool canJump()
+    {
+        if (isGrounded) {
+            return true;
+        } else if (!isGrounded && canDoubleJump && !hasDoubleJumped) {
+            return true;
+        }
+        return false;
     }
 
     public void JumpRelease()
@@ -202,6 +222,10 @@ public class StatePlayerController : MonoBehaviour
         bulletTrail.enabled = true;
         yield return new WaitForSeconds(0.02f);
         bulletTrail.enabled = false;
+    }
+
+    public void setDoubleJump(bool canPlayerDoubleJump) {
+        canDoubleJump = canPlayerDoubleJump;
     }
 
 }
