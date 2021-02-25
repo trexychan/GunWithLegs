@@ -33,12 +33,13 @@ public class PlayerFallingState : PlayerState {
         }
         if (stateInput.lastXDir != horizontalMovement)
         {
-            if (horizontalMovement != 0)
-            {
-                stateInput.lastXDir = horizontalMovement;
-                stateInput.spriteRenderer.flipX = horizontalMovement == -1;
-            }
+
+            stateInput.player.transform.rotation = Quaternion.Euler(0, horizontalMovement == -1 ? 180 : 0, 0);
+            
+            // stateInput.spriteRenderer.flipX = horizontalMovement == -1;
+
         }
+        stateInput.lastXDir = horizontalMovement;
     }
 
 

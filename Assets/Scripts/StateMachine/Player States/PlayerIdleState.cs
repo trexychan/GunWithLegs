@@ -36,19 +36,19 @@ public class PlayerIdleState : PlayerState {
             if (stateInput.playerControls.InGame.Move.ReadValue<Vector2>().x > -0.1f && stateInput.playerControls.InGame.Move.ReadValue<Vector2>().x < 0.1f) {
                 horizontalMovement = 0;
             }
-            if (stateInput.lastXDir != horizontalMovement)
+            if (horizontalMovement != 0 && stateInput.lastXDir != horizontalMovement)
             {
-                if (horizontalMovement != 0)
-                {
-                    stateInput.lastXDir = horizontalMovement;
-                    //stateInput.anim.Play("Player_Run");
-                    stateInput.spriteRenderer.flipX = horizontalMovement == -1;
-                }
-                else
+                stateInput.player.transform.rotation = Quaternion.Euler(0, horizontalMovement == -1 ? 180 : 0, 0);
+                
+                //stateInput.anim.Play("Player_Run");
+                // stateInput.spriteRenderer.flipX = horizontalMovement == -1;
+                if (horizontalMovement == 0)
                 {
                     //stateInput.anim.Play("Player_Idle");
                 }
             }
+            stateInput.lastXDir = horizontalMovement;
+            
         }
     }
 

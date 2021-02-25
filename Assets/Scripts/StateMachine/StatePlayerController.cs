@@ -40,6 +40,8 @@ public class StatePlayerController : MonoBehaviour
     public AudioSource audioSource;
     int currentGun;
 
+    public bool facingRight = true;
+
     private void Awake() {
         playerControls = new PlayerControls();
     }
