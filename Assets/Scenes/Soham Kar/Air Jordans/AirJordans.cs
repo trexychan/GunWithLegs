@@ -7,7 +7,7 @@ public class AirJordans : MonoBehaviour
     void OnTriggerEnter2D(Collider2D hitCollider)
     {
         if (hitCollider.gameObject.tag == "Player") {
-            hitCollider.gameObject.GetComponent<CharacterController2D>().setDoubleJump(true);
+            hitCollider.gameObject.GetComponent<StatePlayerController>().setDoubleJump(true);
             Destroy(gameObject);
         }
     }

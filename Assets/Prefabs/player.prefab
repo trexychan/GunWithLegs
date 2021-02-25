@@ -338,12 +338,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c5b8b5408fe7f47bd8c5a6b7870aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 5
   accelerationTimeAirborne: 0.05
   accelerationTimeGrounded: 0
   moveAfterLaunchTime: 0.03
   moveInput: {x: 0, y: 0}
-  maxJumpVelocity: 10
+  maxJumpVelocity: 7
   minJumpVelocity: 5
   isGrounded: 0
   checkRadius: 0.01
@@ -359,6 +359,7 @@ MonoBehaviour:
   pistolHitEffect: {fileID: 6152003406021164188, guid: 513c6cd46304aac43bd55fdc0b444720,
     type: 3}
   pistolFireSound: {fileID: 8300000, guid: 32279df05fd1de146893799b2769da6c, type: 3}
+  audioSource: {fileID: 0}
 --- !u!114 &2339468830940379823
 MonoBehaviour:
   m_ObjectHideFlags: 0

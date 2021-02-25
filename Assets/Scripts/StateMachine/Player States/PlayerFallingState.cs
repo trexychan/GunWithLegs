@@ -21,6 +21,13 @@ public class PlayerFallingState : PlayerState {
             stateInput.playerController.Shoot();
         }
 
+        if (stateInput.playerControls.InGame.Jump.WasPressedThisFrame() && stateInput.playerController.canJump())
+        {
+            stateInput.playerController.hasJumpedOnce = true;
+            stateInput.playerController.Jump();
+            character.ChangeState<PlayerJumpingState>();
+        }
+
         if (stateInput.playerController.isGrounded)
         {
             character.ChangeState<PlayerIdleState>();
