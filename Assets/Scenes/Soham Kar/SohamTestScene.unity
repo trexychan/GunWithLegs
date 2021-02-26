@@ -8892,7 +8892,7 @@ Transform:
   m_GameObject: {fileID: 2062079156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children:
   - {fileID: 1134381751}
   - {fileID: 324562831}
@@ -8990,6 +8990,7 @@ MonoBehaviour:
   shotCost: 0
   size: 2
   damage: 0
+  maxRange: 0
   fireRate: 3
   animController: {fileID: 0}
   firePt: {fileID: 195678468}
@@ -9034,6 +9035,7 @@ MonoBehaviour:
   canDoubleJump: 0
   hasJumpedOnce: 0
   hasDoubleJumped: 0
+  facingRight: 1
 --- !u!1001 &2770662625740576266
 PrefabInstance:
   m_ObjectHideFlags: 0

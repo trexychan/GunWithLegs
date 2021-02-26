@@ -8,7 +8,7 @@ public class Pistol : RaycastGun
     public Pistol(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController, float maxRange) {
         this.size = Size.LIGHT;
         this.shotCost = 1;
-        this.damage = 10f;
+        this.damage = 1;
         this.fireRate = 1.0f;
         this.firePt = firePoint;
         this.bulletTrail = renderer;
@@ -22,11 +22,15 @@ public class Pistol : RaycastGun
     public override void Shoot()
     {
         Vector3 temp = new Vector3();
-        if (player.playerManager.GetStateInput().spriteRenderer.flipX) {
-            temp = new Vector3(firePt.position.x - 5f, firePt.position.y, firePt.position.z);
-        } else {
-            temp = firePt.right;
-        }
+        // if (player.playerManager.GetStateInput().spriteRenderer.flipX) {
+        //     Debug.Log("The sprite is flipped!");
+        //     firePt.position = new Vector3(firePt.position.x - .08f, firePt.position.y, firePt.position.z);
+        //     temp = new Vector3(firePt.position.x - .08f, firePt.position.y, firePt.position.z);
+        // } else {
+        //     Debug.Log("The sprite is fine!");
+        //     temp = firePt.right;
+        // }
+        temp = firePt.right;
         temp.y += Random.Range(-0.1f,0.1f);
 
         RaycastHit2D hitInfo = Physics2D.Raycast(firePt.position, temp, maxRange);

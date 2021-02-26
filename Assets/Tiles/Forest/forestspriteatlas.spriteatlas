@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: forestspriteatlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 2677560423871121382, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -2669029799029691653, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -8399233190599827846, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: 3505022594225606299, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -842622324862304136, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -2058867857214338133, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -2123491747058135502, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -211733682185465438, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: 1776877806860553453, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -3198748413074521665, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -3864483205139193653, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: 6333502285754647977, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -5272604227190475179, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: 6915871627532620002, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -8352412825104045931, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -609808661829919915, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -3845072994854707654, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: 7187620043515147246, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -1713757466550246563, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -3693139087151507823, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -5994679063047739716, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -7393894852323772832, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -1770856080480003670, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: 3352467622735325798, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: 7305560205178018812, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: 8817397377394148504, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: 8724417273247839679, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -8732676027746166060, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: -5310194085209439986, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  - {fileID: 6012787321573341666, guid: 1eb6152e213652745954972f5bd678b1, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - forest_tileset_8
+  - forest_tileset_0
+  - forest_tileset_2
+  - forest_tileset_3
+  - forest_tileset_4
+  - forest_tileset_5
+  - forest_tileset_7
+  - forest_tileset_31
+  - forest_tileset_30
+  - forest_tileset_33
+  - forest_tileset_32
+  - forest_tileset_34
+  - forest_tileset_19
+  - forest_tileset_18
+  - forest_tileset_12
+  - forest_tileset_28
+  - forest_tileset_11
+  - forest_tileset_29
+  - forest_tileset_26
+  - forest_tileset_17
+  - forest_tileset_27
+  - forest_tileset_16
+  - forest_tileset_24
+  - forest_tileset_15
+  - forest_tileset_25
+  - forest_tileset_14
+  - forest_tileset_22
+  - forest_tileset_23
+  - forest_tileset_20
+  - forest_tileset_21
+  m_Tag: forestspriteatlas
+  m_IsVariant: 0

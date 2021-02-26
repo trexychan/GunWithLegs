@@ -41,6 +41,8 @@ public class StatePlayerController : MonoBehaviour
     int currentGun;
     public bool canDoubleJump = false, hasJumpedOnce = false, hasDoubleJumped = false;
 
+    public bool facingRight = true;
+
     private void Awake() {
         playerControls = new PlayerControls();
     }
