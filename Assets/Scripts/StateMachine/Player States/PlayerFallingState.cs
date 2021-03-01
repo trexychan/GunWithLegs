@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerFallingState : PlayerState {
     public override void Enter(PlayerStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
-        //stateInput.anim.Play("Player_Fall");
+        stateInput.anim.Play("Player_Fall");
     }
 
     public override void Update(PlayerStateInput stateInput)
