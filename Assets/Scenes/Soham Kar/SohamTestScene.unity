@@ -8807,7 +8807,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2062079156
 GameObject:
@@ -8987,16 +8987,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e402c5b834ad22d479f5f060a873c426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotCost: 0
-  size: 2
-  damage: 0
-  maxRange: 0
-  fireRate: 3
-  animController: {fileID: 0}
-  firePt: {fileID: 195678468}
-  player: {fileID: 2062079165}
-  bullet: {fileID: 8666213990023224848, guid: a13f4c46fb719ea408fb498833778fc6, type: 3}
-  bulletSpeed: 10
 --- !u!114 &2062079165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9025,17 +9015,18 @@ MonoBehaviour:
   dashTime: 0.1
   dashSpeed: 8
   gunList:
-  - {fileID: 2062079164}
+  - {fileID: 0}
   playerManager: {fileID: 2062079159}
   firePoint: {fileID: 195678468}
   pistolHitEffect: {fileID: 6152003406021164188, guid: 513c6cd46304aac43bd55fdc0b444720,
     type: 3}
+  hitEffects: []
+  bulletObjs: []
   pistolFireSound: {fileID: 8300000, guid: 32279df05fd1de146893799b2769da6c, type: 3}
   audioSource: {fileID: 0}
   canDoubleJump: 0
   hasJumpedOnce: 0
   hasDoubleJumped: 0
-  facingRight: 1
 --- !u!1001 &2770662625740576266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9056,7 +9047,7 @@ PrefabInstance:
     - target: {fileID: 2770662624393624986, guid: 3aad2773ef5967b48924292ac343c7a6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2770662624393624986, guid: 3aad2773ef5967b48924292ac343c7a6,
         type: 3}

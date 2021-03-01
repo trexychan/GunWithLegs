@@ -7,7 +7,7 @@ public class PlayerIdleState : PlayerState {
     public override void Enter(PlayerStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
         stateInput.lastXDir = 0;
-        //stateInput.anim.Play("Player_Idle");
+        stateInput.anim.Play("Player_Idle");
     }
 
     public override void Update(PlayerStateInput stateInput)
@@ -19,8 +19,10 @@ public class PlayerIdleState : PlayerState {
             return;
         }
 
-        if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame()) {
+        if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame() && stateInput.playerController.canFire) {
+            stateInput.anim.Play("Player_Fire");
             stateInput.playerController.Shoot();
+            
         }
         
         if (stateInput.playerControls.InGame.Jump.WasPressedThisFrame() && stateInput.playerController.canJump())
@@ -40,11 +42,11 @@ public class PlayerIdleState : PlayerState {
             {
                 stateInput.player.transform.rotation = Quaternion.Euler(0, horizontalMovement == -1 ? 180 : 0, 0);
                 
-                //stateInput.anim.Play("Player_Run");
+                stateInput.anim.Play("Player_Run");
                 // stateInput.spriteRenderer.flipX = horizontalMovement == -1;
                 if (horizontalMovement == 0)
                 {
-                    //stateInput.anim.Play("Player_Idle");
+                    stateInput.anim.Play("Player_Idle");
                 }
             }
             stateInput.lastXDir = horizontalMovement;

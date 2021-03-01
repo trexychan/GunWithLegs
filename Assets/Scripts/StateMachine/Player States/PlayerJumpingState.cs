@@ -6,7 +6,7 @@ public class PlayerJumpingState : PlayerState {
     
     public override void Enter(PlayerStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
-        //stateInput.anim.Play("Player_Jump");
+        stateInput.anim.Play("Player_Jump");
         stateInput.lastXDir = 0;
     }
 
