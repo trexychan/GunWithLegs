@@ -18,24 +18,33 @@ public class PlayerJumpingState : PlayerState {
             return;
         }
 
+        if (stateInput.playerControls.InGame.SwitchLeft.WasPressedThisFrame()) {
+            stateInput.playerController.switchGun(false);
+        }
+
+        if (stateInput.playerControls.InGame.SwitchRight.WasPressedThisFrame()) {
+            stateInput.playerController.switchGun(true);
+        }
+
         if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame()) {
             stateInput.playerController.Shoot();
         }
 
         if (stateInput.playerControls.InGame.Jump.WasPressedThisFrame() && stateInput.playerController.canJump())
         {
-            stateInput.playerController.hasJumpedOnce = true;
             stateInput.playerController.Jump();
         }
 
         if (stateInput.rb.velocity.y <= 0)
         {
             character.ChangeState<PlayerFallingState>();
+            return;
         }
-        else if (stateInput.playerControls.InGame.Jump.WasReleasedThisFrame())
+        if (stateInput.playerControls.InGame.Jump.WasReleasedThisFrame())
         {
             stateInput.playerController.JumpRelease();
             character.ChangeState<PlayerFallingState>();
+            return;
         }
         // Movement animations and saving previous input
         int horizontalMovement = (int)Mathf.Sign(stateInput.playerControls.InGame.Move.ReadValue<Vector2>().x);
