@@ -88,7 +88,7 @@ public class StatePlayerController : MonoBehaviour
         } else if (isGrounded && !hasJumpedOnce) {
             rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity);
             hasDoubleJumped = false;
-            Debug.Log("first jump");
+            //Debug.Log("first jump");
         }
     }
 
