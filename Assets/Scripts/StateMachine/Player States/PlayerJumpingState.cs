@@ -6,7 +6,7 @@ public class PlayerJumpingState : PlayerState {
     
     public override void Enter(PlayerStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
-        //stateInput.anim.Play("Player_Jump");
+        stateInput.anim.Play("Player_Jump");
         stateInput.lastXDir = 0;
     }
 
@@ -40,12 +40,11 @@ public class PlayerJumpingState : PlayerState {
         }
         // Movement animations and saving previous input
         int horizontalMovement = (int)Mathf.Sign(stateInput.playerControls.InGame.Move.ReadValue<Vector2>().x);
+        
         if (stateInput.lastXDir != horizontalMovement)
         {
-            if (horizontalMovement != 0)
-            {
-                stateInput.spriteRenderer.flipX = horizontalMovement == -1;
-            }
+            stateInput.player.transform.rotation = Quaternion.Euler(0, horizontalMovement == -1 ? 180 : 0, 0);
+            // stateInput.spriteRenderer.flipX = horizontalMovement == -1;
         }
         stateInput.lastXDir = horizontalMovement;
     }

@@ -41,6 +41,7 @@ public class PlayerLaunchState : PlayerState
         {
             if (horizontalMovement != 0)
             {
+                // stateInput.player.transform.Rotate(0f,180f,0f);
                 //stateInput.spriteRenderer.flipX = horizontalMovement == -1;
                 stateInput.lastXDir = horizontalMovement;
             }

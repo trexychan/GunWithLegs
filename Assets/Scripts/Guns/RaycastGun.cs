@@ -5,8 +5,6 @@ using UnityEngine;
 public class RaycastGun : GunBase
 {
     public LineRenderer bulletTrail;
-    public GameObject hitEffect;
-    public AudioClip fireSound;
 
     public override void Shoot()
     {

@@ -8,6 +8,7 @@ public class PlayerDashState : PlayerState
     public override void Enter(PlayerStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
         dashTimer = stateInput.playerController.dashTime;
+        stateInput.anim.Play("Player_Dash");
     }
 
     public override void ForceCleanUp(PlayerStateInput stateInput)

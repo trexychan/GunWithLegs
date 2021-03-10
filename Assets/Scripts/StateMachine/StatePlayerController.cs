@@ -30,16 +30,20 @@ public class StatePlayerController : MonoBehaviour
     public PlayerControls playerControls;
     public float dashTime;
     public float dashSpeed;
+    public bool canFire = true;
 
     public List<GunBase> gunList;
     public Player playerManager;
     [SerializeField]
     public Transform firePoint;
-    public GameObject pistolHitEffect;
+    public GameObject[] hitEffects = new GameObject[5];
+    public GameObject[] bulletObjs = new GameObject[5];
+    public List<RuntimeAnimatorController> gunAnimControllers = new List<RuntimeAnimatorController>();
     public AudioClip pistolFireSound;
     public AudioSource audioSource;
     int currentGun;
     public bool canDoubleJump = false, hasJumpedOnce = false, hasDoubleJumped = false;
+
 
     private void Awake() {
         playerControls = new PlayerControls();
@@ -60,7 +64,7 @@ public class StatePlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         currentGun = 0;
         gunList = new List<GunBase>();
-        gunList.Add(new Pistol(this, firePoint, pistolHitEffect, pistolFireSound, GetComponent<LineRenderer>(), null, 5f));
+        gunList.Add(new Pistol(this, firePoint, hitEffects[0], pistolFireSound, GetComponent<LineRenderer>(), null));
     }
 
     public void Update() {
@@ -191,9 +195,23 @@ public class StatePlayerController : MonoBehaviour
     }
 
     public void Shoot() {
-       Vector2 shootDir = clampTo8Directions(playerControls.InGame.Move.ReadValue<Vector2>());
-       //use the abstract gun class to shoot
-       gunList[currentGun].Shoot();
+        Vector2 shootDir = clampTo8Directions(playerControls.InGame.Move.ReadValue<Vector2>());
+        //use the abstract gun class to shoot
+        if (canFire) {
+            canFire = false;
+            gunList[currentGun].Shoot();
+            StartCoroutine(delayNextShot());
+        }
+        
+        
+       
+    }
+
+    public IEnumerator delayNextShot()
+    {
+        Debug.Log("starting");
+        yield return new WaitForSeconds(gunList[currentGun].fireRate);
+        canFire = true;
     }
 
     // void OnCollisionEnter2D(Collision2D collision)

@@ -14,6 +14,7 @@ public class Player : Character<Player, PlayerState, PlayerStateInput> {
         stateInput.playerController = GetComponent<StatePlayerController>();
         stateInput.stateChanged = false;
         stateInput.playerControls = stateInput.playerController.playerControls;
+        stateInput.player = gameObject;
     }
 
     override protected void SetInitialState()
@@ -49,4 +50,5 @@ public class PlayerStateInput : CharacterStateInput
     public PlayerControls playerControls;
     public Camera playerCamera;
     public Player stateMachine;
+    public GameObject player;
 }
