@@ -15,7 +15,7 @@ public class Rocket : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo) // if rocket hits something, explode
     {
-        if (hitInfo.name != "Player") {
+        if (hitInfo.gameObject.layer != 8) {
             Destroy(gameObject);
             Instantiate(impactEffect, transform.position, transform.rotation);
         }
