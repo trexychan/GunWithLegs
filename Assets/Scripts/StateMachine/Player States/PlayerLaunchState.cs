@@ -21,31 +21,29 @@ public class PlayerLaunchState : PlayerState
         if (stateInput.playerController.isGrounded)
         {
             character.ChangeState<PlayerIdleState>();
-        } else if (stateInput.rb.velocity.y <= 0)
+            return;
+        }
+        if (stateInput.rb.velocity.y <= 0)
         {
             character.ChangeState<PlayerFallingState>();
+            return;
         }
         
         
         // Movement animations and saving previous input
         int horizontalMovement = (int)Mathf.Sign(stateInput.playerControls.InGame.Move.ReadValue<Vector2>().x);
-        // if (InputMap.Instance.GetInput(ActionType.RIGHT))
-        // {
-        //     horizontalMovement++;
-        // }
-        // if (InputMap.Instance.GetInput(ActionType.LEFT))
-        // {
-        //     horizontalMovement--;
-        // }
-        if (stateInput.lastXDir != horizontalMovement)
-        {
-            if (horizontalMovement != 0)
-            {
-                // stateInput.player.transform.Rotate(0f,180f,0f);
-                //stateInput.spriteRenderer.flipX = horizontalMovement == -1;
-                stateInput.lastXDir = horizontalMovement;
-            }
+        if (stateInput.playerControls.InGame.Move.ReadValue<Vector2>().x > -0.1f && stateInput.playerControls.InGame.Move.ReadValue<Vector2>().x < 0.1f) {
+            horizontalMovement = 0;
         }
+        if (horizontalMovement != 0 && stateInput.lastXDir != horizontalMovement)
+        {
+            Debug.Log(stateInput.lastXDir + " " + horizontalMovement);
+            stateInput.player.transform.rotation = Quaternion.Euler(0, horizontalMovement == -1 ? 180 : 0, 0);
+            
+            // stateInput.spriteRenderer.flipX = horizontalMovement == -1;
+
+        }
+        stateInput.lastXDir = horizontalMovement;
     }
     public override void FixedUpdate(PlayerStateInput stateInput)
     {

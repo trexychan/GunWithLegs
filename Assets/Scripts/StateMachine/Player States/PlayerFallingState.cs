@@ -17,6 +17,14 @@ public class PlayerFallingState : PlayerState {
             return;
         }
 
+        if (stateInput.playerControls.InGame.SwitchLeft.WasPressedThisFrame()) {
+            stateInput.playerController.switchGun(false);
+        }
+
+        if (stateInput.playerControls.InGame.SwitchRight.WasPressedThisFrame()) {
+            stateInput.playerController.switchGun(true);
+        }
+
         if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame()) {
             stateInput.playerController.Shoot();
         }
@@ -26,11 +34,13 @@ public class PlayerFallingState : PlayerState {
             stateInput.playerController.hasJumpedOnce = true;
             stateInput.playerController.Jump();
             character.ChangeState<PlayerJumpingState>();
+            return;
         }
 
         if (stateInput.playerController.isGrounded)
         {
             character.ChangeState<PlayerIdleState>();
+            return;
         }
 
         // Movement animations and saving previous input
@@ -38,9 +48,9 @@ public class PlayerFallingState : PlayerState {
         if (stateInput.playerControls.InGame.Move.ReadValue<Vector2>().x > -0.1f && stateInput.playerControls.InGame.Move.ReadValue<Vector2>().x < 0.1f) {
             horizontalMovement = 0;
         }
-        if (stateInput.lastXDir != horizontalMovement)
+        if (horizontalMovement != 0 && stateInput.lastXDir != horizontalMovement)
         {
-
+            Debug.Log(stateInput.lastXDir + " " + horizontalMovement);
             stateInput.player.transform.rotation = Quaternion.Euler(0, horizontalMovement == -1 ? 180 : 0, 0);
             
             // stateInput.spriteRenderer.flipX = horizontalMovement == -1;
