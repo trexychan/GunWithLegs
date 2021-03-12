@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerFallingState : PlayerState {
     public override void Enter(PlayerStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
-        //stateInput.anim.Play("Player_Fall");
+        stateInput.anim.Play("Player_Fall");
     }
 
     public override void Update(PlayerStateInput stateInput)
@@ -40,12 +40,13 @@ public class PlayerFallingState : PlayerState {
         }
         if (stateInput.lastXDir != horizontalMovement)
         {
-            if (horizontalMovement != 0)
-            {
-                stateInput.lastXDir = horizontalMovement;
-                stateInput.spriteRenderer.flipX = horizontalMovement == -1;
-            }
+
+            stateInput.player.transform.rotation = Quaternion.Euler(0, horizontalMovement == -1 ? 180 : 0, 0);
+            
+            // stateInput.spriteRenderer.flipX = horizontalMovement == -1;
+
         }
+        stateInput.lastXDir = horizontalMovement;
     }
 
 
