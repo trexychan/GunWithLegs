@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pistol : RaycastGun
 {
     private IEnumerator coroutine;
-    public Pistol(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController) {
+    public Pistol(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController, GameObject shell, Transform ejectPt) {
         this.size = Size.LIGHT;
         this.shotCost = 1;
         this.damage = 1;
@@ -16,7 +16,9 @@ public class Pistol : RaycastGun
         this.fireSound = fireSound;
         this.player = player;
         this.animController = animatorController;
-        this.maxRange = 10f;
+        this.maxRange = 9f;
+        this.shell = shell;
+        this.ejectPt = ejectPt;
     }
 
     public override void Shoot()
@@ -35,8 +37,13 @@ public class Pistol : RaycastGun
 
             GameObject new_hit = (GameObject)Instantiate(hitEffect, hitInfo.point, Quaternion.identity);
             Destroy(new_hit, 0.267f);
+            Enemy target = hitInfo.collider.GetComponent<Enemy>();
+            if (target) {
+                Debug.Log("hit!");
+                target.TakeDamage(this.damage);
+            }
+            
 
-            Debug.Log(hitInfo.transform.name);
 
         } else 
         {
@@ -45,7 +52,13 @@ public class Pistol : RaycastGun
         }
         player.playSound(fireSound);
         player.showBulletTrail(bulletTrail);
+        ejectRound();
         
+    }
+
+    private void ejectRound()
+    {
+        GameObject round_instance = Instantiate(shell,ejectPt.position,Quaternion.identity) as GameObject;
     }
 
     

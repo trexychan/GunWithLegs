@@ -13,6 +13,8 @@ public class EnemyIdleState : EnemyState
     public override void Update(EnemyStateInput stateInput)
     {
         base.Update(stateInput);
+
+        
         
     }
 }

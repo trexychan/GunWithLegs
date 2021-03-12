@@ -69,6 +69,7 @@ Transform:
   - {fileID: 2426624051888569882}
   - {fileID: 2426624051562713749}
   - {fileID: 2426624051838760800}
+  - {fileID: 2529842189276518489}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -220,17 +221,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   groundCheck: {fileID: 2426624051562713749}
-  dashTime: 0.1
-  dashSpeed: 8
+  dashTime: 0.3
+  dashSpeed: 20
   canFire: 1
   gunList: []
   playerManager: {fileID: 0}
   firePoint: {fileID: 2426624051888569882}
+  ejectPt: {fileID: 2529842189276518489}
   hitEffects:
   - {fileID: 6152003406021164188, guid: 513c6cd46304aac43bd55fdc0b444720, type: 3}
   bulletObjs:
   - {fileID: 298703161671112519, guid: 002cc101a69524c4ba6918c2ec57d36d, type: 3}
-  gunAnimControllers: []
+  shell: {fileID: 8994036941532790516, guid: 0fd06ae7ea5ecd342939180c5508f915, type: 3}
   pistolFireSound: {fileID: 8300000, guid: 32279df05fd1de146893799b2769da6c, type: 3}
   audioSource: {fileID: 0}
   canDoubleJump: 0
@@ -607,4 +609,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2426624051722942713}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2726221185400784452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2529842189276518489}
+  m_Layer: 8
+  m_Name: ejectpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2529842189276518489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2726221185400784452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.046, y: 0.151, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2426624051722942713}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

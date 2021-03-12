@@ -17,7 +17,8 @@ public class PlayerFallingState : PlayerState {
             return;
         }
 
-        if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame()) {
+        if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame() && stateInput.playerController.canFire) {
+            stateInput.anim.SetTrigger("shoot");
             stateInput.playerController.Shoot();
         }
 

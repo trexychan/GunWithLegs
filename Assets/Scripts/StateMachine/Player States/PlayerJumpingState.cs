@@ -20,6 +20,7 @@ public class PlayerJumpingState : PlayerState {
         }
 
         if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame()) {
+            stateInput.anim.SetTrigger("shoot");
             stateInput.playerController.Shoot();
         }
 

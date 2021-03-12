@@ -36,9 +36,10 @@ public class StatePlayerController : MonoBehaviour
     public Player playerManager;
     [SerializeField]
     public Transform firePoint;
+    public Transform ejectPt;
     public GameObject[] hitEffects = new GameObject[5];
     public GameObject[] bulletObjs = new GameObject[5];
-    public List<RuntimeAnimatorController> gunAnimControllers = new List<RuntimeAnimatorController>();
+    public GameObject shell;
     public AudioClip pistolFireSound;
     public AudioSource audioSource;
     int currentGun;
@@ -64,7 +65,7 @@ public class StatePlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         currentGun = 0;
         gunList = new List<GunBase>();
-        gunList.Add(new Pistol(this, firePoint, hitEffects[0], pistolFireSound, GetComponent<LineRenderer>(), null));
+        gunList.Add(new Pistol(this, firePoint, hitEffects[0], pistolFireSound, GetComponent<LineRenderer>(), null, shell, ejectPt));
     }
 
     public void Update() {
@@ -199,6 +200,7 @@ public class StatePlayerController : MonoBehaviour
         //use the abstract gun class to shoot
         if (canFire) {
             canFire = false;
+            // playerManager.GetStateInput().anim.SetTrigger("shoot");
             gunList[currentGun].Shoot();
             StartCoroutine(delayNextShot());
         }
@@ -209,7 +211,7 @@ public class StatePlayerController : MonoBehaviour
 
     public IEnumerator delayNextShot()
     {
-        Debug.Log("starting");
+        Debug.Log("Starting delay coroutine");
         yield return new WaitForSeconds(gunList[currentGun].fireRate);
         canFire = true;
     }

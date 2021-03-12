@@ -10,7 +10,7 @@ public class Enemy : Character<Enemy, EnemyState, EnemyStateInput>
     public float moveSpeed = 1.0f;
     public float attackRate = 1.0f;
     public int attackStrength = 1;
-    bool isAlive = true;
+    public bool isAlive = true;
     public EnemyType enemyType;
     
     protected override void Init()
@@ -22,6 +22,7 @@ public class Enemy : Character<Enemy, EnemyState, EnemyStateInput>
         stateInput.boxCollider = GetComponent<BoxCollider2D>();
         stateInput.stateChanged = false;
         stateInput.enemy = gameObject;
+        this.currentHealth = maxHealth;
     }
 
     protected override void SetInitialState()
@@ -44,10 +45,8 @@ public class Enemy : Character<Enemy, EnemyState, EnemyStateInput>
     public virtual void Attack() {
 
     }
-    
 
-
-    public virtual void TurnToFacePlayer(Transform pos) {
+    public void TurnToFacePlayer(Transform pos) {
         if (pos.transform.position.x > this.gameObject.transform.position.x) {
             this.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         } else {
@@ -57,6 +56,13 @@ public class Enemy : Character<Enemy, EnemyState, EnemyStateInput>
 
     public virtual void Die() {
         this.gameObject.SetActive(false);
+    }
+
+    public void TakeDamage(int damage) {
+        this.currentHealth -= damage;
+        if (this.currentHealth <= 0) {
+            Die();
+        }
     }
 }
 
