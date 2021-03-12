@@ -35,7 +35,8 @@ public class StatePlayerController : MonoBehaviour
     public List<GunBase> gunList;
     public Player playerManager;
     [SerializeField]
-    public Transform firePoint;
+    //public Transform firePoint;
+    public Transform firePoint, DPLeftFirePoint;
     public GameObject[] hitEffects = new GameObject[5];
     public GameObject[] bulletObjs = new GameObject[5];
     public List<RuntimeAnimatorController> gunAnimControllers = new List<RuntimeAnimatorController>();
@@ -43,6 +44,7 @@ public class StatePlayerController : MonoBehaviour
     public AudioSource audioSource;
     int currentGun;
     public bool canDoubleJump = false, hasJumpedOnce = false, hasDoubleJumped = false;
+    public LineRenderer dualPistolsLeftFirePoint;
 
 
     private void Awake() {
@@ -65,6 +67,7 @@ public class StatePlayerController : MonoBehaviour
         currentGun = 0;
         gunList = new List<GunBase>();
         gunList.Add(new Pistol(this, firePoint, hitEffects[0], pistolFireSound, GetComponent<LineRenderer>(), null));
+        gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], pistolFireSound, GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
     }
 
     public void Update() {
