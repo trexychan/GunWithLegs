@@ -66,6 +66,8 @@ public class StatePlayerController : MonoBehaviour
         gunList = new List<GunBase>();
         gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0]));
         gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
+        gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
+
         foreach (RuntimeAnimatorController anim in gunAnimControllers) {
             Debug.Log(anim);
         }
@@ -212,7 +214,7 @@ public class StatePlayerController : MonoBehaviour
         }
         
         
-       
+
     }
 
     public IEnumerator delayNextShot()
