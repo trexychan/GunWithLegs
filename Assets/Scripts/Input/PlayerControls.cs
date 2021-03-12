@@ -58,6 +58,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""SwitchRight"",
+                    ""type"": ""Value"",
+                    ""id"": ""da3102b0-6cf2-41b9-a34b-d114b4f607eb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SwitchLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""5cc21309-ac69-4c78-986d-f3a2e35b561f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -172,15 +188,59 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""b6ab7bc1-80f6-42fd-9a3e-1f204ae85b45"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""name"": ""Left Stick Digital"",
+                    ""id"": ""dc97d545-f307-4c65-90be-8ecd3daca162"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Up"",
+                    ""id"": ""883fddf9-eeb3-4739-b61e-88396c1ca18b"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Down"",
+                    ""id"": ""ad91bacd-f68c-4779-9fac-e8ab94058e57"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Left"",
+                    ""id"": ""bdc94819-fbf1-4dd5-a542-79738c08a5a4"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Right"",
+                    ""id"": ""61eb532a-3593-4ca8-8b07-56a484981572"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -247,6 +307,50 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""adeeb668-7a70-40c5-87de-0ff1c387aafb"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1130a13-7d47-4f48-b430-fbdac1577b3c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ea369c9-cf12-4886-a0a1-c574d3f9e16d"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8116130-4b3d-4ead-9ec5-bcde8da9c99a"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -259,6 +363,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_InGame_Dash = m_InGame.FindAction("Dash", throwIfNotFound: true);
         m_InGame_Jump = m_InGame.FindAction("Jump", throwIfNotFound: true);
         m_InGame_Move = m_InGame.FindAction("Move", throwIfNotFound: true);
+        m_InGame_SwitchRight = m_InGame.FindAction("SwitchRight", throwIfNotFound: true);
+        m_InGame_SwitchLeft = m_InGame.FindAction("SwitchLeft", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -322,6 +428,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_InGame_Dash;
     private readonly InputAction m_InGame_Jump;
     private readonly InputAction m_InGame_Move;
+    private readonly InputAction m_InGame_SwitchRight;
+    private readonly InputAction m_InGame_SwitchLeft;
     public struct InGameActions
     {
         private @PlayerControls m_Wrapper;
@@ -330,6 +438,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_InGame_Dash;
         public InputAction @Jump => m_Wrapper.m_InGame_Jump;
         public InputAction @Move => m_Wrapper.m_InGame_Move;
+        public InputAction @SwitchRight => m_Wrapper.m_InGame_SwitchRight;
+        public InputAction @SwitchLeft => m_Wrapper.m_InGame_SwitchLeft;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -351,6 +461,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnMove;
+                @SwitchRight.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnSwitchRight;
+                @SwitchRight.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnSwitchRight;
+                @SwitchRight.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnSwitchRight;
+                @SwitchLeft.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnSwitchLeft;
+                @SwitchLeft.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnSwitchLeft;
+                @SwitchLeft.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnSwitchLeft;
             }
             m_Wrapper.m_InGameActionsCallbackInterface = instance;
             if (instance != null)
@@ -367,6 +483,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @SwitchRight.started += instance.OnSwitchRight;
+                @SwitchRight.performed += instance.OnSwitchRight;
+                @SwitchRight.canceled += instance.OnSwitchRight;
+                @SwitchLeft.started += instance.OnSwitchLeft;
+                @SwitchLeft.performed += instance.OnSwitchLeft;
+                @SwitchLeft.canceled += instance.OnSwitchLeft;
             }
         }
     }
@@ -377,5 +499,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnSwitchRight(InputAction.CallbackContext context);
+        void OnSwitchLeft(InputAction.CallbackContext context);
     }
 }
