@@ -5,10 +5,18 @@ using UnityEngine;
 public class Shotgun : RaycastGun
 {
     public int shotgunPellets = 5;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public Shotgun(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController) {
+        this.size = Size.LIGHT;
+        this.shotCost = 1;
+        this.damage = 1;
+        this.fireRate = 0.2f;
+        this.firePt = firePoint;
+        this.bulletTrail = renderer;
+        this.hitEffect = hitEffect;
+        this.fireSound = fireSound;
+        this.player = player;
+        this.animController = animatorController;
+        this.maxRange = 10f;
     }
 
     // Update is called once per frame

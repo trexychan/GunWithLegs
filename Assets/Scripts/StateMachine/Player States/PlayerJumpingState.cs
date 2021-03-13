@@ -7,7 +7,6 @@ public class PlayerJumpingState : PlayerState {
     public override void Enter(PlayerStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
         stateInput.anim.Play("Player_Jump");
-        stateInput.lastXDir = 0;
     }
 
     public override void Update(PlayerStateInput stateInput)
@@ -19,6 +18,14 @@ public class PlayerJumpingState : PlayerState {
             return;
         }
 
+        if (stateInput.playerControls.InGame.SwitchLeft.WasPressedThisFrame()) {
+            stateInput.playerController.switchGun(false);
+        }
+
+        if (stateInput.playerControls.InGame.SwitchRight.WasPressedThisFrame()) {
+            stateInput.playerController.switchGun(true);
+        }
+
         if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame()) {
             stateInput.anim.SetTrigger("shoot");
             stateInput.playerController.Shoot();
@@ -26,23 +33,27 @@ public class PlayerJumpingState : PlayerState {
 
         if (stateInput.playerControls.InGame.Jump.WasPressedThisFrame() && stateInput.playerController.canJump())
         {
-            stateInput.playerController.hasJumpedOnce = true;
             stateInput.playerController.Jump();
         }
 
         if (stateInput.rb.velocity.y <= 0)
         {
             character.ChangeState<PlayerFallingState>();
+            return;
         }
-        else if (stateInput.playerControls.InGame.Jump.WasReleasedThisFrame())
+        if (stateInput.playerControls.InGame.Jump.WasReleasedThisFrame())
         {
             stateInput.playerController.JumpRelease();
             character.ChangeState<PlayerFallingState>();
+            return;
         }
         // Movement animations and saving previous input
         int horizontalMovement = (int)Mathf.Sign(stateInput.playerControls.InGame.Move.ReadValue<Vector2>().x);
+        if (stateInput.playerControls.InGame.Move.ReadValue<Vector2>().x > -0.1f && stateInput.playerControls.InGame.Move.ReadValue<Vector2>().x < 0.1f) {
+            horizontalMovement = 0;
+        }
         
-        if (stateInput.lastXDir != horizontalMovement)
+        if (horizontalMovement != 0 && stateInput.lastXDir != horizontalMovement)
         {
             stateInput.player.transform.rotation = Quaternion.Euler(0, horizontalMovement == -1 ? 180 : 0, 0);
             // stateInput.spriteRenderer.flipX = horizontalMovement == -1;
