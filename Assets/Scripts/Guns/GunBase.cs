@@ -15,6 +15,8 @@ public abstract class GunBase : MonoBehaviour
     public StatePlayerController player;
     public GameObject hitEffect;
     public AudioClip fireSound;
+    public GameObject shell;
+    public Transform ejectPt;
     // public bool canFire;
 
 
