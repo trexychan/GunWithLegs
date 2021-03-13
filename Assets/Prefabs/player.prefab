@@ -233,8 +233,14 @@ MonoBehaviour:
   - {fileID: 6152003406021164188, guid: 513c6cd46304aac43bd55fdc0b444720, type: 3}
   bulletObjs:
   - {fileID: 298703161671112519, guid: 002cc101a69524c4ba6918c2ec57d36d, type: 3}
-  gunAnimControllers: []
-  pistolFireSound: {fileID: 8300000, guid: 32279df05fd1de146893799b2769da6c, type: 3}
+  - {fileID: 8666213990023224848, guid: a13f4c46fb719ea408fb498833778fc6, type: 3}
+  gunAnimControllers:
+  - {fileID: 9100000, guid: 90cf34ee26f0b8542be194c5d117361a, type: 2}
+  - {fileID: 9100000, guid: f1b0e433692e31245be5775119fd90aa, type: 2}
+  - {fileID: 9100000, guid: b36319a770a854843adb420707fe40a6, type: 2}
+  gunSounds:
+  - {fileID: 8300000, guid: 32279df05fd1de146893799b2769da6c, type: 3}
+  - {fileID: 8300000, guid: 2187eda6a59dc284cbf823b53932bb42, type: 3}
   audioSource: {fileID: 0}
   canDoubleJump: 0
   hasJumpedOnce: 0
@@ -250,7 +256,7 @@ Animator:
   m_GameObject: {fileID: 2426624051722942692}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f1b0e433692e31245be5775119fd90aa, type: 2}
+  m_Controller: {fileID: 9100000, guid: 90cf34ee26f0b8542be194c5d117361a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

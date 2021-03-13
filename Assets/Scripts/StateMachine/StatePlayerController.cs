@@ -40,7 +40,7 @@ public class StatePlayerController : MonoBehaviour
     public GameObject[] hitEffects = new GameObject[5];
     public GameObject[] bulletObjs = new GameObject[5];
     public List<RuntimeAnimatorController> gunAnimControllers = new List<RuntimeAnimatorController>();
-    public AudioClip pistolFireSound;
+    public AudioClip[] gunSounds;
     public AudioSource audioSource;
     int currentGun;
     public bool canDoubleJump = false, hasJumpedOnce = false, hasDoubleJumped = false;
@@ -66,8 +66,14 @@ public class StatePlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         currentGun = 0;
         gunList = new List<GunBase>();
-        gunList.Add(new Pistol(this, firePoint, hitEffects[0], pistolFireSound, GetComponent<LineRenderer>(), null));
         gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], pistolFireSound, GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
+        gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0]));
+        gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
+        gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
+
+        foreach (RuntimeAnimatorController anim in gunAnimControllers) {
+            Debug.Log(anim);
+        }
     }
 
     public void Update() {
@@ -91,13 +97,15 @@ public class StatePlayerController : MonoBehaviour
         } else if (isGrounded && !hasJumpedOnce) {
             rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity);
             hasDoubleJumped = false;
-            Debug.Log("first jump");
+            hasJumpedOnce = true;
+            //Debug.Log("first jump");
         }
     }
 
     public bool canJump()
     {
         if (isGrounded) {
+            hasJumpedOnce = false;
             return true;
         } else if (!isGrounded && canDoubleJump && !hasDoubleJumped) {
             return true;
@@ -195,6 +203,8 @@ public class StatePlayerController : MonoBehaviour
                 currentGun--;
             }
         }
+        playerManager.GetStateInput().anim.runtimeAnimatorController = gunList[currentGun].animController;
+        //Debug.Log(currentGun + " " + gunAnimControllers[currentGun]);
     }
 
     public void Shoot() {
@@ -207,7 +217,7 @@ public class StatePlayerController : MonoBehaviour
         }
         
         
-       
+
     }
 
     public IEnumerator delayNextShot()

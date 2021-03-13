@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RPG : ProjectileGun
 {
-    public RPG(StatePlayerController player, Transform firePoint, GameObject hitEffect, GameObject shotObj, AudioClip fireSound, RuntimeAnimatorController animatorController, float maxRange) {
+    public RPG(StatePlayerController player, Transform firePoint, GameObject hitEffect, GameObject shotObj, AudioClip fireSound, RuntimeAnimatorController animatorController) {
         this.size = Size.HEAVY;
         this.shotCost = 10;
         this.damage = 20;
@@ -16,7 +16,6 @@ public class RPG : ProjectileGun
         this.fireSound = fireSound;
         this.player = player;
         this.animController = animatorController;
-        this.maxRange = maxRange;
     }
 
     public override void Shoot()
