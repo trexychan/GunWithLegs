@@ -37,6 +37,8 @@ public class StatePlayerController : MonoBehaviour
     [SerializeField]
     //public Transform firePoint;
     public Transform firePoint, DPLeftFirePoint;
+    public Transform ejectPt;
+    public GameObject ejected_shell;
     public GameObject[] hitEffects = new GameObject[5];
     public GameObject[] bulletObjs = new GameObject[5];
     public List<RuntimeAnimatorController> gunAnimControllers = new List<RuntimeAnimatorController>();
@@ -66,8 +68,8 @@ public class StatePlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         currentGun = 0;
         gunList = new List<GunBase>();
-        gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], pistolFireSound, GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
-        gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0]));
+        gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
+        gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt));
         gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
         gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
 
