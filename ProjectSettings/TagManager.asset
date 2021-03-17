@@ -7,6 +7,7 @@ TagManager:
   - Explosion
   - Rocket
   - Enemy
+  - Beemon
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Checkpoint
   - Allies
   - PlayerFX
-  - 
+  - EnemyRanges
   - 
   - 
   - 

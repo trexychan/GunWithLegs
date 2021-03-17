@@ -37,9 +37,9 @@ public class Pistol : RaycastGun
 
             GameObject new_hit = (GameObject)Instantiate(hitEffect, hitInfo.point, Quaternion.identity);
             Destroy(new_hit, 0.267f);
-            Enemy target = hitInfo.collider.GetComponent<Enemy>();
+            
+            EnemyController target = hitInfo.collider.gameObject.GetComponent<EnemyController>();
             if (target) {
-                Debug.Log("hit!");
                 target.TakeDamage(this.damage);
             }
             
