@@ -223,8 +223,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   groundCheck: {fileID: 2426624051562713749}
-  dashTime: 0.1
-  dashSpeed: 8
+  dashTime: 0.12
+  dashSpeed: 20
   canFire: 1
   gunList: []
   playerManager: {fileID: 0}

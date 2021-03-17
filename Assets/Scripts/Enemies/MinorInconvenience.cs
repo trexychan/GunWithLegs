@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Beemon : Character<Beemon, BeemonState, BeemonStateInput>
+public class MinorInconvenience : Character<MinorInconvenience, MinorState, MinorStateInput>
 {
-    public float maxSpeed = 5f;
-    public bool facingRight = false;
-    public bool isAlive = true;
+    //general enemy stats
+    public float moveSpeed = 1.0f;
     public float attackRate = 1.0f;
     public float attackStrength = 1.0f;
-    public Transform waypoint_l;
-    public Transform waypoint_r;
-
-
+    public bool isAlive = true;
+    public bool facingRight = false;
+    
     protected override void Init()
     {
-        stateInput.beemon = this;
+        stateInput.minor_inconvenience = this;
         stateInput.anim = GetComponent<Animator>();
         stateInput.spriteRenderer = GetComponent<SpriteRenderer>();
         stateInput.rb = GetComponent<Rigidbody2D>();
@@ -23,19 +21,31 @@ public class Beemon : Character<Beemon, BeemonState, BeemonStateInput>
         stateInput.stateChanged = false;
         stateInput.gameobj = gameObject;
     }
+
     protected override void SetInitialState()
     {
-        ChangeState<BeemonWanderState>();
+        ChangeState<MinorIdleState>();
     }
 
+    public MinorStateInput GetStateInput() {
+        return stateInput;
+    }
+
+    public MinorState GetState() {
+        return state;
+    }
+
+    public bool IsAlive() {
+        return this.isAlive;
+    }
 }
 
-public abstract class BeemonState : CharacterState<Beemon, BeemonState, BeemonStateInput>
+public abstract class MinorState : CharacterState<MinorInconvenience, MinorState, MinorStateInput>
 {
 
 }
 
-public class BeemonStateInput : CharacterStateInput
+public class MinorStateInput : CharacterStateInput
 {
     public Animator anim;
     public SpriteRenderer spriteRenderer;
@@ -44,6 +54,6 @@ public class BeemonStateInput : CharacterStateInput
     public bool stateChanged;
     public GameObject lastWall;
     public int lastXDir;
-    public Beemon beemon;
+    public MinorInconvenience minor_inconvenience;
     public GameObject gameobj;
 }
