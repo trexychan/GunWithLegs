@@ -51,14 +51,9 @@ public class PlayerIdleState : PlayerState {
         if (horizontalMovement != 0 && stateInput.lastXDir != horizontalMovement)
         {
             stateInput.player.transform.rotation = Quaternion.Euler(0, horizontalMovement == -1 ? 180 : 0, 0);
-            
-            stateInput.anim.Play("Player_Run");
             // stateInput.spriteRenderer.flipX = horizontalMovement == -1;
-            if (horizontalMovement == 0)
-            {
-                stateInput.anim.Play("Player_Idle");
-            }
         }
+        stateInput.anim.SetFloat("speed", Mathf.Abs(horizontalMovement));
         stateInput.lastXDir = horizontalMovement;
     }
 

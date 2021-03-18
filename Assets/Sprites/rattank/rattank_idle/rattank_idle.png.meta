@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: 933b63140fdcbec42912d646b63c6af5
+guid: 08d270cadf5502e4da6921b17b7cc7dc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1514943954079150692
-    second: RPG_with_legs_idle_clone_0
+      213: 8848883410211696103
+    second: rattank_idle_0
   - first:
-      213: 4059026271867891008
-    second: RPG_with_legs_idle_clone_1
+      213: 7758811190824156617
+    second: rattank_idle_1
+  - first:
+      213: 4641086997090377339
+    second: rattank_idle_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -95,43 +98,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RPG_with_legs_idle_clone_0
+      name: rattank_idle_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 40
-        width: 54
-        height: 17
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 462738def79260510800000000000000
-      internalID: 1514943954079150692
+      spriteID: 7ede384049c8dca70800000000000000
+      internalID: 8848883410211696103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RPG_with_legs_idle_clone_1
+      name: rattank_idle_1
       rect:
         serializedVersion: 2
-        x: 2
-        y: 6
-        width: 54
-        height: 17
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04de9ac73ee845830800000000000000
-      internalID: 4059026271867891008
+      spriteID: 9cd366c8ba5dcab60800000000000000
+      internalID: 7758811190824156617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rattank_idle_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7e9149c804786040800000000000000
+      internalID: 4641086997090377339
       vertices: []
       indices: 
       edges: []

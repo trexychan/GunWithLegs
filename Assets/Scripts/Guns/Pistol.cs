@@ -7,9 +7,9 @@ public class Pistol : RaycastGun
     private IEnumerator coroutine;
     public Pistol(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController, GameObject shell, Transform ejectPt) {
         this.size = Size.LIGHT;
-        this.shotCost = 1;
+        this.shotCost = 1f;
         this.damage = 1;
-        this.fireRate = 0.2f;
+        this.fireRate = 0.25f;
         this.firePt = firePoint;
         this.bulletTrail = renderer;
         this.hitEffect = hitEffect;

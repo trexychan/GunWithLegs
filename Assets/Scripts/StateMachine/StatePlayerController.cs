@@ -91,12 +91,12 @@ public class StatePlayerController : MonoBehaviour
     //if you jump it changes your y velocity to the maxJumpVelocity
     public void Jump()
     {
-        if (!isGrounded && canDoubleJump && hasJumpedOnce) {
+        if (!isGrounded && canDoubleJump && hasJumpedOnce && canJump()) {
             rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity * 1.2f);
             hasJumpedOnce = false;
             hasDoubleJumped = true;
             Debug.Log("second jump");
-        } else if (isGrounded && !hasJumpedOnce) {
+        } else if (isGrounded && !hasJumpedOnce && canJump()) {
             rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity);
             hasDoubleJumped = false;
             hasJumpedOnce = true;
@@ -106,10 +106,10 @@ public class StatePlayerController : MonoBehaviour
 
     public bool canJump()
     {
-        if (isGrounded) {
+        if (isGrounded && gunList[currentGun].canDash()) {
             hasJumpedOnce = false;
             return true;
-        } else if (!isGrounded && canDoubleJump && !hasDoubleJumped) {
+        } else if (!isGrounded && canDoubleJump && !hasDoubleJumped && gunList[currentGun].canDash()) {
             return true;
         }
         return false;
