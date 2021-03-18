@@ -6,8 +6,8 @@ public class Shotgun : RaycastGun
 {
     public int shotgunPellets = 5;
     public Shotgun(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController) {
-        this.size = Size.LIGHT;
-        this.shotCost = 1;
+        this.size = Size.NORMAL;
+        this.shotCost = 4f;
         this.damage = 1;
         this.fireRate = 0.2f;
         this.firePt = firePoint;

@@ -2,40 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Beemon : Character<Beemon, BeemonState, BeemonStateInput>
+public class RatTank : Character<RatTank, TankState, TankStateInput>
 {
-    public float maxSpeed = 5f;
-    public bool facingRight = false;
+    //general enemy stats
+    public float moveSpeed = 1.0f;
     public float attackRate = 1.0f;
     public float attackStrength = 1.0f;
-    public Transform waypoint_l;
-    public Transform waypoint_r;
-
-
+    public bool facingRight = false;
+    
     protected override void Init()
     {
-        stateInput.beemon = this;
+        stateInput.rattank = this;
         stateInput.anim = GetComponent<Animator>();
         stateInput.spriteRenderer = GetComponent<SpriteRenderer>();
         stateInput.rb = GetComponent<Rigidbody2D>();
         stateInput.boxCollider = GetComponent<BoxCollider2D>();
         stateInput.stateChanged = false;
         stateInput.gameobj = gameObject;
-        stateInput.enemy_controller = GetComponent<EnemyController>();
     }
+
     protected override void SetInitialState()
     {
-        ChangeState<BeemonWanderState>();
+        ChangeState<TankIdleState>();
     }
 
+    public TankStateInput GetStateInput() {
+        return stateInput;
+    }
+
+    public TankState GetState() {
+        return state;
+    }
+
+    
 }
 
-public abstract class BeemonState : CharacterState<Beemon, BeemonState, BeemonStateInput>
+public abstract class TankState : CharacterState<RatTank, TankState, TankStateInput>
 {
 
 }
 
-public class BeemonStateInput : CharacterStateInput
+public class TankStateInput : CharacterStateInput
 {
     public Animator anim;
     public SpriteRenderer spriteRenderer;
@@ -44,7 +51,6 @@ public class BeemonStateInput : CharacterStateInput
     public bool stateChanged;
     public GameObject lastWall;
     public int lastXDir;
-    public Beemon beemon;
+    public RatTank rattank;
     public GameObject gameobj;
-    public EnemyController enemy_controller;
 }

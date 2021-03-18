@@ -6,7 +6,7 @@ public class RPG : ProjectileGun
 {
     public RPG(StatePlayerController player, Transform firePoint, GameObject hitEffect, GameObject shotObj, AudioClip fireSound, RuntimeAnimatorController animatorController) {
         this.size = Size.HEAVY;
-        this.shotCost = 10;
+        this.shotCost = 10f;
         this.damage = 20;
         this.fireRate = 3f;
         this.firePt = firePoint;

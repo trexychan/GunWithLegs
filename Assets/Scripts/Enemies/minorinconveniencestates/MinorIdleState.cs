@@ -12,9 +12,6 @@ public class MinorIdleState : MinorState
 
     public override void Update(MinorStateInput stateInput)
     {
-        base.Update(stateInput);
-
-        
-        
+        stateInput.enemy_controller.TurnToFacePlayer(stateInput.player.transform.position);
     }
 }
