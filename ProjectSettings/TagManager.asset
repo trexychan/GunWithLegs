@@ -8,6 +8,7 @@ TagManager:
   - Rocket
   - Enemy
   - Beemon
+  - Armor
   layers:
   - Default
   - TransparentFX

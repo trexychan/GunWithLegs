@@ -19,6 +19,8 @@ public class RatTank : Character<RatTank, TankState, TankStateInput>
         stateInput.boxCollider = GetComponent<BoxCollider2D>();
         stateInput.stateChanged = false;
         stateInput.gameobj = gameObject;
+        stateInput.enemy_controller = GetComponent<EnemyController>();
+        stateInput.player = GameObject.FindGameObjectWithTag("Player");
     }
 
     protected override void SetInitialState()
@@ -53,4 +55,6 @@ public class TankStateInput : CharacterStateInput
     public int lastXDir;
     public RatTank rattank;
     public GameObject gameobj;
+    public EnemyController enemy_controller;
+    public GameObject player;
 }

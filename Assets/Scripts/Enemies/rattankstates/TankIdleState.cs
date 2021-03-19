@@ -9,4 +9,16 @@ public class TankIdleState : TankState
         base.Enter(stateInput, transitionInfo);
         // stateInput.anim.Play("Enemy_Idle");
     }
+
+    public override void Update(TankStateInput stateInput)
+    {
+        stateInput.enemy_controller.TurnToFacePlayer(stateInput.player.transform.position);
+
+        if (stateInput.enemy_controller.spottedPlayer())
+        {
+            if (timer > stateInput.rattank.attackRate)
+            stateInput.anim.Play("Enemy_Attack");
+            
+        }
+    }
 }
