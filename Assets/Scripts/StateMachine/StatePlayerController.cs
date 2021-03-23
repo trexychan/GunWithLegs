@@ -217,9 +217,9 @@ public class StatePlayerController : MonoBehaviour
             gunList[currentGun].Shoot();
             StartCoroutine(delayNextShot());
         }
-        
-        
 
+        //sample code to fire camera shake
+        CamController.Instance.Shake(2, 0.1f);
     }
 
     public IEnumerator delayNextShot()
