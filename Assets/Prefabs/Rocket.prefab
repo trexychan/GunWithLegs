@@ -122,7 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   rb: {fileID: 5776542109103424521}
-  impactEffect: {fileID: 139366, guid: b185c1a9cf067374586d095111b15bd1, type: 3}
+  impactEffect: {fileID: 2117236851428820190, guid: a5a967e6ecf7e414f8695fc265751dca,
+    type: 3}
 --- !u!61 &145669055668448367
 BoxCollider2D:
   m_ObjectHideFlags: 0

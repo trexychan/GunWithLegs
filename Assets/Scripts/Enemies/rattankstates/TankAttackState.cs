@@ -6,8 +6,24 @@ public class TankAttackState : TankState
 {
     public override void Enter(TankStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
-        stateInput.anim.Play("Enemy_Spot");
+        Debug.Log("Entering Attack State");
+        stateInput.anim.Play("Enemy_Attack");
     }
+
+    public override void Update(TankStateInput stateInput)
+    {
+        
+    }
+
+
+
+
+
+
+
+
+
+    
 
     
 

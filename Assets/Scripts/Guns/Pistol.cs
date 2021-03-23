@@ -32,6 +32,7 @@ public class Pistol : RaycastGun
 
         if (hitInfo)
         {
+            Debug.Log(hitInfo.collider.name);
             bulletTrail.SetPosition(0,firePt.position);
             bulletTrail.SetPosition(1,hitInfo.point);
 
