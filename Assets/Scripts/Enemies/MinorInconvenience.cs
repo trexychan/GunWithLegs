@@ -6,9 +6,8 @@ public class MinorInconvenience : Character<MinorInconvenience, MinorState, Mino
 {
     //general enemy stats
     public float moveSpeed = 1.0f;
-    public float attackRate = 1.0f;
+    public int attackRate = 1;
     public float attackStrength = 1.0f;
-    public bool facingRight = false;
     
     protected override void Init()
     {

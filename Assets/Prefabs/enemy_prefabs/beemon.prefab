@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8676185462129824158}
   m_Layer: 11
   m_Name: beemon
-  m_TagString: Untagged
+  m_TagString: Beemon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6044dbe701742d643ba62380aaa384fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -199,8 +199,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 3
-  facingRight: 0
-  isAlive: 1
   attackRate: 1
   attackStrength: 1
   waypoint_l: {fileID: 8676185463383228030}
@@ -218,6 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  facingRight: 0
+  vision_origin: {fileID: 0}
 --- !u!1 &8676185462784365568
 GameObject:
   m_ObjectHideFlags: 0

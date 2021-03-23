@@ -5,8 +5,7 @@ using UnityEngine;
 public class Beemon : Character<Beemon, BeemonState, BeemonStateInput>
 {
     public float maxSpeed = 5f;
-    public bool facingRight = false;
-    public float attackRate = 1.0f;
+    public int attackRate = 1;
     public float attackStrength = 1.0f;
     public Transform waypoint_l;
     public Transform waypoint_r;

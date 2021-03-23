@@ -224,7 +224,6 @@ public class StatePlayerController : MonoBehaviour
 
     public IEnumerator delayNextShot()
     {
-        Debug.Log("starting");
         yield return new WaitForSeconds(gunList[currentGun].fireRate);
         canFire = true;
     }
