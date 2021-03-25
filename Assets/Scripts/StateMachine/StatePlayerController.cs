@@ -21,7 +21,7 @@ public class StatePlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     //the player's box collider
-    private BoxCollider2D boxCollder;
+    public BoxCollider2D boxCollider;
 
     //Everything for being grounded
     [HideInInspector]
@@ -33,6 +33,8 @@ public class StatePlayerController : MonoBehaviour
     public PlayerControls playerControls;
     public float dashTime;
     public float dashSpeed;
+    public float dashCooldownTime;
+    private float dashCooldownTimer;
     public bool canFire = true;
 
     public List<GunBase> gunList;
@@ -69,13 +71,13 @@ public class StatePlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerManager = GetComponent<Player>();
         audioSource = GetComponent<AudioSource>();
-        boxCollder = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
         currentGun = 0;
         gunList = new List<GunBase>();
         //gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
         gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt));
-        gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
-        gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
+        //gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
+        //gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
 
         foreach (RuntimeAnimatorController anim in gunAnimControllers) {
             Debug.Log(anim);
@@ -83,7 +85,7 @@ public class StatePlayerController : MonoBehaviour
     }
 
     public void Update() {
-        
+        updateDashCooldown();
     }
 
     public float CalculatePlayerVelocity(float RBvelocity, Vector2 input, float moveSpeed, float velocityXSmoothing, float accelerationTimeGrounded, float accelerationTimeAirborne, bool isGrounded)
@@ -103,7 +105,6 @@ public class StatePlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity);
             hasDoubleJumped = false;
             hasJumpedOnce = true;
-            //Debug.Log("first jump");
         }
     }
 
@@ -191,17 +192,22 @@ public class StatePlayerController : MonoBehaviour
     }
 
     public bool canDash() {
-        return gunList[currentGun].canDash();
+        return gunList[currentGun].canDash() && dashCooldownTimer <= 0;
+    }
+
+    public void startDashCooldown()
+    {
+        dashCooldownTimer = dashCooldownTime;
     }
 
     public bool checkIfGrounded() {
-        Vector2 startingPoint1 = new Vector2(gameObject.transform.position.x + boxCollder.offset.x , gameObject.transform.position.y + groundCheck.position.y);
-        Vector2 startingPoint2 = new Vector2(gameObject.transform.position.x + boxCollder.offset.x + boxCollder.size.x, gameObject.transform.position.y + boxCollder.offset.y);
+
+        Vector2 startingPoint1 = new Vector2(boxCollider.bounds.center.x - boxCollider.bounds.extents.x , boxCollider.bounds.center.y - boxCollider.bounds.extents.y);
+        Vector2 startingPoint2 = new Vector2(boxCollider.bounds.center.x + boxCollider.bounds.extents.x, boxCollider.bounds.center.y - boxCollider.bounds.extents.y);
         RaycastHit2D hit1 = Physics2D.Raycast(startingPoint1, Vector2.down, 0.2f, whatIsGround);
-        Debug.DrawRay(startingPoint1, Vector2.down, Color.blue, 0.5f);
+        Debug.DrawRay(startingPoint1, Vector2.down, Color.blue, 0.2f);
         RaycastHit2D hit2 = Physics2D.Raycast(startingPoint2, Vector2.down, 0.2f, whatIsGround);
-        //Debug.DrawRay(startingPoint2, Vector2.down, Color.blue, 0.5f);
-        Debug.Log("Hi I work");
+        Debug.DrawRay(startingPoint2, Vector2.down, Color.blue, 0.2f);
         if (hit1 || hit2)
         {
             return true;
@@ -209,6 +215,14 @@ public class StatePlayerController : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    private void updateDashCooldown()
+    {
+        if (dashCooldownTimer > 0)
+        {
+            dashCooldownTimer -= Time.deltaTime;
         }
     }
 
