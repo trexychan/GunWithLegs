@@ -20,6 +20,9 @@ public class StatePlayerController : MonoBehaviour
     //the player's rigidbody
     private Rigidbody2D rb;
 
+    //the player's box collider
+    private BoxCollider2D boxCollder;
+
     //Everything for being grounded
     [HideInInspector]
     public bool isGrounded;
@@ -66,12 +69,13 @@ public class StatePlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerManager = GetComponent<Player>();
         audioSource = GetComponent<AudioSource>();
+        boxCollder = GetComponent<BoxCollider2D>();
         currentGun = 0;
         gunList = new List<GunBase>();
         //gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
         gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt));
-        //gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
-        //gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
+        gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
+        gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
 
         foreach (RuntimeAnimatorController anim in gunAnimControllers) {
             Debug.Log(anim);
@@ -95,7 +99,6 @@ public class StatePlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity * 1.2f);
             hasJumpedOnce = false;
             hasDoubleJumped = true;
-            Debug.Log("second jump");
         } else if (isGrounded && !hasJumpedOnce) {
             rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity);
             hasDoubleJumped = false;
@@ -189,6 +192,24 @@ public class StatePlayerController : MonoBehaviour
 
     public bool canDash() {
         return gunList[currentGun].canDash();
+    }
+
+    public bool checkIfGrounded() {
+        Vector2 startingPoint1 = new Vector2(gameObject.transform.position.x + boxCollder.offset.x , gameObject.transform.position.y + groundCheck.position.y);
+        Vector2 startingPoint2 = new Vector2(gameObject.transform.position.x + boxCollder.offset.x + boxCollder.size.x, gameObject.transform.position.y + boxCollder.offset.y);
+        RaycastHit2D hit1 = Physics2D.Raycast(startingPoint1, Vector2.down, 0.2f, whatIsGround);
+        Debug.DrawRay(startingPoint1, Vector2.down, Color.blue, 0.5f);
+        RaycastHit2D hit2 = Physics2D.Raycast(startingPoint2, Vector2.down, 0.2f, whatIsGround);
+        //Debug.DrawRay(startingPoint2, Vector2.down, Color.blue, 0.5f);
+        Debug.Log("Hi I work");
+        if (hit1 || hit2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void switchGun(bool right) {
