@@ -217,6 +217,7 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   maxJumpVelocity: 25
   minJumpVelocity: 10
+  boxCollider: {fileID: 0}
   isGrounded: 0
   checkRadius: 0.01
   whatIsGround:
@@ -225,6 +226,7 @@ MonoBehaviour:
   groundCheck: {fileID: 2426624051562713749}
   dashTime: 0.12
   dashSpeed: 20
+  dashCooldownTime: 0.5
   canFire: 1
   gunList: []
   playerManager: {fileID: 0}

@@ -28,6 +28,10 @@ public abstract class GunBase : MonoBehaviour
         else {return false;}
     }
 
+    public virtual void updateComponents() {
+        
+    }
+
     
 }
 public enum Size
