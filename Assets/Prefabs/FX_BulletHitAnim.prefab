@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6341939399700654392}
   - component: {fileID: 2735230545681773326}
   - component: {fileID: 4515252096933950687}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FX_BulletHitAnim
   m_TagString: Untagged
   m_Icon: {fileID: 0}

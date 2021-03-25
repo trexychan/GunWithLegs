@@ -7,9 +7,9 @@ public class Pistol : RaycastGun
     private Queue<GameObject> roundPool;
     public Pistol(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController, GameObject shell, Transform ejectPt) {
         this.size = Size.LIGHT;
-        this.shotCost = 1;
+        this.shotCost = 1f;
         this.damage = 1;
-        this.fireRate = 0.2f;
+        this.fireRate = 0.25f;
         this.firePt = firePoint;
         this.bulletTrail = renderer;
         this.hitEffect = hitEffect;
@@ -38,14 +38,15 @@ public class Pistol : RaycastGun
 
         if (hitInfo)
         {
+            Debug.Log(hitInfo.collider.name);
             bulletTrail.SetPosition(0,firePt.position);
             bulletTrail.SetPosition(1,hitInfo.point);
 
             GameObject new_hit = (GameObject)Instantiate(hitEffect, hitInfo.point, Quaternion.identity);
             Destroy(new_hit, 0.267f);
-            Enemy target = hitInfo.collider.GetComponent<Enemy>();
+            
+            EnemyController target = hitInfo.collider.gameObject.GetComponent<EnemyController>();
             if (target) {
-                Debug.Log("hit!");
                 target.TakeDamage(this.damage);
             }
             
