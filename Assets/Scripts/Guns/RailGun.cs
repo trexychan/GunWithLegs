@@ -6,7 +6,7 @@ public class RailGun : RaycastGun
 {
     RailGun(StatePlayerController player, Transform firePt) {
         size = Size.HEAVY;
-        shotCost = 10;
+        shotCost = 10f;
         damage = 10;
         fireRate = 1.0f;
         this.firePt = firePt;

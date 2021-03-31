@@ -101,27 +101,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RPG_with_legs_attack_1_0
-      rect:
-        serializedVersion: 2
-        x: 5
-        y: 108
-        width: 54
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dda8a47ca96c95990800000000000000
-      internalID: -7396662544908514595
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: RPG_with_legs_attack_1_1
       rect:
         serializedVersion: 2
@@ -130,7 +109,7 @@ TextureImporter:
         width: 54
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -138,6 +117,48 @@ TextureImporter:
       bones: []
       spriteID: 9668f13c4cd51f360800000000000000
       internalID: 7201640378810730089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_with_legs_attack_1_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 9
+        width: 50
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38a56261e40bbe8e0800000000000000
+      internalID: -1663041787957716349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_with_legs_attack_1_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 108
+        width: 54
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dda8a47ca96c95990800000000000000
+      internalID: -7396662544908514595
       vertices: []
       indices: 
       edges: []
@@ -151,7 +172,7 @@ TextureImporter:
         width: 54
         height: 17
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -159,27 +180,6 @@ TextureImporter:
       bones: []
       spriteID: acdc7129a8cdc4d40800000000000000
       internalID: 5570069326865092042
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RPG_with_legs_attack_1_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 9
-        width: 54
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 38a56261e40bbe8e0800000000000000
-      internalID: -1663041787957716349
       vertices: []
       indices: 
       edges: []

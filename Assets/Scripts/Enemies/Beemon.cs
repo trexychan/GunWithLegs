@@ -5,9 +5,7 @@ using UnityEngine;
 public class Beemon : Character<Beemon, BeemonState, BeemonStateInput>
 {
     public float maxSpeed = 5f;
-    public bool facingRight = false;
-    public bool isAlive = true;
-    public float attackRate = 1.0f;
+    public int attackRate = 1;
     public float attackStrength = 1.0f;
     public Transform waypoint_l;
     public Transform waypoint_r;
@@ -22,6 +20,7 @@ public class Beemon : Character<Beemon, BeemonState, BeemonStateInput>
         stateInput.boxCollider = GetComponent<BoxCollider2D>();
         stateInput.stateChanged = false;
         stateInput.gameobj = gameObject;
+        stateInput.enemy_controller = GetComponent<EnemyController>();
     }
     protected override void SetInitialState()
     {
@@ -46,4 +45,5 @@ public class BeemonStateInput : CharacterStateInput
     public int lastXDir;
     public Beemon beemon;
     public GameObject gameobj;
+    public EnemyController enemy_controller;
 }

@@ -12,8 +12,9 @@ public class PlayerIdleState : PlayerState {
 
     public override void Update(PlayerStateInput stateInput)
     {
-        stateInput.playerController.isGrounded = Physics2D.OverlapCircle(stateInput.playerController.groundCheck.position, stateInput.playerController.checkRadius, stateInput.playerController.whatIsGround);
-        
+        stateInput.playerController.isGrounded = stateInput.playerController.checkIfGrounded();
+
+
         if (stateInput.playerController.canDash() && stateInput.playerControls.InGame.Dash.WasPressedThisFrame()) {
             character.ChangeState<PlayerDashState>();
             return;
@@ -51,14 +52,9 @@ public class PlayerIdleState : PlayerState {
         if (horizontalMovement != 0 && stateInput.lastXDir != horizontalMovement)
         {
             stateInput.player.transform.rotation = Quaternion.Euler(0, horizontalMovement == -1 ? 180 : 0, 0);
-            
-            stateInput.anim.Play("Player_Run");
             // stateInput.spriteRenderer.flipX = horizontalMovement == -1;
-            if (horizontalMovement == 0)
-            {
-                stateInput.anim.Play("Player_Idle");
-            }
         }
+        stateInput.anim.SetFloat("speed", Mathf.Abs(horizontalMovement));
         stateInput.lastXDir = horizontalMovement;
     }
 

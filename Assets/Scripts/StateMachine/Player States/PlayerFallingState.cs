@@ -50,7 +50,6 @@ public class PlayerFallingState : PlayerState {
         }
         if (horizontalMovement != 0 && stateInput.lastXDir != horizontalMovement)
         {
-            Debug.Log(stateInput.lastXDir + " " + horizontalMovement);
             stateInput.player.transform.rotation = Quaternion.Euler(0, horizontalMovement == -1 ? 180 : 0, 0);
             
             // stateInput.spriteRenderer.flipX = horizontalMovement == -1;

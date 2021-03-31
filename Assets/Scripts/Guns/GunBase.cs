@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class GunBase : MonoBehaviour
 {
     // Different guns consume your ammo at different rates. Some weapons might only take one bullet to fire a shot, but some may require several bullets to fire
-    public int shotCost;
+    public float shotCost;
     public Size size;
     public int damage;
     public float maxRange;
@@ -26,6 +26,10 @@ public abstract class GunBase : MonoBehaviour
     {
         if (size != Size.HEAVY) {return true;}
         else {return false;}
+    }
+
+    public virtual void updateComponents() {
+        
     }
 
     

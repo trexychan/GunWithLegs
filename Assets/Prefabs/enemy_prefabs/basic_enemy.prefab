@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6044dbe701742d643ba62380aaa384fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -166,13 +166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8bacb22e00abc4dba78b44d5c25a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
   moveSpeed: 1
   attackRate: 1
   attackStrength: 1
-  isAlive: 1
-  facingRight: 0
-  enemyType: 2
 --- !u!114 &7280301623016866443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,3 +182,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 2
+  facingRight: 0
+  vision_origin: {fileID: 0}

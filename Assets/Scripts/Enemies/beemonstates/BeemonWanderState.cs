@@ -15,14 +15,14 @@ public class BeemonWanderState : BeemonState
         if (stateInput.gameobj.transform.position.x > stateInput.beemon.waypoint_r.position.x)
         {
             stateInput.gameobj.transform.position = stateInput.beemon.waypoint_r.position;
-            stateInput.beemon.facingRight = !stateInput.beemon.facingRight;
+            stateInput.enemy_controller.facingRight = !stateInput.enemy_controller.facingRight;
             stateInput.gameobj.transform.rotation = Quaternion.Euler(0,0,0);
             stateInput.rb.velocity = -stateInput.rb.velocity;
         }
         if (stateInput.gameobj.transform.position.x < stateInput.beemon.waypoint_l.position.x)
         {
             stateInput.gameobj.transform.position = stateInput.beemon.waypoint_l.position;
-            stateInput.beemon.facingRight = !stateInput.beemon.facingRight;
+            stateInput.enemy_controller.facingRight = !stateInput.enemy_controller.facingRight;
             stateInput.gameobj.transform.rotation = Quaternion.Euler(0,180,0);
             stateInput.rb.velocity = -stateInput.rb.velocity;
         }

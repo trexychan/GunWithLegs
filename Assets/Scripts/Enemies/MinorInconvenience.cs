@@ -6,10 +6,8 @@ public class MinorInconvenience : Character<MinorInconvenience, MinorState, Mino
 {
     //general enemy stats
     public float moveSpeed = 1.0f;
-    public float attackRate = 1.0f;
+    public int attackRate = 1;
     public float attackStrength = 1.0f;
-    public bool isAlive = true;
-    public bool facingRight = false;
     
     protected override void Init()
     {
@@ -20,6 +18,8 @@ public class MinorInconvenience : Character<MinorInconvenience, MinorState, Mino
         stateInput.boxCollider = GetComponent<BoxCollider2D>();
         stateInput.stateChanged = false;
         stateInput.gameobj = gameObject;
+        stateInput.enemy_controller = GetComponent<EnemyController>();
+        stateInput.player = GameObject.FindGameObjectWithTag("Player");
     }
 
     protected override void SetInitialState()
@@ -35,11 +35,7 @@ public class MinorInconvenience : Character<MinorInconvenience, MinorState, Mino
         return state;
     }
 
-    public bool IsAlive() {
-        return this.isAlive;
-    }
 }
-
 public abstract class MinorState : CharacterState<MinorInconvenience, MinorState, MinorStateInput>
 {
 
@@ -56,4 +52,6 @@ public class MinorStateInput : CharacterStateInput
     public int lastXDir;
     public MinorInconvenience minor_inconvenience;
     public GameObject gameobj;
+    public EnemyController enemy_controller;
+    public GameObject player;
 }
