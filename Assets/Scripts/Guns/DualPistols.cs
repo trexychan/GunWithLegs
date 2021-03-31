@@ -10,7 +10,7 @@ public class DualPistols : RaycastGun
 
     public DualPistols(StatePlayerController player, Transform firstFirePoint, Transform secondFirePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer rendererRight, LineRenderer rendererLeft, RuntimeAnimatorController animatorController) {
         this.size = Size.LIGHT;
-        this.shotCost = 2;
+        this.shotCost = 2f;
         this.damage = 1;
         this.fireRate = 0.2f;
         this.firePt = firstFirePoint;

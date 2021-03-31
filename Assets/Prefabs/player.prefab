@@ -71,6 +71,7 @@ Transform:
   - {fileID: 2426624051562713749}
   - {fileID: 2426624051838760800}
   - {fileID: 3705068537437563007}
+  - {fileID: 1878861688787293552}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -216,19 +217,24 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   maxJumpVelocity: 25
   minJumpVelocity: 10
+  boxCollider: {fileID: 0}
   isGrounded: 0
   checkRadius: 0.01
   whatIsGround:
     serializedVersion: 2
     m_Bits: 512
   groundCheck: {fileID: 2426624051562713749}
-  dashTime: 0.1
-  dashSpeed: 8
+  dashTime: 0.12
+  dashSpeed: 20
+  dashCooldownTime: 0.5
   canFire: 1
   gunList: []
   playerManager: {fileID: 0}
   firePoint: {fileID: 2426624051888569882}
   DPLeftFirePoint: {fileID: 3327624536478039361}
+  ejectPt: {fileID: 1878861688787293552}
+  ejected_shell: {fileID: 8994036941532790516, guid: 0fd06ae7ea5ecd342939180c5508f915,
+    type: 3}
   hitEffects:
   - {fileID: 6152003406021164188, guid: 513c6cd46304aac43bd55fdc0b444720, type: 3}
   bulletObjs:
@@ -777,3 +783,33 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!1 &8746185471293738008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1878861688787293552}
+  m_Layer: 8
+  m_Name: ejectPt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1878861688787293552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8746185471293738008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.037, y: 0.156, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2426624051722942713}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -20,6 +20,9 @@ public class StatePlayerController : MonoBehaviour
     //the player's rigidbody
     private Rigidbody2D rb;
 
+    //the player's box collider
+    public BoxCollider2D boxCollider;
+
     //Everything for being grounded
     [HideInInspector]
     public bool isGrounded;
@@ -30,6 +33,8 @@ public class StatePlayerController : MonoBehaviour
     public PlayerControls playerControls;
     public float dashTime;
     public float dashSpeed;
+    public float dashCooldownTime;
+    private float dashCooldownTimer;
     public bool canFire = true;
 
     public List<GunBase> gunList;
@@ -37,6 +42,8 @@ public class StatePlayerController : MonoBehaviour
     [SerializeField]
     //public Transform firePoint;
     public Transform firePoint, DPLeftFirePoint;
+    public Transform ejectPt;
+    public GameObject ejected_shell;
     public GameObject[] hitEffects = new GameObject[5];
     public GameObject[] bulletObjs = new GameObject[5];
     public List<RuntimeAnimatorController> gunAnimControllers = new List<RuntimeAnimatorController>();
@@ -64,12 +71,13 @@ public class StatePlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerManager = GetComponent<Player>();
         audioSource = GetComponent<AudioSource>();
+        boxCollider = GetComponent<BoxCollider2D>();
         currentGun = 0;
         gunList = new List<GunBase>();
-        gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], pistolFireSound, GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
-        gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0]));
-        gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
-        gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
+        //gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
+        gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt));
+        //gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
+        //gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
 
         foreach (RuntimeAnimatorController anim in gunAnimControllers) {
             Debug.Log(anim);
@@ -77,7 +85,7 @@ public class StatePlayerController : MonoBehaviour
     }
 
     public void Update() {
-        
+        updateDashCooldown();
     }
 
     public float CalculatePlayerVelocity(float RBvelocity, Vector2 input, float moveSpeed, float velocityXSmoothing, float accelerationTimeGrounded, float accelerationTimeAirborne, bool isGrounded)
@@ -89,25 +97,23 @@ public class StatePlayerController : MonoBehaviour
     //if you jump it changes your y velocity to the maxJumpVelocity
     public void Jump()
     {
-        if (!isGrounded && canDoubleJump && hasJumpedOnce) {
+        if (!isGrounded && canDoubleJump && hasJumpedOnce && canJump()) {
             rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity * 1.2f);
             hasJumpedOnce = false;
             hasDoubleJumped = true;
-            Debug.Log("second jump");
         } else if (isGrounded && !hasJumpedOnce) {
             rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity);
             hasDoubleJumped = false;
             hasJumpedOnce = true;
-            //Debug.Log("first jump");
         }
     }
 
     public bool canJump()
     {
-        if (isGrounded) {
+        if (isGrounded && gunList[currentGun].canDash()) {
             hasJumpedOnce = false;
             return true;
-        } else if (!isGrounded && canDoubleJump && !hasDoubleJumped) {
+        } else if (!isGrounded && canDoubleJump && !hasDoubleJumped && gunList[currentGun].canDash()) {
             return true;
         }
         return false;
@@ -186,7 +192,38 @@ public class StatePlayerController : MonoBehaviour
     }
 
     public bool canDash() {
-        return gunList[currentGun].canDash();
+        return gunList[currentGun].canDash() && dashCooldownTimer <= 0;
+    }
+
+    public void startDashCooldown()
+    {
+        dashCooldownTimer = dashCooldownTime;
+    }
+
+    public bool checkIfGrounded() {
+
+        Vector2 startingPoint1 = new Vector2(boxCollider.bounds.center.x - boxCollider.bounds.extents.x , boxCollider.bounds.center.y - boxCollider.bounds.extents.y);
+        Vector2 startingPoint2 = new Vector2(boxCollider.bounds.center.x + boxCollider.bounds.extents.x, boxCollider.bounds.center.y - boxCollider.bounds.extents.y);
+        RaycastHit2D hit1 = Physics2D.Raycast(startingPoint1, Vector2.down, 0.2f, whatIsGround);
+        Debug.DrawRay(startingPoint1, Vector2.down, Color.blue, 0.2f);
+        RaycastHit2D hit2 = Physics2D.Raycast(startingPoint2, Vector2.down, 0.2f, whatIsGround);
+        Debug.DrawRay(startingPoint2, Vector2.down, Color.blue, 0.2f);
+        if (hit1 || hit2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void updateDashCooldown()
+    {
+        if (dashCooldownTimer > 0)
+        {
+            dashCooldownTimer -= Time.deltaTime;
+        }
     }
 
     public void switchGun(bool right) {
@@ -215,14 +252,13 @@ public class StatePlayerController : MonoBehaviour
             gunList[currentGun].Shoot();
             StartCoroutine(delayNextShot());
         }
-        
-        
 
+        //sample code to fire camera shake
+        CamController.Instance.Shake(2, 0.1f);
     }
 
     public IEnumerator delayNextShot()
     {
-        Debug.Log("starting");
         yield return new WaitForSeconds(gunList[currentGun].fireRate);
         canFire = true;
     }
@@ -257,6 +293,21 @@ public class StatePlayerController : MonoBehaviour
 
     public void setDoubleJump(bool canPlayerDoubleJump) {
         canDoubleJump = canPlayerDoubleJump;
+    }
+
+    public void addGun(int gunType) {
+        switch(gunType) {
+            case (int)GunPickup.GunType.RPG:
+                gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
+            break;
+            case (int)GunPickup.GunType.Shotgun:
+                gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
+            break;
+            case (int)GunPickup.GunType.DualPistols:
+                gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
+            break;
+
+        }
     }
 
 }
