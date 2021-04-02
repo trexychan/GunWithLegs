@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 2899902859293263969}
   - component: {fileID: 2899902859293263970}
   - component: {fileID: 2899902859293263971}
+  - component: {fileID: 3795147956874577401}
   m_Layer: 11
   m_Name: rattank
   m_TagString: Untagged
@@ -212,7 +213,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.5876222, y: -1.314199}
+  m_Offset: {x: 1.5876217, y: -1.314199}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -223,7 +224,33 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.82475567, y: 1.371602}
+  m_Size: {x: 0.8247547, y: 1.371602}
+  m_EdgeRadius: 0
+--- !u!61 &3795147956874577401
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2899902859293263973}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.023866653, y: -1.3067958}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4}
+    newSize: {x: 4, y: 4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.5933323, y: 1.3864083}
   m_EdgeRadius: 0
 --- !u!1 &2899902859894750722
 GameObject:
