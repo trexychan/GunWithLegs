@@ -92,7 +92,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 7
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -240,6 +240,7 @@ MonoBehaviour:
   bulletObjs:
   - {fileID: 298703161671112519, guid: 002cc101a69524c4ba6918c2ec57d36d, type: 3}
   - {fileID: 8666213990023224848, guid: a13f4c46fb719ea408fb498833778fc6, type: 3}
+  - {fileID: 1053092031073558933, guid: 2a79630fabb9fa14cb32a16d66478841, type: 3}
   gunAnimControllers:
   - {fileID: 9100000, guid: 90cf34ee26f0b8542be194c5d117361a, type: 2}
   - {fileID: 9100000, guid: f1b0e433692e31245be5775119fd90aa, type: 2}
@@ -618,7 +619,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2426624051888569883}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.482, y: 0.181, z: 0}
+  m_LocalPosition: {x: 0.406, y: 0.181, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2426624051722942713}

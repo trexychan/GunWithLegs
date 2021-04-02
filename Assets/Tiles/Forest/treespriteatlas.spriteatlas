@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: treespriteatlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 4214861947690707277, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -2181894621885720348, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: 6839582177459668831, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -7006592586712422331, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: 8003873512023933553, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -1225061601079501331, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: 5819438380799073408, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -5628267520381501406, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: 4625271685046220557, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -2041115959465053463, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -692755747981596448, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -1862110142978530090, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: 8569800124326915928, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -6858776996288372878, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: 6155766016748204062, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -5916961766251346278, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: 6640022658641449687, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: 6227935560237651791, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -3850614066036212556, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: 8616459852316385200, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: 8193650505118244361, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -1312577145782917731, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -6594127010750181360, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -4162023685441717137, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -3868993113020104267, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  - {fileID: -7303524786937196091, guid: 01b58ddb5caa6a148b038522351249a4, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - tree_tileset_18
+  - tree_tileset_19
+  - tree_tileset_12
+  - tree_tileset_13
+  - tree_tileset_10
+  - tree_tileset_11
+  - tree_tileset_16
+  - tree_tileset_17
+  - tree_tileset_14
+  - tree_tileset_15
+  - tree_tileset_25
+  - tree_tileset_24
+  - tree_tileset_23
+  - tree_tileset_22
+  - tree_tileset_21
+  - tree_tileset_20
+  - tree_tileset_9
+  - tree_tileset_8
+  - tree_tileset_7
+  - tree_tileset_6
+  - tree_tileset_5
+  - tree_tileset_4
+  - tree_tileset_3
+  - tree_tileset_2
+  - tree_tileset_1
+  - tree_tileset_0
+  m_Tag: treespriteatlas
+  m_IsVariant: 0

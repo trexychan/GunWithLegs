@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     bool isAlive;
     public bool facingRight = false;
     public Transform vision_origin = null; // location of vision raycast, mainly for ranged enemies
+    public Condition currentCondition = Condition.NONE;
     [SerializeField]
     float meleeDamage, rangedAttackDamage;
 
@@ -41,12 +42,18 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage) {
         DamageFlash();
-        this.currentHealth -= damage;
+        this.currentHealth -= this.currentCondition == Condition.WEAK ? damage * 2 : damage;
         Debug.Log(this.currentHealth);
         if (this.currentHealth <= 0) {
             this.isAlive = false;
             Die();
         }
+    }
+
+    public void SetCondition(Condition condition)
+    {
+        if (this.currentCondition != condition) {this.currentCondition = condition;}
+        ConditionChange();
     }
 
     public bool IsAlive() {
@@ -106,6 +113,12 @@ public class EnemyController : MonoBehaviour
         sprite.material.SetFloat("_FlashAmount",0);
     }
 
+    private void ConditionChange()
+    {
+
+    }
+
+    
     public float GetMeleeDamage() 
     {
         return meleeDamage;
@@ -123,4 +136,12 @@ public enum EnemyType
     BEEMON=3,
     RATTANK=10,
     CRUSHROOM=6
+}
+
+public enum Condition
+{
+    WEAK,
+    POISONED,
+    SLOWED,
+    NONE
 }
