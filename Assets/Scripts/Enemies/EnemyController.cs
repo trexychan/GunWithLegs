@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour
     public bool facingRight = false;
     public Transform vision_origin = null; // location of vision raycast, mainly for ranged enemies
     public Condition currentCondition = Condition.NONE;
+    [SerializeField]
+    float meleeDamage, rangedAttackDamage;
 
     private IEnumerator damageCoroutine;
 
@@ -117,13 +119,23 @@ public class EnemyController : MonoBehaviour
     }
 
     
+    public float GetMeleeDamage() 
+    {
+        return meleeDamage;
+    }
+
+    public float GetRangedAttackDamage() 
+    {
+        return rangedAttackDamage;
+    }
 }
 
 public enum EnemyType
 {
     MINOR=2,
     BEEMON=3,
-    RATTANK=10
+    RATTANK=10,
+    CRUSHROOM=6
 }
 
 public enum Condition

@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Beemon
   - Armor
+  - Crushroom
+  - Ground
   layers:
   - Default
   - TransparentFX
