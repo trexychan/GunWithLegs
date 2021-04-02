@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StatePlayerController : MonoBehaviour
 {
-    public float moveSpeed = 3f;
+    public float moveSpeed = 3f, currentPlayerHealth = 9f, maxPlayerHealth = 9f;
     public float accelerationTimeAirborne;
     public float accelerationTimeGrounded;
     private float velocityXSmoothing;
@@ -51,6 +51,7 @@ public class StatePlayerController : MonoBehaviour
     public AudioSource audioSource;
     int currentGun;
     public bool canDoubleJump = false, hasJumpedOnce = false, hasDoubleJumped = false;
+    private bool takingDamage = false;
     public LineRenderer dualPistolsLeftFirePoint;
 
 
@@ -72,6 +73,8 @@ public class StatePlayerController : MonoBehaviour
         playerManager = GetComponent<Player>();
         audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
+        currentPlayerHealth = 9.0f;
+        maxPlayerHealth = 9.0f;
         currentGun = 0;
         gunList = new List<GunBase>();
         //gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
@@ -263,13 +266,82 @@ public class StatePlayerController : MonoBehaviour
         canFire = true;
     }
 
-    // void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Platform"))
-    //     {
-    //         transform.parent = collision.transform;
-    //     }
-    // }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // if (collision.gameObject.CompareTag("Platform"))
+        // {
+        //     transform.parent = collision.transform;
+        // }
+
+        if (collision.gameObject.layer == 11 && !takingDamage) // if the collision is with an enemy 
+        { 
+            Debug.Log("ran into enemy");
+            takingDamage = true;
+            
+            float enemyMeleeDamage = collision.gameObject.GetComponent<EnemyController>().GetMeleeDamage();
+            DecreasePlayerCurrentHealth(enemyMeleeDamage);
+
+            StartCoroutine(EnemyPushPlayer());
+        } else if (collision.gameObject.tag == "" && !takingDamage) // if collision is with an enemy ranged attack
+        { 
+            Debug.Log("ran into enemy ranged attack");
+            takingDamage = true;
+
+            float enemyRangedDamage = collision.gameObject.GetComponent<EnemyController>().GetRangedAttackDamage();
+            DecreasePlayerCurrentHealth(enemyRangedDamage);
+            
+            StartCoroutine(RangedAttackPushPlayer());
+            
+            // do other stuff if player collides with enemy ranged attack
+        }
+    }
+
+    private IEnumerator EnemyPushPlayer() 
+    {
+        GetComponent<BoxCollider2D>().isTrigger = true;
+        
+        int num = Random.Range(0,2); // randomly push player to the left or to the right
+        if (num == 0)
+            GetComponent<Rigidbody2D>().AddForce(Vector2.right * 2000);
+        else
+            GetComponent<Rigidbody2D>().AddForce(Vector2.left * 2000);
+        
+        yield return new WaitForSeconds(0.05f);
+        GetComponent<BoxCollider2D>().isTrigger = false;
+        yield return new WaitForSeconds(1f); // temporary immunity from damage for player
+        takingDamage = false;
+    }
+
+    private IEnumerator RangedAttackPushPlayer() 
+    {
+        // push player after getting hit by enemy ranged attack
+        yield return null;
+    }
+
+    public void DecreasePlayerCurrentHealth(float amount)
+    {
+        currentPlayerHealth -= amount;
+        Debug.Log("Player health: " + currentPlayerHealth);
+        if (currentPlayerHealth <= 0f) {
+            Debug.Log("player died :(");
+            // kill player
+        }
+    }
+
+    public void IncreasePlayerCurrentHealth(float amount)
+    {
+        if (currentPlayerHealth + amount >= maxPlayerHealth) {
+            currentPlayerHealth = maxPlayerHealth;
+        } else {
+            currentPlayerHealth += amount;
+        }
+        Debug.Log("Player health: " + currentPlayerHealth);
+    }
+
+    public void IncreasePlayerMaxHealth(float amount)
+    {
+        maxPlayerHealth += amount;
+    }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
