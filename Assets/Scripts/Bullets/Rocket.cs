@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    public float speed = 20f;
+    public float speed = 3f;
+    private float acceleration = 5f;
     public Rigidbody2D rb;
     public GameObject impactEffect;
 

@@ -33,8 +33,7 @@ public class Pistol : RaycastGun
         temp = firePt.right;
         // temp.y += Random.Range(-0.1f,0.1f);
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePt.position, temp, maxRange);
-        Physics2D.IgnoreLayerCollision(8, Physics2D.IgnoreRaycastLayer);
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePt.position, temp, maxRange, ~layermask);
 
         if (hitInfo)
         {
