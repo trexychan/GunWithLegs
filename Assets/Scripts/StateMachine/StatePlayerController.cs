@@ -1,10 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatePlayerController : MonoBehaviour
 {
+<<<<<<< Updated upstream
     public float moveSpeed = 3f, currentPlayerHealth = 9f, maxPlayerHealth = 9f;
+=======
+    public int player_health; // also magazine size
+    public Image[] bullets;
+    public Sprite bulletheart;
+    public float moveSpeed = 3f;
+>>>>>>> Stashed changes
     public float accelerationTimeAirborne;
     public float accelerationTimeGrounded;
     private float velocityXSmoothing;
