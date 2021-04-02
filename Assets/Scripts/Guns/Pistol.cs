@@ -59,6 +59,7 @@ public class Pistol : RaycastGun
         player.playSound(fireSound);
         player.showBulletTrail(bulletTrail);
         ejectRound();
+        player.DamagePlayer(shotCost);
         
     }
 

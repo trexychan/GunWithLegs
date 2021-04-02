@@ -211,6 +211,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  currentPlayerHealth: 9
+  maxPlayerHealth: 9
+  healthbullets: []
+  loadedshell: {fileID: 0}
+  emptyshell: {fileID: 0}
   accelerationTimeAirborne: 0.05
   accelerationTimeGrounded: 0
   moveAfterLaunchTime: 0.03

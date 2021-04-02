@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class StatePlayerController : MonoBehaviour
 {
     public float moveSpeed = 3f, currentPlayerHealth = 9f, maxPlayerHealth = 9f;
-    public Image[] bullets;
-    public Sprite bulletheart;
+    public Image[] healthbullets;
+    public Sprite loadedshell;
+    public Sprite emptyshell;
     public float accelerationTimeAirborne;
     public float accelerationTimeGrounded;
     private float velocityXSmoothing;
@@ -76,8 +77,7 @@ public class StatePlayerController : MonoBehaviour
         playerManager = GetComponent<Player>();
         audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
-        currentPlayerHealth = 9.0f;
-        maxPlayerHealth = 9.0f;
+        SetPlayerHealthBar(currentPlayerHealth);
         currentGun = 0;
         gunList = new List<GunBase>();
         //gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
@@ -93,6 +93,38 @@ public class StatePlayerController : MonoBehaviour
 
     public void Update() {
         updateDashCooldown();
+    }
+
+    public void DamagePlayer(float damage)
+    {
+        currentPlayerHealth -= damage;
+        currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
+        SetPlayerHealthBar(currentPlayerHealth); 
+    }
+
+    public void IncreaseMaxHealth(float maxIncrease)
+    {
+        maxPlayerHealth += maxIncrease;
+        currentPlayerHealth = maxPlayerHealth;
+        SetPlayerHealthBar(currentPlayerHealth);
+    }
+
+    private void SetPlayerHealthBar(float currentHealth)
+    {
+        if (currentHealth > maxPlayerHealth) {currentHealth = maxPlayerHealth;}
+
+        for (int i = 0; i < healthbullets.Length; i++)
+        {
+            if (i < currentHealth) {healthbullets[i].sprite = loadedshell;}
+            else {healthbullets[i].sprite = emptyshell;}
+            if (i < maxPlayerHealth)
+            {
+                healthbullets[i].enabled = true;
+            } else
+            {
+                healthbullets[i].enabled = false;
+            }
+        }
     }
 
     public float CalculatePlayerVelocity(float RBvelocity, Vector2 input, float moveSpeed, float velocityXSmoothing, float accelerationTimeGrounded, float accelerationTimeAirborne, bool isGrounded)
