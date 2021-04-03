@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -135,7 +135,8 @@ public enum EnemyType
     MINOR=2,
     BEEMON=3,
     RATTANK=10,
-    CRUSHROOM=6
+    CRUSHROOM=6,
+    GHOST=1
 }
 
 public enum Condition
