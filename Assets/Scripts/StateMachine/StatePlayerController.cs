@@ -12,8 +12,9 @@ public class StatePlayerController : MonoBehaviour
     public float accelerationTimeAirborne;
     public float accelerationTimeGrounded;
     private float velocityXSmoothing;
+
+    public Vector2 launchVelocity;
     public float moveAfterLaunchTime;
-    private float moveAfterLaunchTimer;
     [HideInInspector]
     public Vector2 moveInput;
 
@@ -22,7 +23,7 @@ public class StatePlayerController : MonoBehaviour
     public float minJumpVelocity;
 
     //the player's rigidbody
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     //the player's box collider
     public BoxCollider2D boxCollider;
@@ -40,6 +41,9 @@ public class StatePlayerController : MonoBehaviour
     public float dashCooldownTime;
     private float dashCooldownTimer;
     public bool canFire = true;
+    private bool isImmuneToDamage = false;
+    public float invincibilityCooldownTime;
+    private float invincibilityCooldownTimer;
 
     public List<GunBase> gunList;
     public Player playerManager;
@@ -57,6 +61,9 @@ public class StatePlayerController : MonoBehaviour
     public bool canDoubleJump = false, hasJumpedOnce = false, hasDoubleJumped = false;
     private bool takingDamage = false;
     public LineRenderer dualPistolsLeftFirePoint;
+    private SpriteRenderer spriteRenderer;
+
+    public bool damaged;
 
 
     private void Awake() {
@@ -77,6 +84,7 @@ public class StatePlayerController : MonoBehaviour
         playerManager = GetComponent<Player>();
         audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         SetPlayerHealthBar(currentPlayerHealth);
         currentGun = 0;
         gunList = new List<GunBase>();
@@ -93,13 +101,24 @@ public class StatePlayerController : MonoBehaviour
 
     public void Update() {
         updateDashCooldown();
+        updateInvincibilityCooldown();
     }
 
     public void DamagePlayer(float damage)
     {
-        currentPlayerHealth -= damage;
-        currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
-        SetPlayerHealthBar(currentPlayerHealth); 
+        if (!isImmuneToDamage) {
+            currentPlayerHealth -= damage;
+            currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
+            SetPlayerHealthBar(currentPlayerHealth); 
+        }
+    }
+
+    public bool tookDamage() {
+        return damaged;
+    }
+
+    public void setDamaged(bool set) {
+        damaged = set;
     }
 
     public void IncreaseMaxHealth(float maxIncrease)
@@ -131,6 +150,10 @@ public class StatePlayerController : MonoBehaviour
     {
         float targetVelocityx = input.x * moveSpeed;
         return Mathf.SmoothDamp(RBvelocity, targetVelocityx, ref velocityXSmoothing, isGrounded ? accelerationTimeGrounded : accelerationTimeAirborne);
+    }
+
+    public void launchPlayer(Vector2 velocity) {
+        rb.velocity = velocity;
     }
 
     //if you jump it changes your y velocity to the maxJumpVelocity
@@ -265,6 +288,19 @@ public class StatePlayerController : MonoBehaviour
         }
     }
 
+    private void updateInvincibilityCooldown() {
+        if (invincibilityCooldownTimer >= 0 && isImmuneToDamage) {
+            invincibilityCooldownTimer -= Time.deltaTime;
+            if (spriteRenderer.enabled) {
+                spriteRenderer.enabled = false;
+            } else {
+                spriteRenderer.enabled = true;
+            }
+        } else {
+            SetPlayerImmunity(false);
+        }
+    }
+
     public void switchGun(bool right) {
         if (right) {
             if (currentGun + 1 == gunList.Count) {
@@ -309,15 +345,15 @@ public class StatePlayerController : MonoBehaviour
         //     transform.parent = collision.transform;
         // }
 
-        if (collision.gameObject.layer == 11 && !takingDamage) // if the collision is with an enemy 
+        if (collision.gameObject.layer == 11 && !damaged) // if the collision is with an enemy 
         { 
             Debug.Log("ran into enemy");
-            takingDamage = true;
+            if (isImmuneToDamage == false) {     
+                float enemyMeleeDamage = collision.gameObject.GetComponent<EnemyController>().GetMeleeDamage();
+                DecreasePlayerCurrentHealth(enemyMeleeDamage);
+                setDamaged(true);
+            }
             
-            float enemyMeleeDamage = collision.gameObject.GetComponent<EnemyController>().GetMeleeDamage();
-            DecreasePlayerCurrentHealth(enemyMeleeDamage);
-
-            StartCoroutine(EnemyPushPlayer());
         } else if (collision.gameObject.tag == "" && !takingDamage) // if collision is with an enemy ranged attack
         { 
             Debug.Log("ran into enemy ranged attack");
@@ -372,6 +408,14 @@ public class StatePlayerController : MonoBehaviour
             currentPlayerHealth += amount;
         }
         Debug.Log("Player health: " + currentPlayerHealth);
+    }
+
+    public void SetPlayerImmunity(bool immunity) {
+        this.isImmuneToDamage = immunity;
+        if (immunity == false) {
+            spriteRenderer.enabled = true;
+            invincibilityCooldownTimer = invincibilityCooldownTime;
+        }
     }
 
     public void IncreasePlayerMaxHealth(float amount)

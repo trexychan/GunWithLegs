@@ -218,10 +218,12 @@ MonoBehaviour:
   emptyshell: {fileID: 0}
   accelerationTimeAirborne: 0.05
   accelerationTimeGrounded: 0
+  launchVelocity: {x: 10, y: 15}
   moveAfterLaunchTime: 0.03
   moveInput: {x: 0, y: 0}
   maxJumpVelocity: 25
   minJumpVelocity: 10
+  rb: {fileID: 0}
   boxCollider: {fileID: 0}
   isGrounded: 0
   checkRadius: 0.01
@@ -233,6 +235,7 @@ MonoBehaviour:
   dashSpeed: 20
   dashCooldownTime: 0.5
   canFire: 1
+  invincibilityCooldownTime: 1
   gunList: []
   playerManager: {fileID: 0}
   firePoint: {fileID: 2426624051888569882}
@@ -258,6 +261,7 @@ MonoBehaviour:
   hasJumpedOnce: 0
   hasDoubleJumped: 0
   dualPistolsLeftFirePoint: {fileID: 4885979024128462849}
+  damaged: 0
 --- !u!95 &8802488606771251299
 Animator:
   serializedVersion: 3

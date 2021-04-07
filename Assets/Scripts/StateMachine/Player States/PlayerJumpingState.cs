@@ -18,6 +18,17 @@ public class PlayerJumpingState : PlayerState {
             return;
         }
 
+        if (stateInput.playerController.tookDamage()) {
+            stateInput.playerController.setDamaged(false);
+            Vector2 launchDirection = stateInput.playerController.launchVelocity;
+            if (stateInput.player.transform.rotation.y == 0) {
+                launchDirection.x = -launchDirection.x;
+            }
+            
+            character.ChangeState<PlayerLaunchState>(new LaunchStateTransitionInfo(launchDirection, stateInput.playerController.moveAfterLaunchTime, true));
+            return;
+        }
+
         if (stateInput.playerControls.InGame.SwitchLeft.WasPressedThisFrame()) {
             stateInput.playerController.switchGun(false);
         }

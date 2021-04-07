@@ -25,6 +25,16 @@ public class PlayerDashState : PlayerState
         {
             stateInput.rb.velocity = new Vector2(dir * stateInput.playerController.dashSpeed, 0);
             dashTimer -= Time.deltaTime;
+            if (stateInput.playerController.tookDamage()) {
+            stateInput.playerController.setDamaged(false);
+            Vector2 launchDirection = stateInput.playerController.launchVelocity;
+            if (stateInput.player.transform.rotation.y == 0) {
+                launchDirection.x = -launchDirection.x;
+            }
+            
+            character.ChangeState<PlayerLaunchState>(new LaunchStateTransitionInfo(launchDirection, stateInput.playerController.moveAfterLaunchTime, true));
+            return;
+        }
         } else
         {
             stateInput.rb.velocity = Vector2.zero;
