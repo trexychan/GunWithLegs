@@ -5,7 +5,7 @@ using UnityEngine;
 public class Shotgun : RaycastGun
 {
     public int shotgunPellets = 5;
-    public Shotgun(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController) {
+    public Shotgun(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController, Sprite icon) {
         this.size = Size.NORMAL;
         this.shotCost = 4f;
         this.damage = 1;
@@ -17,6 +17,7 @@ public class Shotgun : RaycastGun
         this.player = player;
         this.animController = animatorController;
         this.maxRange = 10f;
+        this.icon = icon;
     }
 
     // Update is called once per frame

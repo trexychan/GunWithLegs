@@ -24,7 +24,6 @@ public class EnemyController : MonoBehaviour
     void Start() {
         this.currentHealth = (int)maxHealth;
         this.isAlive = true;
-        Debug.Log(this.currentHealth);
     }
     
     public void TurnToFacePlayer(Vector3 pos) {

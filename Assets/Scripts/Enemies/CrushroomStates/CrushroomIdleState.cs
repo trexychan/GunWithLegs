@@ -5,7 +5,6 @@ using UnityEngine;
 public class CrushroomIdleState : CrushroomState
 {
     float width, leftX, rightX;
-
     public override void Enter(CrushroomStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
         // base.Enter(stateInput, transitionInfo);
@@ -18,8 +17,11 @@ public class CrushroomIdleState : CrushroomState
 
     public override void Update(CrushroomStateInput stateInput)
     {
+        RaycastHit2D hit = Physics2D.Raycast(stateInput.gameobj.transform.position, -stateInput.gameobj.transform.up, 20f, ~stateInput.crushroom.layermask);
+
         // stateInput.enemy_controller.TurnToFacePlayer(stateInput.player.transform.position);
-        if (stateInput.player.transform.position.x >= leftX && stateInput.player.transform.position.x <= rightX) {
+        if (hit) {
+            if (hit.collider.gameObject.layer == 8)
             character.ChangeState<CrushroomFallDownState>();
         }
     }

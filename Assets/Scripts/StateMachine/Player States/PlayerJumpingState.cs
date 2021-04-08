@@ -19,11 +19,11 @@ public class PlayerJumpingState : PlayerState {
         }
 
         if (stateInput.playerControls.InGame.SwitchLeft.WasPressedThisFrame()) {
-            stateInput.playerController.switchGun(false);
+            stateInput.playerController.switchGun(-1);
         }
 
         if (stateInput.playerControls.InGame.SwitchRight.WasPressedThisFrame()) {
-            stateInput.playerController.switchGun(true);
+            stateInput.playerController.switchGun(1);
         }
 
         if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame()) {

@@ -17,7 +17,7 @@ public class CrushroomManager : MonoBehaviour
     }
 
     IEnumerator WaitOnGround() {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         doneWaiting = true;
     }
 
@@ -40,4 +40,6 @@ public class CrushroomManager : MonoBehaviour
         
         player.GetComponent<Rigidbody2D>().AddForce(new Vector2(xcomponent, ycomponent));
     }
+
+    
 }
