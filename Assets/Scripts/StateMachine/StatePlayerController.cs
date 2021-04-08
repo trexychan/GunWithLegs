@@ -9,6 +9,8 @@ public class StatePlayerController : MonoBehaviour
     public Image[] healthbullets;
     public Sprite loadedshell;
     public Sprite emptyshell;
+    public Sprite[] gunicons;
+    public Image[] gunHUDSlots;
     public float accelerationTimeAirborne;
     public float accelerationTimeGrounded;
     private float velocityXSmoothing;
@@ -49,6 +51,7 @@ public class StatePlayerController : MonoBehaviour
     public Transform ejectPt;
     public GameObject ejected_shell;
     public GameObject[] hitEffects = new GameObject[5];
+    public GameObject switchEffect;
     public GameObject[] bulletObjs = new GameObject[5];
     public List<RuntimeAnimatorController> gunAnimControllers = new List<RuntimeAnimatorController>();
     public AudioClip[] gunSounds;
@@ -82,10 +85,11 @@ public class StatePlayerController : MonoBehaviour
         gunList = new List<GunBase>();
         //gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
         // gunList.Add(new TVGun(this, firePoint, hitEffects[0],bulletObjs[1], gunSounds[0], gunAnimControllers[0]));
-        gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt));
+        gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt, gunicons[0]));
+        Debug.Log(gunicons[0]);
+        SetPlayerCurrentGun(currentGun);
         //gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
         //gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
-
         foreach (RuntimeAnimatorController anim in gunAnimControllers) {
             Debug.Log(anim);
         }
@@ -93,20 +97,7 @@ public class StatePlayerController : MonoBehaviour
 
     public void Update() {
         updateDashCooldown();
-    }
-
-    public void DamagePlayer(float damage)
-    {
-        currentPlayerHealth -= damage;
-        currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
-        SetPlayerHealthBar(currentPlayerHealth); 
-    }
-
-    public void IncreaseMaxHealth(float maxIncrease)
-    {
-        maxPlayerHealth += maxIncrease;
-        currentPlayerHealth = maxPlayerHealth;
-        SetPlayerHealthBar(currentPlayerHealth);
+        
     }
 
     private void SetPlayerHealthBar(float currentHealth)
@@ -124,6 +115,20 @@ public class StatePlayerController : MonoBehaviour
             {
                 healthbullets[i].enabled = false;
             }
+        }
+    }
+
+    private void SetPlayerCurrentGun(int current)
+    {
+        gunHUDSlots[1].sprite = gunList[current].icon;
+        
+        gunHUDSlots[2].sprite = gunList[(currentGun + 1) % gunList.Count].icon;
+        if (currentGun - 1 < 0)
+        {
+            gunHUDSlots[0].sprite = gunList[gunList.Count - 1].icon;
+        } else
+        {
+            gunHUDSlots[0].sprite = gunList[currentGun - 1].icon;
         }
     }
 
@@ -265,20 +270,23 @@ public class StatePlayerController : MonoBehaviour
         }
     }
 
-    public void switchGun(bool right) {
-        if (right) {
+    public void switchGun(int right) {
+        if (right > 0) {
             if (currentGun + 1 == gunList.Count) {
                 currentGun = 0;
             } else {
                 currentGun++;
             }
-        } else {
+        } else if (right < 0) {
             if (currentGun - 1 == -1) {
                 currentGun = gunList.Count - 1;
             } else {
                 currentGun--;
             }
         }
+        if (gunList.Count > 1) {Instantiate(switchEffect,gameObject.transform.position,Quaternion.identity);}
+        Debug.Log(currentGun);
+        SetPlayerCurrentGun(currentGun);
         playerManager.GetStateInput().anim.runtimeAnimatorController = gunList[currentGun].animController;
         //Debug.Log(currentGun + " " + gunAnimControllers[currentGun]);
     }
@@ -357,6 +365,8 @@ public class StatePlayerController : MonoBehaviour
     public void DecreasePlayerCurrentHealth(float amount)
     {
         currentPlayerHealth -= amount;
+        currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
+        SetPlayerHealthBar(currentPlayerHealth);
         Debug.Log("Player health: " + currentPlayerHealth);
         if (currentPlayerHealth <= 0f) {
             Debug.Log("player died :(");
@@ -371,12 +381,15 @@ public class StatePlayerController : MonoBehaviour
         } else {
             currentPlayerHealth += amount;
         }
+        SetPlayerHealthBar(currentPlayerHealth);
         Debug.Log("Player health: " + currentPlayerHealth);
     }
 
     public void IncreasePlayerMaxHealth(float amount)
     {
         maxPlayerHealth += amount;
+        currentPlayerHealth = maxPlayerHealth;
+        SetPlayerHealthBar(currentPlayerHealth);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -406,16 +419,17 @@ public class StatePlayerController : MonoBehaviour
     public void addGun(int gunType) {
         switch(gunType) {
             case (int)GunPickup.GunType.RPG:
-                gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
+                gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2], gunicons[2]));
             break;
             case (int)GunPickup.GunType.Shotgun:
-                gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
+                gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1], gunicons[1]));
             break;
             case (int)GunPickup.GunType.DualPistols:
-                gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
+                gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, gunAnimControllers[3], gunicons[3]));
             break;
 
         }
+        SetPlayerCurrentGun(currentGun);
     }
 
 }
