@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3664429856897968012}
   - component: {fileID: 3891481710136720181}
   - component: {fileID: 8774653046690677451}
-  m_Layer: 2
+  m_Layer: 16
   m_Name: shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,3 +144,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a6db7e4cff5e347a9f732f4c30b419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawnTime: 3

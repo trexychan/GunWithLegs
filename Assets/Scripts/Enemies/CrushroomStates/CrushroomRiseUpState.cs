@@ -9,6 +9,9 @@ public class CrushroomRiseUpState : CrushroomState
     {
         stateInput.crushroomManager = stateInput.crushroom.GetComponent<CrushroomManager>();
         originalY = stateInput.crushroomManager.GetOriginalY();
+        stateInput.anim.SetBool("landed", false);
+        stateInput.anim.Play("crushroom_retreat");
+        
     }
 
     public override void Update(CrushroomStateInput stateInput)

@@ -9,17 +9,23 @@ public class CrushroomFallDownState : CrushroomState
     public override void Enter(CrushroomStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
         stateInput.crushroomManager = stateInput.crushroom.GetComponent<CrushroomManager>();
-        stateInput.crushroom.GetComponent<Rigidbody2D>().bodyType =  RigidbodyType2D.Dynamic;
-        stateInput.crushroom.GetComponent<Rigidbody2D>().gravityScale =  2f;
+        stateInput.rb.bodyType =  RigidbodyType2D.Dynamic;
+        stateInput.rb.gravityScale =  2f;
+        stateInput.rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        stateInput.anim.Play("crushroom_attack");
         falling = true;
     }
 
     public override void Update(CrushroomStateInput stateInput)
     {
-        if (stateInput.crushroom.GetComponent<Rigidbody2D>().IsSleeping() && falling) { // if the crushroom hits the ground
+        
+        // stateInput.anim.SetFloat("speed", stateInput.rb.velocity.y);
+        if (stateInput.rb.IsTouchingLayers(1 << 9) && falling) { // if the crushroom hits the ground
+            stateInput.anim.Play("crushroom_land");
             falling = false;
-            stateInput.crushroom.GetComponent<Rigidbody2D>().bodyType =  RigidbodyType2D.Kinematic;
+            stateInput.rb.bodyType =  RigidbodyType2D.Kinematic;
             stateInput.crushroomManager.StartWaitOnGround();
+            
         }
         if (stateInput.crushroomManager.IsDoneWaiting()) {
             stateInput.crushroomManager.SetWaitStatus(false);

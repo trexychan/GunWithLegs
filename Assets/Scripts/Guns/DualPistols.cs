@@ -8,7 +8,7 @@ public class DualPistols : RaycastGun
     private Transform secondFirePoint;
     private LineRenderer bulletTrailLeft;
 
-    public DualPistols(StatePlayerController player, Transform firstFirePoint, Transform secondFirePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer rendererRight, LineRenderer rendererLeft, RuntimeAnimatorController animatorController) {
+    public DualPistols(StatePlayerController player, Transform firstFirePoint, Transform secondFirePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer rendererRight, LineRenderer rendererLeft, RuntimeAnimatorController animatorController, Sprite icon) {
         this.size = Size.LIGHT;
         this.shotCost = 2f;
         this.damage = 1;
@@ -22,6 +22,7 @@ public class DualPistols : RaycastGun
         this.player = player;
         this.animController = animatorController;
         this.maxRange = 10f;
+        this.icon = icon;
     }
 
     public override void Shoot()
@@ -32,9 +33,9 @@ public class DualPistols : RaycastGun
         temp2 = -(secondFirePoint.right);
         // temp.y += Random.Range(-0.1f,0.1f);
 
-        RaycastHit2D hitInfoRight = Physics2D.Raycast(firePt.position, temp1, maxRange);
-        RaycastHit2D hitInfoLeft = Physics2D.Raycast(secondFirePoint.position, temp2, maxRange);
-        Physics2D.IgnoreLayerCollision(8, Physics2D.IgnoreRaycastLayer);
+        RaycastHit2D hitInfoRight = Physics2D.Raycast(firePt.position, temp1, maxRange, ~layermask);
+        RaycastHit2D hitInfoLeft = Physics2D.Raycast(secondFirePoint.position, temp2, maxRange, ~layermask);
+        // Physics2D.IgnoreLayerCollision(8, Physics2D.IgnoreRaycastLayer);
 
         if (hitInfoRight)
         {
