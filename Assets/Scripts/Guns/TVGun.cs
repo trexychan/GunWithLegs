@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TVGun : ProjectileGun
 {
-    public TVGun(StatePlayerController player, Transform firePoint, GameObject hitEffect, GameObject shotObj, AudioClip fireSound, RuntimeAnimatorController animatorController) {
+    public TVGun(StatePlayerController player, Transform firePoint, GameObject hitEffect, GameObject shotObj, AudioClip fireSound, RuntimeAnimatorController animatorController, Sprite icon) {
         this.size = Size.NORMAL;
         this.shotCost = 2f;
         this.damage = 1;
@@ -16,6 +16,7 @@ public class TVGun : ProjectileGun
         this.fireSound = fireSound;
         this.player = player;
         this.animController = animatorController;
+        this.icon = icon;
     }
 
     public override void Shoot()

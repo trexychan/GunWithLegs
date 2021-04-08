@@ -9,11 +9,14 @@ public class StatePlayerController : MonoBehaviour
     public Image[] healthbullets;
     public Sprite loadedshell;
     public Sprite emptyshell;
+    public Sprite[] gunicons;
+    public Image[] gunHUDSlots;
     public float accelerationTimeAirborne;
     public float accelerationTimeGrounded;
     private float velocityXSmoothing;
+
+    public Vector2 launchVelocity;
     public float moveAfterLaunchTime;
-    private float moveAfterLaunchTimer;
     [HideInInspector]
     public Vector2 moveInput;
 
@@ -22,7 +25,7 @@ public class StatePlayerController : MonoBehaviour
     public float minJumpVelocity;
 
     //the player's rigidbody
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     //the player's box collider
     public BoxCollider2D boxCollider;
@@ -40,6 +43,9 @@ public class StatePlayerController : MonoBehaviour
     public float dashCooldownTime;
     private float dashCooldownTimer;
     public bool canFire = true;
+    private bool isImmuneToDamage = false;
+    public float invincibilityCooldownTime;
+    private float invincibilityCooldownTimer;
 
     public List<GunBase> gunList;
     public Player playerManager;
@@ -49,6 +55,7 @@ public class StatePlayerController : MonoBehaviour
     public Transform ejectPt;
     public GameObject ejected_shell;
     public GameObject[] hitEffects = new GameObject[5];
+    public GameObject switchEffect;
     public GameObject[] bulletObjs = new GameObject[5];
     public List<RuntimeAnimatorController> gunAnimControllers = new List<RuntimeAnimatorController>();
     public AudioClip[] gunSounds;
@@ -57,6 +64,9 @@ public class StatePlayerController : MonoBehaviour
     public bool canDoubleJump = false, hasJumpedOnce = false, hasDoubleJumped = false;
     private bool takingDamage = false;
     public LineRenderer dualPistolsLeftFirePoint;
+    private SpriteRenderer spriteRenderer;
+
+    public bool damaged;
 
 
     private void Awake() {
@@ -77,15 +87,17 @@ public class StatePlayerController : MonoBehaviour
         playerManager = GetComponent<Player>();
         audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         SetPlayerHealthBar(currentPlayerHealth);
         currentGun = 0;
         gunList = new List<GunBase>();
         //gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
         // gunList.Add(new TVGun(this, firePoint, hitEffects[0],bulletObjs[1], gunSounds[0], gunAnimControllers[0]));
-        gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt));
+        gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt, gunicons[0]));
+        Debug.Log(gunicons[0]);
+        SetPlayerCurrentGun(currentGun);
         //gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
         //gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
-
         foreach (RuntimeAnimatorController anim in gunAnimControllers) {
             Debug.Log(anim);
         }
@@ -93,13 +105,24 @@ public class StatePlayerController : MonoBehaviour
 
     public void Update() {
         updateDashCooldown();
+        updateInvincibilityCooldown();
     }
 
     public void DamagePlayer(float damage)
     {
-        currentPlayerHealth -= damage;
-        currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
-        SetPlayerHealthBar(currentPlayerHealth); 
+        if (!isImmuneToDamage) {
+            currentPlayerHealth -= damage;
+            currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
+            SetPlayerHealthBar(currentPlayerHealth); 
+        }
+    }
+
+    public bool tookDamage() {
+        return damaged;
+    }
+
+    public void setDamaged(bool set) {
+        damaged = set;
     }
 
     public void IncreaseMaxHealth(float maxIncrease)
@@ -127,10 +150,28 @@ public class StatePlayerController : MonoBehaviour
         }
     }
 
+    private void SetPlayerCurrentGun(int current)
+    {
+        gunHUDSlots[1].sprite = gunList[current].icon;
+        
+        gunHUDSlots[2].sprite = gunList[(currentGun + 1) % gunList.Count].icon;
+        if (currentGun - 1 < 0)
+        {
+            gunHUDSlots[0].sprite = gunList[gunList.Count - 1].icon;
+        } else
+        {
+            gunHUDSlots[0].sprite = gunList[currentGun - 1].icon;
+        }
+    }
+
     public float CalculatePlayerVelocity(float RBvelocity, Vector2 input, float moveSpeed, float velocityXSmoothing, float accelerationTimeGrounded, float accelerationTimeAirborne, bool isGrounded)
     {
         float targetVelocityx = input.x * moveSpeed;
         return Mathf.SmoothDamp(RBvelocity, targetVelocityx, ref velocityXSmoothing, isGrounded ? accelerationTimeGrounded : accelerationTimeAirborne);
+    }
+
+    public void launchPlayer(Vector2 velocity) {
+        rb.velocity = velocity;
     }
 
     //if you jump it changes your y velocity to the maxJumpVelocity
@@ -265,20 +306,36 @@ public class StatePlayerController : MonoBehaviour
         }
     }
 
-    public void switchGun(bool right) {
-        if (right) {
+    private void updateInvincibilityCooldown() {
+        if (invincibilityCooldownTimer >= 0 && isImmuneToDamage) {
+            invincibilityCooldownTimer -= Time.deltaTime;
+            if (spriteRenderer.enabled) {
+                spriteRenderer.enabled = false;
+            } else {
+                spriteRenderer.enabled = true;
+            }
+        } else {
+            SetPlayerImmunity(false);
+        }
+    }
+
+    public void switchGun(int right) {
+        if (right > 0) {
             if (currentGun + 1 == gunList.Count) {
                 currentGun = 0;
             } else {
                 currentGun++;
             }
-        } else {
+        } else if (right < 0) {
             if (currentGun - 1 == -1) {
                 currentGun = gunList.Count - 1;
             } else {
                 currentGun--;
             }
         }
+        if (gunList.Count > 1) {Instantiate(switchEffect,gameObject.transform.position,Quaternion.identity);}
+        Debug.Log(currentGun);
+        SetPlayerCurrentGun(currentGun);
         playerManager.GetStateInput().anim.runtimeAnimatorController = gunList[currentGun].animController;
         //Debug.Log(currentGun + " " + gunAnimControllers[currentGun]);
     }
@@ -309,15 +366,15 @@ public class StatePlayerController : MonoBehaviour
         //     transform.parent = collision.transform;
         // }
 
-        if (collision.gameObject.layer == 11 && !takingDamage) // if the collision is with an enemy 
+        if (collision.gameObject.layer == 11 && !damaged) // if the collision is with an enemy 
         { 
             Debug.Log("ran into enemy");
-            takingDamage = true;
+            if (isImmuneToDamage == false) {     
+                float enemyMeleeDamage = collision.gameObject.GetComponent<EnemyController>().GetMeleeDamage();
+                DecreasePlayerCurrentHealth(enemyMeleeDamage);
+                setDamaged(true);
+            }
             
-            float enemyMeleeDamage = collision.gameObject.GetComponent<EnemyController>().GetMeleeDamage();
-            DecreasePlayerCurrentHealth(enemyMeleeDamage);
-
-            StartCoroutine(EnemyPushPlayer());
         } else if (collision.gameObject.tag == "" && !takingDamage) // if collision is with an enemy ranged attack
         { 
             Debug.Log("ran into enemy ranged attack");
@@ -357,6 +414,8 @@ public class StatePlayerController : MonoBehaviour
     public void DecreasePlayerCurrentHealth(float amount)
     {
         currentPlayerHealth -= amount;
+        currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
+        SetPlayerHealthBar(currentPlayerHealth);
         Debug.Log("Player health: " + currentPlayerHealth);
         if (currentPlayerHealth <= 0f) {
             Debug.Log("player died :(");
@@ -371,12 +430,23 @@ public class StatePlayerController : MonoBehaviour
         } else {
             currentPlayerHealth += amount;
         }
+        SetPlayerHealthBar(currentPlayerHealth);
         Debug.Log("Player health: " + currentPlayerHealth);
+    }
+
+    public void SetPlayerImmunity(bool immunity) {
+        this.isImmuneToDamage = immunity;
+        if (immunity == false) {
+            spriteRenderer.enabled = true;
+            invincibilityCooldownTimer = invincibilityCooldownTime;
+        }
     }
 
     public void IncreasePlayerMaxHealth(float amount)
     {
         maxPlayerHealth += amount;
+        currentPlayerHealth = maxPlayerHealth;
+        SetPlayerHealthBar(currentPlayerHealth);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -406,16 +476,17 @@ public class StatePlayerController : MonoBehaviour
     public void addGun(int gunType) {
         switch(gunType) {
             case (int)GunPickup.GunType.RPG:
-                gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
+                gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2], gunicons[2]));
             break;
             case (int)GunPickup.GunType.Shotgun:
-                gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
+                gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1], gunicons[1]));
             break;
             case (int)GunPickup.GunType.DualPistols:
-                gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
+                gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, gunAnimControllers[3], gunicons[3]));
             break;
 
         }
+        SetPlayerCurrentGun(currentGun);
     }
 
 }

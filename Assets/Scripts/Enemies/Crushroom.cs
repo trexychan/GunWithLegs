@@ -8,6 +8,7 @@ public class Crushroom : Character<Crushroom, CrushroomState, CrushroomStateInpu
     public float moveSpeed = 1.0f;
     public int attackRate = 1;
     public float attackStrength = 1.0f;
+    public int layermask = 1 << 11;
     
     protected override void Init()
     {

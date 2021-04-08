@@ -12,7 +12,7 @@ public class GunPickup : MonoBehaviour
         if (collider.gameObject.layer == 8) {
             StatePlayerController player = collider.GetComponent<StatePlayerController>();
             player.addGun((int)gunType);
-            player.IncreaseMaxHealth(5);
+            player.IncreasePlayerMaxHealth(5);
             Destroy(gameObject);
         }
     }
