@@ -147,7 +147,7 @@ public enum EnemyType
     BEEMON=3,
     RATTANK=10,
     CRUSHROOM=6,
-    GHOST=1
+    GHOST=4
 }
 
 public enum Condition
