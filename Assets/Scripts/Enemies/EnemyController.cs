@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour
     public Condition currentCondition = Condition.NONE;
     [SerializeField]
     float meleeDamage, rangedAttackDamage;
+
+    public float minChaseDistance = 10; 
 
     private IEnumerator damageCoroutine;
 
@@ -35,6 +37,16 @@ public class EnemyController : MonoBehaviour
             this.facingRight = false;
         }
     }
+
+    public bool spotPlayerByDistance(Vector2 playerPos) {
+        float distance = Vector2.Distance(this.gameObject.transform.position, playerPos);
+        if (distance < minChaseDistance) {
+            return true;
+        }
+        return false;
+    }
+
+
     public virtual void Die() {
         this.gameObject.SetActive(false);
     }
@@ -134,7 +146,8 @@ public enum EnemyType
     MINOR=2,
     BEEMON=3,
     RATTANK=10,
-    CRUSHROOM=6
+    CRUSHROOM=6,
+    GHOST=1
 }
 
 public enum Condition
