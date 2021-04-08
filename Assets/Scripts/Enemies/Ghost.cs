@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Ghost : Character<Ghost, GhostState, GhostStateInput>
 {
-    public float maxSpeed = 5f;
+    public float maxSpeed = 3f;
     public int attackRate = 1;
     public float attackStrength = 1.0f;
+    public Transform waypoint;
     public Transform waypoint_l;
     public Transform waypoint_r;
-
 
     protected override void Init()
     {
         stateInput.ghost = this;
         stateInput.anim = GetComponent<Animator>();
         stateInput.spriteRenderer = GetComponent<SpriteRenderer>();
-        //stateInput.rb = GetComponent<Rigidbody2D>();
+        stateInput.rb = GetComponent<Rigidbody2D>();
         stateInput.boxCollider = GetComponent<BoxCollider2D>();
         stateInput.stateChanged = false;
         stateInput.gameobj = gameObject;

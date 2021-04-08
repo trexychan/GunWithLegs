@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     float meleeDamage, rangedAttackDamage;
 
+    public float minChaseDistance = 10; 
+
     private IEnumerator damageCoroutine;
 
     SpriteRenderer sprite;
@@ -36,6 +38,16 @@ public class EnemyController : MonoBehaviour
             this.facingRight = false;
         }
     }
+
+    public bool spotPlayerByDistance(Vector2 playerPos) {
+        float distance = Vector2.Distance(this.gameObject.transform.position, playerPos);
+        if (distance < minChaseDistance) {
+            return true;
+        }
+        return false;
+    }
+
+
     public virtual void Die() {
         this.gameObject.SetActive(false);
     }

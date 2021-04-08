@@ -1,44 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GhostWanderState : GhostState
 {
-    //float timer = 0f;
+    Transform targetedWaypoint;
     // Start is called before the first frame update
     public override void Enter(GhostStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
         //base.Enter(stateInput, transitionInfo);
         stateInput.anim.Play("Enemy_Move");
         stateInput.rb.velocity = new Vector2(-stateInput.ghost.maxSpeed, 0f);
+        targetedWaypoint = stateInput.ghost.waypoint_l;
     }
 
     // Update is called once per frame
     public override void Update(GhostStateInput stateInput)
     {
-        if (stateInput.enemy_controller.spottedPlayer())
-        {
-            stateInput.enemy_controller.TurnToFacePlayer(stateInput.player.transform.position);
-            stateInput.anim.Play("Enemy_Attack");
-
-            stateInput.gameobj.transform.position = Vector2.MoveTowards(stateInput.gameobj.transform.position,
-            stateInput.player.transform.position, stateInput.ghost.maxSpeed * Time.deltaTime);
-            
-        } else {
-            if (stateInput.gameobj.transform.position.x > stateInput.ghost.waypoint_r.position.x) 
+    
+            if (targetedWaypoint == stateInput.ghost.waypoint_r)
             {
-                stateInput.gameobj.transform.position = stateInput.ghost.waypoint_r.position;
-                stateInput.enemy_controller.facingRight = !stateInput.enemy_controller.facingRight;
-                stateInput.gameobj.transform.rotation = Quaternion.Euler(0,0,0);
-                stateInput.rb.velocity = -stateInput.rb.velocity;
-            }
-            if (stateInput.gameobj.transform.position.x < stateInput.ghost.waypoint_l.position.x)
-            {
-                stateInput.gameobj.transform.position = stateInput.ghost.waypoint_l.position;
-                stateInput.enemy_controller.facingRight = !stateInput.enemy_controller.facingRight;
                 stateInput.gameobj.transform.rotation = Quaternion.Euler(0,180,0);
-                stateInput.rb.velocity = -stateInput.rb.velocity;
+                float distance = Vector2.Distance(stateInput.ghost.transform.position, targetedWaypoint.position);
+                Vector2 moveDirection = targetedWaypoint.position - stateInput.ghost.transform.position;
+                moveDirection.Normalize();
+                moveDirection *= stateInput.ghost.maxSpeed;
+                stateInput.rb.velocity = moveDirection;
+                if (distance < 0.05f) {
+                    targetedWaypoint = stateInput.ghost.waypoint_l;
+                }
             }
-        }
+            if (targetedWaypoint == stateInput.ghost.waypoint_l)
+            {      
+                stateInput.gameobj.transform.rotation = Quaternion.Euler(0,0,0);
+                float distance = Vector2.Distance(stateInput.ghost.transform.position, targetedWaypoint.position);
+                Vector2 moveDirection = targetedWaypoint.position - stateInput.ghost.transform.position;
+                moveDirection.Normalize();
+                moveDirection *= stateInput.ghost.maxSpeed;
+                stateInput.rb.velocity = moveDirection;
+               if (distance < 0.05f) {
+                    targetedWaypoint = stateInput.ghost.waypoint_r;
+                }
+            }
+        
+        if (stateInput.enemy_controller.spotPlayerByDistance(stateInput.player.transform.position)) {
+             stateInput.rb.velocity = Vector2.zero;
+             character.ChangeState<GhostChaseState>();
+             return;
+        } 
     }
 }
