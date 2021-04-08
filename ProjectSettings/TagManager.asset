@@ -11,6 +11,7 @@ TagManager:
   - Armor
   - Crushroom
   - Ground
+  - Ghost
   layers:
   - Default
   - TransparentFX
