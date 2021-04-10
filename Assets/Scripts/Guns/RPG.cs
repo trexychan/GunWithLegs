@@ -8,8 +8,8 @@ public class RPG : ProjectileGun
     private Vector2 boxOffset;
     public RPG(StatePlayerController player, Transform firePoint, GameObject hitEffect, GameObject shotObj, AudioClip fireSound, RuntimeAnimatorController animatorController, Sprite icon) {
         this.size = Size.HEAVY;
-        this.shotCost = 10f;
-        this.damage = 20;
+        this.shotCost = 5f;
+        this.damage = 10;
         this.fireRate = 3f;
         this.firePt = firePoint;
         this.bullet = shotObj;
@@ -27,6 +27,7 @@ public class RPG : ProjectileGun
     {
         Instantiate(bullet, firePt.position, firePt.rotation);
         player.playSound(fireSound);
+        player.DecreasePlayerCurrentHealth(shotCost);
         
     }
 
