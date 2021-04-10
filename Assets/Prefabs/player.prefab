@@ -289,7 +289,7 @@ MonoBehaviour:
   - {fileID: 1053092031073558933, guid: 2a79630fabb9fa14cb32a16d66478841, type: 3}
   gunAnimControllers:
   - {fileID: 9100000, guid: 90cf34ee26f0b8542be194c5d117361a, type: 2}
-  - {fileID: 9100000, guid: f1b0e433692e31245be5775119fd90aa, type: 2}
+  - {fileID: 9100000, guid: 77e373a4fac23854bbc20a577df68652, type: 2}
   - {fileID: 9100000, guid: b36319a770a854843adb420707fe40a6, type: 2}
   - {fileID: 9100000, guid: d321af7c7c079fb49891fbfe29e9fa25, type: 2}
   gunSounds:
@@ -697,7 +697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8383219461300547348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.667, y: 0.716, z: 0}
+  m_LocalPosition: {x: -0.514, y: 0.159, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2426624051722942713}

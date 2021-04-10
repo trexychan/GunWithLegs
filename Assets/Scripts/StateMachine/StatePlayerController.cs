@@ -94,7 +94,6 @@ public class StatePlayerController : MonoBehaviour
         //gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
         // gunList.Add(new TVGun(this, firePoint, hitEffects[0],bulletObjs[1], gunSounds[0], gunAnimControllers[0]));
         gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt, gunicons[0]));
-        Debug.Log(gunicons[0]);
         SetPlayerCurrentGun(currentGun);
         //gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
         //gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
@@ -152,15 +151,17 @@ public class StatePlayerController : MonoBehaviour
 
     private void SetPlayerCurrentGun(int current)
     {
-        gunHUDSlots[1].sprite = gunList[current].icon;
-        
-        gunHUDSlots[2].sprite = gunList[(currentGun + 1) % gunList.Count].icon;
-        if (currentGun - 1 < 0)
-        {
-            gunHUDSlots[0].sprite = gunList[gunList.Count - 1].icon;
-        } else
-        {
-            gunHUDSlots[0].sprite = gunList[currentGun - 1].icon;
+        if (gunHUDSlots.Length > 1) {
+            gunHUDSlots[1].sprite = gunList[current].icon;
+            
+            gunHUDSlots[2].sprite = gunList[(currentGun + 1) % gunList.Count].icon;
+            if (currentGun - 1 < 0)
+            {
+                gunHUDSlots[0].sprite = gunList[gunList.Count - 1].icon;
+            } else
+            {
+                gunHUDSlots[0].sprite = gunList[currentGun - 1].icon;
+            }
         }
     }
 
@@ -271,7 +272,7 @@ public class StatePlayerController : MonoBehaviour
         return Vector2.zero;
     }
 
-    public bool canDash() {
+    public bool dashAble() {
         return gunList[currentGun].canDash() && dashCooldownTimer <= 0;
     }
 
@@ -369,6 +370,7 @@ public class StatePlayerController : MonoBehaviour
         if (collision.gameObject.layer == 11 && !damaged) // if the collision is with an enemy 
         { 
             Debug.Log("ran into enemy");
+            CamController.Instance.Shake(5, 0.2f);
             if (isImmuneToDamage == false) {
                 if (collision.gameObject.CompareTag("Enemy Projectile"))
                 {
@@ -379,6 +381,7 @@ public class StatePlayerController : MonoBehaviour
                     DecreasePlayerCurrentHealth(enemyMeleeDamage);
                 }
                 setDamaged(true);
+                
             }
         }
             
