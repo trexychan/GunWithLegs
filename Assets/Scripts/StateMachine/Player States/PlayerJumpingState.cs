@@ -13,7 +13,7 @@ public class PlayerJumpingState : PlayerState {
     {
         stateInput.playerController.isGrounded = stateInput.playerController.checkIfGrounded();
 
-        if (stateInput.playerController.canDash() && stateInput.playerControls.InGame.Dash.WasPressedThisFrame()) {
+        if (stateInput.playerController.dashAble() && stateInput.playerControls.InGame.Dash.WasPressedThisFrame()) {
             character.ChangeState<PlayerDashState>();
             return;
         }

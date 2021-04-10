@@ -12,6 +12,7 @@ TagManager:
   - Crushroom
   - Ground
   - Ghost
+  - Enemy Projectile
   layers:
   - Default
   - TransparentFX

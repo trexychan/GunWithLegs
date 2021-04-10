@@ -198,7 +198,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.113940835}
@@ -244,13 +244,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4427adaad964d8f4db443e40490d317b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 4
+  firept: {fileID: 0}
+  heavyprojectile: {fileID: 0}
+  lightprojectile: {fileID: 0}
   facingRight: 0
   vision_origin: {fileID: 7243453277208045524}
   currentCondition: 3
   meleeDamage: 1
   rangedAttackDamage: 0
-  minChaseDistance: 10
+  minChaseDistance: 8
 --- !u!1 &7243453277940872465
 GameObject:
   m_ObjectHideFlags: 0
