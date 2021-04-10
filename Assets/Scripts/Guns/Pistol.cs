@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pistol : RaycastGun
 {
     private Queue<GameObject> roundPool;
-    public Pistol(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController, GameObject shell, Transform ejectPt) {
+    public Pistol(StatePlayerController player, Transform firePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer renderer, RuntimeAnimatorController animatorController, GameObject shell, Transform ejectPt, Sprite icon) {
         this.size = Size.LIGHT;
         this.shotCost = 1f;
         this.damage = 1;
@@ -19,6 +19,7 @@ public class Pistol : RaycastGun
         this.maxRange = 9f;
         this.shell = shell;
         this.ejectPt = ejectPt;
+        this.icon = icon;
         roundPool = new Queue<GameObject>();
         for (int i = 0; i < 20; i++) {
             GameObject round = Instantiate(shell, ejectPt.position, Quaternion.identity);
@@ -33,8 +34,7 @@ public class Pistol : RaycastGun
         temp = firePt.right;
         // temp.y += Random.Range(-0.1f,0.1f);
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePt.position, temp, maxRange);
-        Physics2D.IgnoreLayerCollision(8, Physics2D.IgnoreRaycastLayer);
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePt.position, temp, maxRange, ~layermask);
 
         if (hitInfo)
         {
@@ -60,6 +60,7 @@ public class Pistol : RaycastGun
         player.playSound(fireSound);
         player.showBulletTrail(bulletTrail);
         ejectRound();
+        player.DecreasePlayerCurrentHealth(shotCost);
         
     }
 

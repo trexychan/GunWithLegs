@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5750539561867886639}
   - component: {fileID: 491781526500069909}
   - component: {fileID: 7311910722378592951}
+  - component: {fileID: -4911218297049559088}
   m_Layer: 0
   m_Name: RPGPickup
   m_TagString: Untagged
@@ -124,3 +125,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: 0
+--- !u!114 &-4911218297049559088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7911641800424587700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d78bcf4d4f5cc4f4f885a92710ff5e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degreesPerSecond: 15
+  amplitude: 0.1
+  frequency: 0.4

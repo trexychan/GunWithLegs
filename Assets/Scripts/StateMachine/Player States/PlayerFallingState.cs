@@ -10,19 +10,30 @@ public class PlayerFallingState : PlayerState {
 
     public override void Update(PlayerStateInput stateInput)
     {
-        stateInput.playerController.isGrounded = Physics2D.OverlapCircle(stateInput.playerController.groundCheck.position, stateInput.playerController.checkRadius, stateInput.playerController.whatIsGround);
+        stateInput.playerController.isGrounded = stateInput.playerController.isGrounded = stateInput.playerController.checkIfGrounded();
 
         if (stateInput.playerController.canDash() && stateInput.playerControls.InGame.Dash.WasPressedThisFrame()) {
             character.ChangeState<PlayerDashState>();
             return;
         }
 
+        if (stateInput.playerController.tookDamage()) {
+            stateInput.playerController.setDamaged(false);
+            Vector2 launchDirection = stateInput.playerController.launchVelocity;
+            if (stateInput.player.transform.rotation.y == 0) {
+                launchDirection.x = -launchDirection.x;
+            }
+            
+            character.ChangeState<PlayerLaunchState>(new LaunchStateTransitionInfo(launchDirection, stateInput.playerController.moveAfterLaunchTime, true));
+            return;
+        }
+
         if (stateInput.playerControls.InGame.SwitchLeft.WasPressedThisFrame()) {
-            stateInput.playerController.switchGun(false);
+            stateInput.playerController.switchGun(-1);
         }
 
         if (stateInput.playerControls.InGame.SwitchRight.WasPressedThisFrame()) {
-            stateInput.playerController.switchGun(true);
+            stateInput.playerController.switchGun(1);
         }
 
         if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame()) {

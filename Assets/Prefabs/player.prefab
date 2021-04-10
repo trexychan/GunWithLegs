@@ -92,7 +92,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 7
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -115,7 +115,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -141,7 +141,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -165,7 +165,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 0.32, y: 0.32}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -211,12 +211,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  currentPlayerHealth: 9
+  maxPlayerHealth: 9
+  healthbullets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  loadedshell: {fileID: 7941453658311570693, guid: bd775038d07cb9646b91b0ef3fd5166a,
+    type: 3}
+  emptyshell: {fileID: 3331372922665665631, guid: bd775038d07cb9646b91b0ef3fd5166a,
+    type: 3}
+  gunicons:
+  - {fileID: 7818957457410751845, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
+  - {fileID: -1273635796346213251, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
+  - {fileID: -4853023277583621765, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
+  - {fileID: -2559397733908335593, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
+  gunHUDSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   accelerationTimeAirborne: 0.05
   accelerationTimeGrounded: 0
+  launchVelocity: {x: 10, y: 15}
   moveAfterLaunchTime: 0.03
   moveInput: {x: 0, y: 0}
   maxJumpVelocity: 25
   minJumpVelocity: 10
+  rb: {fileID: 0}
   boxCollider: {fileID: 0}
   isGrounded: 0
   checkRadius: 0.01
@@ -228,6 +271,7 @@ MonoBehaviour:
   dashSpeed: 20
   dashCooldownTime: 0.5
   canFire: 1
+  invincibilityCooldownTime: 1
   gunList: []
   playerManager: {fileID: 0}
   firePoint: {fileID: 2426624051888569882}
@@ -237,13 +281,17 @@ MonoBehaviour:
     type: 3}
   hitEffects:
   - {fileID: 6152003406021164188, guid: 513c6cd46304aac43bd55fdc0b444720, type: 3}
+  switchEffect: {fileID: 3383979459072766390, guid: 8d7f1818d245c044d9007850962960f9,
+    type: 3}
   bulletObjs:
   - {fileID: 298703161671112519, guid: 002cc101a69524c4ba6918c2ec57d36d, type: 3}
   - {fileID: 8666213990023224848, guid: a13f4c46fb719ea408fb498833778fc6, type: 3}
+  - {fileID: 1053092031073558933, guid: 2a79630fabb9fa14cb32a16d66478841, type: 3}
   gunAnimControllers:
   - {fileID: 9100000, guid: 90cf34ee26f0b8542be194c5d117361a, type: 2}
   - {fileID: 9100000, guid: f1b0e433692e31245be5775119fd90aa, type: 2}
   - {fileID: 9100000, guid: b36319a770a854843adb420707fe40a6, type: 2}
+  - {fileID: 9100000, guid: d321af7c7c079fb49891fbfe29e9fa25, type: 2}
   gunSounds:
   - {fileID: 8300000, guid: 32279df05fd1de146893799b2769da6c, type: 3}
   - {fileID: 8300000, guid: 2187eda6a59dc284cbf823b53932bb42, type: 3}
@@ -252,6 +300,7 @@ MonoBehaviour:
   hasJumpedOnce: 0
   hasDoubleJumped: 0
   dualPistolsLeftFirePoint: {fileID: 4885979024128462849}
+  damaged: 0
 --- !u!95 &8802488606771251299
 Animator:
   serializedVersion: 3
@@ -618,7 +667,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2426624051888569883}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.482, y: 0.181, z: 0}
+  m_LocalPosition: {x: 0.406, y: 0.181, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2426624051722942713}
@@ -648,7 +697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8383219461300547348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.402, y: 0.181, z: 0}
+  m_LocalPosition: {x: -0.667, y: 0.716, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2426624051722942713}
