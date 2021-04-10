@@ -359,7 +359,7 @@ public class StatePlayerController : MonoBehaviour
         canFire = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         // if (collision.gameObject.CompareTag("Platform"))
         // {
@@ -369,24 +369,31 @@ public class StatePlayerController : MonoBehaviour
         if (collision.gameObject.layer == 11 && !damaged) // if the collision is with an enemy 
         { 
             Debug.Log("ran into enemy");
-            if (isImmuneToDamage == false) {     
-                float enemyMeleeDamage = collision.gameObject.GetComponent<EnemyController>().GetMeleeDamage();
-                DecreasePlayerCurrentHealth(enemyMeleeDamage);
+            if (isImmuneToDamage == false) {
+                if (collision.gameObject.CompareTag("Enemy Projectile"))
+                {
+                    float enemyRangedDamage = collision.gameObject.GetComponent<EnemyProjectile>().GetProjectileDamage();
+                    DecreasePlayerCurrentHealth(enemyRangedDamage);
+                } else {    
+                    float enemyMeleeDamage = collision.gameObject.GetComponent<EnemyController>().GetMeleeDamage();
+                    DecreasePlayerCurrentHealth(enemyMeleeDamage);
+                }
                 setDamaged(true);
             }
-            
-        } else if (collision.gameObject.tag == "" && !takingDamage) // if collision is with an enemy ranged attack
-        { 
-            Debug.Log("ran into enemy ranged attack");
-            takingDamage = true;
-
-            float enemyRangedDamage = collision.gameObject.GetComponent<EnemyController>().GetRangedAttackDamage();
-            DecreasePlayerCurrentHealth(enemyRangedDamage);
-            
-            StartCoroutine(RangedAttackPushPlayer());
-            
-            // do other stuff if player collides with enemy ranged attack
         }
+            
+        // } else if (collision.gameObject.CompareTag("Enemy Projectile") && !takingDamage) // if collision is with an enemy ranged attack
+        // { 
+        //     Debug.Log("ran into enemy ranged attack");
+        //     takingDamage = true;
+
+        //     float enemyRangedDamage = collision.gameObject.GetComponent<EnemyProjectile>().GetProjectileDamage();
+        //     DecreasePlayerCurrentHealth(enemyRangedDamage);
+            
+        //     StartCoroutine(RangedAttackPushPlayer());
+            
+        //     // do other stuff if player collides with enemy ranged attack
+        // }
     }
 
     private IEnumerator EnemyPushPlayer() 

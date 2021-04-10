@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public EnemyType maxHealth;
+    public Transform firept;
+    public GameObject heavyprojectile;
+    public GameObject lightprojectile;
     int currentHealth;
     bool isAlive;
     public bool facingRight = false;
@@ -12,7 +15,6 @@ public class EnemyController : MonoBehaviour
     public Condition currentCondition = Condition.NONE;
     [SerializeField]
     float meleeDamage, rangedAttackDamage;
-
     public float minChaseDistance = 10; 
 
     private IEnumerator damageCoroutine;
@@ -97,9 +99,10 @@ public class EnemyController : MonoBehaviour
         
     }
 
-    public void ShootProjectile()
+    public void ShootHeavyProjectile()
     {
         Debug.Log("PROJECTILE");
+        Instantiate(heavyprojectile,firept.position,gameObject.transform.rotation);
     }
 
     private void DamageFlash()

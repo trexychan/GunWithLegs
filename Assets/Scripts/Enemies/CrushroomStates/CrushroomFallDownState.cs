@@ -21,9 +21,10 @@ public class CrushroomFallDownState : CrushroomState
         
         // stateInput.anim.SetFloat("speed", stateInput.rb.velocity.y);
         if (stateInput.rb.IsTouchingLayers(1 << 9) && falling) { // if the crushroom hits the ground
+            Debug.Log("Landed!");
             stateInput.anim.Play("crushroom_land");
             falling = false;
-            stateInput.rb.bodyType =  RigidbodyType2D.Kinematic;
+            stateInput.rb.bodyType =  RigidbodyType2D.Static;
             stateInput.crushroomManager.StartWaitOnGround();
             
         }

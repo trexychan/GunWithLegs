@@ -8,6 +8,7 @@ public class DestroyableWall : MonoBehaviour
     {
         Debug.Log(hitCollider.gameObject.tag);
         if (hitCollider.gameObject.tag == "Rocket") {
+            gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }
