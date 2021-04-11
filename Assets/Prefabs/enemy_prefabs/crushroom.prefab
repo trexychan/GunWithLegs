@@ -123,11 +123,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 8
+  firept: {fileID: 0}
+  heavyprojectile: {fileID: 0}
+  lightprojectile: {fileID: 0}
   facingRight: 0
   vision_origin: {fileID: 0}
   currentCondition: 3
   meleeDamage: 3
   rangedAttackDamage: 0
+  minChaseDistance: 10
 --- !u!114 &8211841793392919845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +147,7 @@ MonoBehaviour:
   moveSpeed: 1
   attackRate: 1
   attackStrength: 1
+  layermask: 2048
 --- !u!114 &8211841793392919850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +171,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
