@@ -94,6 +94,8 @@ public class StatePlayerController : MonoBehaviour
         //gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
         // gunList.Add(new TVGun(this, firePoint, hitEffects[0],bulletObjs[1], gunSounds[0], gunAnimControllers[0]));
         gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt, gunicons[0]));
+        gunList.Add(new RailGun(this, firePoint, hitEffects[0], bulletObjs[3], gunSounds[0], gunAnimControllers[0], gunicons[0]));
+        Debug.Log(gunicons[0]);
         SetPlayerCurrentGun(currentGun);
         //gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
         //gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
@@ -346,8 +348,15 @@ public class StatePlayerController : MonoBehaviour
         //use the abstract gun class to shoot
         if (canFire) {
             canFire = false;
-            gunList[currentGun].Shoot();
-            StartCoroutine(delayNextShot());
+            if (gunList[currentGun].GetType() == typeof(RailGun))
+            {
+                StartCoroutine(chargedShot());
+            }
+            else
+            {
+                gunList[currentGun].Shoot();
+                StartCoroutine(delayNextShot());
+            }
         }
 
         //sample code to fire camera shake
@@ -358,6 +367,12 @@ public class StatePlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(gunList[currentGun].fireRate);
         canFire = true;
+    }
+    public IEnumerator chargedShot()
+    {
+        yield return new WaitForSeconds(gunList[currentGun].charge);
+        gunList[currentGun].Shoot();
+        StartCoroutine(delayNextShot());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
