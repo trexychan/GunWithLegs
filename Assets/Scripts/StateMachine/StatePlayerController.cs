@@ -56,6 +56,7 @@ public class StatePlayerController : MonoBehaviour
     public GameObject ejected_shell;
     public GameObject[] hitEffects = new GameObject[5];
     public GameObject switchEffect;
+    public GameObject deflectshotEffect;
     public GameObject[] bulletObjs = new GameObject[5];
     public List<RuntimeAnimatorController> gunAnimControllers = new List<RuntimeAnimatorController>();
     public AudioClip[] gunSounds;
@@ -372,6 +373,7 @@ public class StatePlayerController : MonoBehaviour
             Debug.Log("ran into enemy");
             CamController.Instance.Shake(5, 0.2f);
             if (isImmuneToDamage == false) {
+                playSound(gunSounds[gunSounds.Length-1]);
                 if (collision.gameObject.CompareTag("Enemy Projectile"))
                 {
                     float enemyRangedDamage = collision.gameObject.GetComponent<EnemyProjectile>().GetProjectileDamage();

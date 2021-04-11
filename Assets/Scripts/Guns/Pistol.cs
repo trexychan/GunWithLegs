@@ -42,12 +42,15 @@ public class Pistol : RaycastGun
             bulletTrail.SetPosition(0,firePt.position);
             bulletTrail.SetPosition(1,hitInfo.point);
 
-            GameObject new_hit = (GameObject)Instantiate(hitEffect, hitInfo.point, Quaternion.identity);
-            Destroy(new_hit, 0.267f);
+            
             
             EnemyController target = hitInfo.collider.gameObject.GetComponent<EnemyController>();
             if (target) {
                 target.TakeDamage(this.damage);
+                GameObject new_hit = (GameObject)Instantiate(hitEffect, hitInfo.point, Quaternion.identity);
+                Destroy(new_hit, 0.267f);
+            } else {
+                Instantiate(player.deflectshotEffect,hitInfo.point,Quaternion.identity);
             }
             
 
