@@ -81,6 +81,16 @@ public class StatePlayerController : MonoBehaviour
         playerControls.Disable();
     }
 
+    public void EnablePlayerControls()
+    {
+        playerControls.Enable();
+    }
+
+    public void DisablePlayerControls()
+    {
+        playerControls.Disable();
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
