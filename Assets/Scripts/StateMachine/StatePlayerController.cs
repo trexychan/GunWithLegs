@@ -91,15 +91,23 @@ public class StatePlayerController : MonoBehaviour
         SetPlayerHealthBar(currentPlayerHealth);
         currentGun = 0;
         gunList = new List<GunBase>();
+        foreach (int gunType in PlayerData.Instance.gunList) {
+            addGun(gunType);
+        }
         //gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
         // gunList.Add(new TVGun(this, firePoint, hitEffects[0],bulletObjs[1], gunSounds[0], gunAnimControllers[0]));
-        gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt, gunicons[0]));
+        if (gunList.Count == 0) {
+            if (PlayerData.Instance.gunList.Contains((int)GunPickup.GunType.Pistol) == false) {
+                PlayerData.Instance.addGun((int)GunPickup.GunType.Pistol);
+            }
+            gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt, gunicons[0]));
+        }
         SetPlayerCurrentGun(currentGun);
         //gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
         //gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
-        foreach (RuntimeAnimatorController anim in gunAnimControllers) {
-            Debug.Log(anim);
-        }
+        // foreach (RuntimeAnimatorController anim in gunAnimControllers) {
+        //     Debug.Log(anim);
+        // }
     }
 
     public void Update() {
@@ -335,7 +343,6 @@ public class StatePlayerController : MonoBehaviour
             }
         }
         if (gunList.Count > 1) {Instantiate(switchEffect,gameObject.transform.position,Quaternion.identity);}
-        Debug.Log(currentGun);
         SetPlayerCurrentGun(currentGun);
         playerManager.GetStateInput().anim.runtimeAnimatorController = gunList[currentGun].animController;
         //Debug.Log(currentGun + " " + gunAnimControllers[currentGun]);
@@ -484,17 +491,27 @@ public class StatePlayerController : MonoBehaviour
     }
 
     public void addGun(int gunType) {
+        if (PlayerData.Instance.gunList.Contains(gunType) == false) {
+            PlayerData.Instance.addGun(gunType);
+        }
         switch(gunType) {
+            case (int)GunPickup.GunType.Pistol:
+                Pistol pistol = new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt, gunicons[0]);
+                gunList.Add(pistol);
+            break;
             case (int)GunPickup.GunType.RPG:
-                gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2], gunicons[2]));
+                RPG rpg = new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2], gunicons[2]);
+                gunList.Add(rpg);
+                
             break;
             case (int)GunPickup.GunType.Shotgun:
-                gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1], gunicons[1]));
+                Shotgun shotgun = new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1], gunicons[1]);
+                gunList.Add(shotgun);
             break;
             case (int)GunPickup.GunType.DualPistols:
-                gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, gunAnimControllers[3], gunicons[3]));
+                DualPistols dualPistols = new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, gunAnimControllers[3], gunicons[3]);
+                gunList.Add(dualPistols);
             break;
-
         }
         SetPlayerCurrentGun(currentGun);
     }

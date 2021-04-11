@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunPickup : MonoBehaviour
 {
-    public enum GunType {RPG, Shotgun, DualPistols}
+    public enum GunType {Pistol, RPG, Shotgun, DualPistols}
 
     public GunType gunType;
     
