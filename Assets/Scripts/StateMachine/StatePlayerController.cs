@@ -100,6 +100,7 @@ public class StatePlayerController : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetPlayerHealthBar(currentPlayerHealth);
+        gameObject.transform.position = PlayerData.Instance.player_position;
         currentGun = 0;
         gunList = new List<GunBase>();
         foreach (int gunType in PlayerData.Instance.gunList) {
@@ -160,6 +161,7 @@ public class StatePlayerController : MonoBehaviour
             else {healthbullets[i].sprite = emptyshell;}
             if (i < maxPlayerHealth)
             {
+                Debug.Log(i);
                 healthbullets[i].enabled = true;
             } else
             {
@@ -206,6 +208,7 @@ public class StatePlayerController : MonoBehaviour
             hasDoubleJumped = false;
             hasJumpedOnce = true;
         }
+        
     }
 
     public bool canJump()
