@@ -51,6 +51,7 @@ public class EnemyController : MonoBehaviour
 
     public virtual void Die() {
         this.gameObject.SetActive(false);
+        // dropHealth();
     }
 
     public void TakeDamage(int damage) {

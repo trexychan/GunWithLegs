@@ -535,7 +535,7 @@ public class StatePlayerController : MonoBehaviour
                 
             break;
             case (int)GunPickup.GunType.Shotgun:
-                Shotgun shotgun = new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1], gunicons[1]);
+                Shotgun shotgun = new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], bulletObjs[3], gunAnimControllers[1], gunicons[1]);
                 gunList.Add(shotgun);
             break;
             case (int)GunPickup.GunType.DualPistols:
