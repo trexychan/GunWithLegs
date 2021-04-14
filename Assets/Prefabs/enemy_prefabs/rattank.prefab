@@ -230,6 +230,10 @@ MonoBehaviour:
   heavyprojectile: {fileID: 7754265722927855575, guid: 0d19f3c510be84f4aafc7f0322e348b0,
     type: 3}
   lightprojectile: {fileID: 0}
+  ammoPack: {fileID: 7405032826889282250, guid: 8e60e13d68c81e64eac417cd320ec45e,
+    type: 3}
+  enemyDeathExplosion: {fileID: 2354211482506408958, guid: 97334d20b01eb49408e1e8a05edec394,
+    type: 3}
   facingRight: 0
   vision_origin: {fileID: 2899902860116989020}
   currentCondition: 3
