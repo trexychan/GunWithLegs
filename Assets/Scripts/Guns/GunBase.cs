@@ -18,6 +18,7 @@ public abstract class GunBase : MonoBehaviour
     public GameObject shell;
     public Transform ejectPt;
     public Sprite icon;
+    public float charge = 0f;
     // public bool canFire;
 
 

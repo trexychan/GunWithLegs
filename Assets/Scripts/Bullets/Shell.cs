@@ -8,9 +8,12 @@ public class Shell : MonoBehaviour
     public float despawnTime = 3f;
     private float despawnTimer;
 
-    void Start() 
+    void Awake() 
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+    
+    void Start() {
         OnEnable();
     }
 
