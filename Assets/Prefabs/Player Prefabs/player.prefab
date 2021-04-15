@@ -213,32 +213,7 @@ MonoBehaviour:
   moveSpeed: 10
   currentPlayerHealth: 9
   maxPlayerHealth: 9
-  healthbullets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  healthbullets: []
   loadedshell: {fileID: 7941453658311570693, guid: bd775038d07cb9646b91b0ef3fd5166a,
     type: 3}
   emptyshell: {fileID: 3331372922665665631, guid: bd775038d07cb9646b91b0ef3fd5166a,
@@ -248,6 +223,8 @@ MonoBehaviour:
   - {fileID: -1273635796346213251, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
   - {fileID: -4853023277583621765, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
   - {fileID: -2559397733908335593, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
+  - {fileID: -5441483886059572633, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
+  - {fileID: -4160671016246182353, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
   gunHUDSlots:
   - {fileID: 0}
   - {fileID: 0}

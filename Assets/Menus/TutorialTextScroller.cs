@@ -26,8 +26,12 @@ public class TutorialTextScroller : MonoBehaviour
     }
     void Update()
     {
-        if (currentText == texts.Length - 1 && playerControls.InGame.Shoot.WasPressedThisFrame()) {SceneManager.LoadScene("Level1");}
-        else if ((playerControls.InGame.Move.triggered || playerControls.InGame.Jump.WasPressedThisFrame() || playerControls.InGame.Dash.WasPressedThisFrame()) && currentText < texts.Length - 1)
+        if (currentText == texts.Length - 1 && playerControls.InGame.Shoot.WasPressedThisFrame())
+        {
+            PlayerData.Instance.SetPlayerPosition(new Vector3(-19f, .5f, 0f));
+            SceneManager.LoadScene("Forest");
+        }
+        if ((playerControls.InGame.Move.triggered || playerControls.InGame.Jump.WasPressedThisFrame() || playerControls.InGame.Dash.WasPressedThisFrame()) && currentText < texts.Length - 1)
         {
             Debug.Log("Movement");
             texts[currentText].SetActive(!texts[currentText].activeSelf);
