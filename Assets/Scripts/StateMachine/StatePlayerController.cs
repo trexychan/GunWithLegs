@@ -99,7 +99,11 @@ public class StatePlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        SetPlayerHealthBar(currentPlayerHealth);
+        if (healthbullets != null) 
+        {
+            SetPlayerHealthBar(currentPlayerHealth);
+        }
+        
         gameObject.transform.position = PlayerData.Instance.player_position;
         currentGun = 0;
         gunList = new List<GunBase>();
@@ -116,7 +120,10 @@ public class StatePlayerController : MonoBehaviour
         }
         // gunList.Add(new RailGun(this, firePoint, hitEffects[0], bulletObjs[3], gunSounds[0], gunAnimControllers[0], gunicons[0]));
         // Debug.Log(gunicons[0]);
-        SetPlayerCurrentGun(currentGun);
+        if (gunHUDSlots != null) {
+            Debug.Log(gunHUDSlots.Length);
+            SetPlayerCurrentGun(currentGun);
+        }
         //gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
         //gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
         // foreach (RuntimeAnimatorController anim in gunAnimControllers) {
@@ -503,6 +510,10 @@ public class StatePlayerController : MonoBehaviour
     public void IncreasePlayerMaxHealth(float amount)
     {
         maxPlayerHealth += amount;
+        if (maxPlayerHealth > healthbullets.Length)
+        {
+            maxPlayerHealth = healthbullets.Length;
+        }
         currentPlayerHealth = maxPlayerHealth;
         SetPlayerHealthBar(currentPlayerHealth);
     }
@@ -553,8 +564,13 @@ public class StatePlayerController : MonoBehaviour
                 DualPistols dualPistols = new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, gunAnimControllers[3], gunicons[3]);
                 gunList.Add(dualPistols);
             break;
+            // case (int)GunPickup.GunType.RailGun:
+            //     RailGun railgun = new RailGun(this, firePoint, hitEffects[0], bulletObjs[3], );
         }
-        SetPlayerCurrentGun(currentGun);
+        if (gunHUDSlots != null)
+        {
+            SetPlayerCurrentGun(currentGun);
+        }
     }
 
 }

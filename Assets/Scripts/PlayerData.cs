@@ -24,7 +24,6 @@ public class PlayerData : MonoBehaviour
         } else {
             instance = this;
             gunList = new List<int>();
-            player_position = new Vector3(-19f, 0.5f, 0f);
             DontDestroyOnLoad(gameObject);
         }
     }
