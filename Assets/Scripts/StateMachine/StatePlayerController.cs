@@ -138,6 +138,17 @@ public class StatePlayerController : MonoBehaviour
         }
     }
 
+    public void AddHealth(float health)
+    {
+        if (currentPlayerHealth + health >= maxPlayerHealth) {
+            currentPlayerHealth = maxPlayerHealth;
+        } else {
+            currentPlayerHealth += health;
+            currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
+        }
+        SetPlayerHealthBar(currentPlayerHealth);
+    }
+
     public bool tookDamage() {
         return damaged;
     }

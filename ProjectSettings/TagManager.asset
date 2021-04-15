@@ -13,6 +13,7 @@ TagManager:
   - Ground
   - Ghost
   - Enemy Projectile
+  - Ammo
   layers:
   - Default
   - TransparentFX
