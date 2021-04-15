@@ -19,7 +19,6 @@ public class Railgunbullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D hitInfo) // if rocket hits something, explode
     {
         if (hitInfo.gameObject.layer != 8) {
-            if (hitInfo.gameObject.layer != 19) {
                 if (hitInfo.gameObject.layer == 11)
                 {
                     Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, exp_radius);
@@ -38,7 +37,6 @@ public class Railgunbullet : MonoBehaviour
                     Destroy(gameObject);
                     Instantiate(impactEffect, transform.position, transform.rotation);
                 }
-            }
         }
     }
 

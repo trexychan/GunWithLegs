@@ -542,6 +542,8 @@ public class StatePlayerController : MonoBehaviour
                 DualPistols dualPistols = new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, gunAnimControllers[3], gunicons[3]);
                 gunList.Add(dualPistols);
             break;
+            // case (int)GunPickup.GunType.RailGun:
+            //     RailGun railgun = new RailGun(this, firePoint, hitEffects[0], bulletObjs[3], );
         }
         SetPlayerCurrentGun(currentGun);
     }
