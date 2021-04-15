@@ -70,5 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98aa5cd2d4e57d42905b9646b604b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transition: {fileID: 0}
+  transitiontime: 1
   destination: Level2
   destination_position: {x: -5.32, y: -2.32, z: 0}

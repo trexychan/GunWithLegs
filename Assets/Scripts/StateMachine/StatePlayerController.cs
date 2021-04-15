@@ -99,10 +99,7 @@ public class StatePlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if (healthbullets != null) 
-        {
-            SetPlayerHealthBar(currentPlayerHealth);
-        }
+        
         
         gameObject.transform.position = PlayerData.Instance.player_position;
         currentGun = 0;
@@ -110,25 +107,26 @@ public class StatePlayerController : MonoBehaviour
         foreach (int gunType in PlayerData.Instance.gunList) {
             addGun(gunType);
         }
+        Debug.Log(PlayerData.Instance.player_current_health);
+        maxPlayerHealth = PlayerData.Instance.player_max_health;
+        currentPlayerHealth = PlayerData.Instance.player_current_health;
         //gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
         // gunList.Add(new TVGun(this, firePoint, hitEffects[0],bulletObjs[1], gunSounds[0], gunAnimControllers[0]));
+
         if (gunList.Count == 0) {
             if (PlayerData.Instance.gunList.Contains((int)GunPickup.GunType.Pistol) == false) {
                 PlayerData.Instance.addGun((int)GunPickup.GunType.Pistol);
             }
             gunList.Add(new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt, gunicons[0]));
         }
-        // gunList.Add(new RailGun(this, firePoint, hitEffects[0], bulletObjs[3], gunSounds[0], gunAnimControllers[0], gunicons[0]));
-        // Debug.Log(gunicons[0]);
+        
+        
+        SetPlayerHealthBar(currentPlayerHealth);
+
         if (gunHUDSlots != null) {
             Debug.Log(gunHUDSlots.Length);
             SetPlayerCurrentGun(currentGun);
         }
-        //gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
-        //gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
-        // foreach (RuntimeAnimatorController anim in gunAnimControllers) {
-        //     Debug.Log(anim);
-        // }
     }
 
     public void Update() {
@@ -136,14 +134,7 @@ public class StatePlayerController : MonoBehaviour
         updateInvincibilityCooldown();
     }
 
-    public void DamagePlayer(float damage)
-    {
-        if (!isImmuneToDamage) {
-            currentPlayerHealth -= damage;
-            currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
-            SetPlayerHealthBar(currentPlayerHealth); 
-        }
-    }
+    
 
     public void AddHealth(float health)
     {
@@ -154,6 +145,8 @@ public class StatePlayerController : MonoBehaviour
             currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
         }
         SetPlayerHealthBar(currentPlayerHealth);
+        PlayerData.Instance.SetPlayerHealth(currentPlayerHealth, maxPlayerHealth); // storing health data
+        
     }
 
     public bool tookDamage() {
@@ -181,7 +174,7 @@ public class StatePlayerController : MonoBehaviour
             else {healthbullets[i].sprite = emptyshell;}
             if (i < maxPlayerHealth)
             {
-                Debug.Log(i);
+                
                 healthbullets[i].enabled = true;
             } else
             {
@@ -481,22 +474,12 @@ public class StatePlayerController : MonoBehaviour
         currentPlayerHealth -= amount;
         currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
         SetPlayerHealthBar(currentPlayerHealth);
-        Debug.Log("Player health: " + currentPlayerHealth);
+        PlayerData.Instance.SetPlayerHealth(currentPlayerHealth, maxPlayerHealth); // storing health data
+        
         if (currentPlayerHealth <= 0f) {
             Debug.Log("player died :(");
             // kill player
         }
-    }
-
-    public void IncreasePlayerCurrentHealth(float amount)
-    {
-        if (currentPlayerHealth + amount >= maxPlayerHealth) {
-            currentPlayerHealth = maxPlayerHealth;
-        } else {
-            currentPlayerHealth += amount;
-        }
-        SetPlayerHealthBar(currentPlayerHealth);
-        Debug.Log("Player health: " + currentPlayerHealth);
     }
 
     public void SetPlayerImmunity(bool immunity) {
@@ -516,6 +499,7 @@ public class StatePlayerController : MonoBehaviour
         }
         currentPlayerHealth = maxPlayerHealth;
         SetPlayerHealthBar(currentPlayerHealth);
+        PlayerData.Instance.SetPlayerHealth(currentPlayerHealth, maxPlayerHealth); // storing health data
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -564,8 +548,10 @@ public class StatePlayerController : MonoBehaviour
                 DualPistols dualPistols = new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, gunAnimControllers[3], gunicons[3]);
                 gunList.Add(dualPistols);
             break;
-            // case (int)GunPickup.GunType.RailGun:
-            //     RailGun railgun = new RailGun(this, firePoint, hitEffects[0], bulletObjs[3], );
+            case (int)GunPickup.GunType.RailGun:
+                RailGun railgun = new RailGun(this, firePoint, hitEffects[0], bulletObjs[4], gunSounds[4], gunAnimControllers[4], gunicons[4]);
+                gunList.Add(railgun);
+                break;
         }
         if (gunHUDSlots != null)
         {

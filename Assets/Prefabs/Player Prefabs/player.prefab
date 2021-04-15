@@ -273,11 +273,13 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 77e373a4fac23854bbc20a577df68652, type: 2}
   - {fileID: 9100000, guid: b36319a770a854843adb420707fe40a6, type: 2}
   - {fileID: 9100000, guid: d321af7c7c079fb49891fbfe29e9fa25, type: 2}
+  - {fileID: 9100000, guid: 80c00ebd05b8a1449b9ea503dd83cbad, type: 2}
   gunSounds:
   - {fileID: 8300000, guid: 32279df05fd1de146893799b2769da6c, type: 3}
   - {fileID: 8300000, guid: 2187eda6a59dc284cbf823b53932bb42, type: 3}
   - {fileID: 8300000, guid: 2187eda6a59dc284cbf823b53932bb42, type: 3}
   - {fileID: 8300000, guid: 3027d9dd122c2304c86816086ce6e512, type: 3}
+  - {fileID: 8300000, guid: 779a80904a4688e43a3bd661d7d6b417, type: 3}
   - {fileID: 8300000, guid: cdc2bc0e2de0c7b48820de5fe9d60f9b, type: 3}
   audioSource: {fileID: 0}
   canDoubleJump: 0

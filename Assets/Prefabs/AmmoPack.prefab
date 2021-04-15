@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2623662744149388073}
   - component: {fileID: 4240921293453278354}
   - component: {fileID: 4613963786853524777}
-  m_Layer: 9
+  m_Layer: 19
   m_Name: AmmoPack
   m_TagString: Ammo
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2623662744149388073
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -172,4 +172,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada097bddb55b96439ca8ada2dad97bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 6096317200623831514, guid: 9ca5e5c863af4f546afd01107b605538, type: 3}
