@@ -14,6 +14,7 @@ public class PlayerData : MonoBehaviour
     public Vector3 player_position;
     public int player_current_health;
     public int player_max_health;
+    public bool hasAirJorguns;
 
 
     private void Awake()
@@ -24,6 +25,7 @@ public class PlayerData : MonoBehaviour
         } else {
             instance = this;
             gunList = new List<int>();
+            hasAirJorguns = false;
             DontDestroyOnLoad(gameObject);
         }
     }
@@ -39,6 +41,11 @@ public class PlayerData : MonoBehaviour
 
     public void SetPlayerHealth(int curr, int max)
     {
+        player_current_health = curr;
+        player_max_health = max;
+    }
 
+    public void obtainAirJorguns() {
+        hasAirJorguns = true;
     }
 }
