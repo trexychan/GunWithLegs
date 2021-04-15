@@ -69,7 +69,7 @@ public class EnemyController : MonoBehaviour
 
     public void DropHealth(int number)
     {
-        if (maxHealth == EnemyType.MINOR) {
+        if (maxHealth == EnemyType.MINOR || maxHealth == EnemyType.RATTANK) {
             number *= 2;
         }
         for (int i = 0; i < number; i++) {

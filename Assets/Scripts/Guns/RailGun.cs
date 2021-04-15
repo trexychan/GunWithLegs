@@ -8,7 +8,7 @@ public class RailGun : ProjectileGun
         size = Size.HEAVY;
         shotCost = 10f;
         damage = 10;
-        fireRate = 1.0f;
+        fireRate = 1.4f;
         this.firePt = firePt;
         this.hitEffect = hitEffect;
         this.bullet = shotObj;
@@ -24,16 +24,9 @@ public class RailGun : ProjectileGun
     public override void Shoot()
     {
         //Damage player based on ammo cost
-        Instantiate(bullet, firePt.position, firePt.rotation);
+        Instantiate(this.bullet, firePt.position, firePt.rotation);
         player.playSound(fireSound);
         player.DecreasePlayerCurrentHealth(shotCost);
-        //StartCoroutine(ChargedShot());
-        //enemy logic
-
-        /* bulletTrail.SetPosition(0, firePt.position);
-         bulletTrail.SetPosition(1, hitInfo.point);*/
-
-        // GameObject hit_mark = (GameObject)Instantiate(hit_effect,hitInfo.point,Quaternion.identity);
-        // Destroy(hit_mark,0.2f); // arbitrary delay on destroying effect, depends on if we have multiple hit effects of varying times
+        
     }
 }

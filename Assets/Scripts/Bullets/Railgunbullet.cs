@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Railgunbullet : MonoBehaviour
 {
-    public float speed = 10f;
-    public int damage = 2;
-    public float exp_radius = 1.8f;
-    //private float acceleration = 10f;
+    public float speed = 50f;
+    public int damage = 5;
     public Rigidbody2D rb;
     public GameObject impactEffect;
 
@@ -18,30 +16,24 @@ public class Railgunbullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo) // if rocket hits something, explode
     {
-        if (hitInfo.gameObject.layer != 8) {
-                if (hitInfo.gameObject.layer == 11)
-                {
-                    Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, exp_radius);
-
-                    foreach (Collider2D item in objects)
-                    {
-                        Debug.Log(item.gameObject.name);
-                        EnemyController ec = item.GetComponent<EnemyController>();
-                        if (ec)
-                        {
-                            ec.TakeDamage(damage);
-                        }
-                    }
-                }
-                else {
-                    Destroy(gameObject);
-                    Instantiate(impactEffect, transform.position, transform.rotation);
-                }
+        if (hitInfo.gameObject.layer == 11)
+        {
+            
+            EnemyController ec = hitInfo.gameObject.GetComponent<EnemyController>();
+            if (ec)
+            {
+                ec.TakeDamage(damage);
+            }
         }
     }
 
-    void OnBecameInvisible() // if rocket exits camera view, destroy itself
+    void OnCollisionEnter2D(Collision2D hitInfo)
     {
-        Destroy(gameObject);
+        if (hitInfo.gameObject.layer == 9)
+        {
+            Destroy(gameObject);
+            Instantiate(impactEffect, transform.position, transform.rotation);
+        }
     }
+
 }

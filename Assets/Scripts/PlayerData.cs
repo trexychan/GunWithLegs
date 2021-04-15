@@ -12,9 +12,9 @@ public class PlayerData : MonoBehaviour
     public List<int> gunList;
 
     public Vector3 player_position;
-    public int player_current_health;
-    public int player_max_health;
     public bool hasAirJorguns;
+    public float player_current_health;
+    public float player_max_health;
 
 
     private void Awake()
@@ -26,6 +26,8 @@ public class PlayerData : MonoBehaviour
             instance = this;
             gunList = new List<int>();
             hasAirJorguns = false;
+            player_current_health = 9f;
+            player_max_health = player_current_health;
             DontDestroyOnLoad(gameObject);
         }
     }
@@ -39,7 +41,7 @@ public class PlayerData : MonoBehaviour
         player_position = in_position;
     }
 
-    public void SetPlayerHealth(int curr, int max)
+    public void SetPlayerHealth(float curr, float max)
     {
         player_current_health = curr;
         player_max_health = max;
