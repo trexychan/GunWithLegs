@@ -127,6 +127,12 @@ public class StatePlayerController : MonoBehaviour
             Debug.Log(gunHUDSlots.Length);
             SetPlayerCurrentGun(currentGun);
         }
+        canDoubleJump = PlayerData.Instance.hasAirJorguns;
+        //gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
+        //gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
+        // foreach (RuntimeAnimatorController anim in gunAnimControllers) {
+        //     Debug.Log(anim);
+        // }
     }
 
     public void Update() {
