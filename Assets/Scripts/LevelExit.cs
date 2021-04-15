@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelExit : MonoBehaviour
 {
+    public Animator transition;
+    public float transitiontime = 1f;
     public string destination;
     public Vector3 destination_position;
     // Start is called before the first frame update
@@ -18,7 +20,14 @@ public class LevelExit : MonoBehaviour
         if (collider.CompareTag("Player") && !collider.isTrigger)
         {
             PlayerData.Instance.SetPlayerPosition(destination_position);
-            SceneManager.LoadScene(destination, LoadSceneMode.Single);
+            StartCoroutine(LoadLevel());
         }
+    }
+
+    IEnumerator LoadLevel()
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(transitiontime);
+        SceneManager.LoadScene(destination, LoadSceneMode.Single);
     }
 }

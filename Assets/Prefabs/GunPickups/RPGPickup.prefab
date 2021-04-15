@@ -137,6 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78bcf4d4f5cc4f4f885a92710ff5e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  degreesPerSecond: 15
+  degreesPerSecond: 0
   amplitude: 0.1
   frequency: 0.4
