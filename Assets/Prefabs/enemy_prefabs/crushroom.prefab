@@ -122,10 +122,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4427adaad964d8f4db443e40490d317b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 8
+  maxHealth: 6
   firept: {fileID: 0}
   heavyprojectile: {fileID: 0}
   lightprojectile: {fileID: 0}
+  ammoPack: {fileID: 7405032826889282250, guid: 8e60e13d68c81e64eac417cd320ec45e,
+    type: 3}
+  enemyDeathExplosion: {fileID: 2354211482506408958, guid: 97334d20b01eb49408e1e8a05edec394,
+    type: 3}
   facingRight: 0
   vision_origin: {fileID: 0}
   currentCondition: 3

@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
     public Transform firept;
     public GameObject heavyprojectile;
     public GameObject lightprojectile;
+    public GameObject ammoPack;
+    public GameObject enemyDeathExplosion;
     int currentHealth;
     bool isAlive;
     public bool facingRight = false;
@@ -51,7 +53,8 @@ public class EnemyController : MonoBehaviour
 
     public virtual void Die() {
         this.gameObject.SetActive(false);
-        // dropHealth();
+        Instantiate(enemyDeathExplosion, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), Quaternion.identity);
+        DropHealth((int)maxHealth);
     }
 
     public void TakeDamage(int damage) {
@@ -61,6 +64,21 @@ public class EnemyController : MonoBehaviour
         if (this.currentHealth <= 0) {
             this.isAlive = false;
             Die();
+        }
+    }
+
+    public void DropHealth(int number)
+    {
+        if (maxHealth == EnemyType.MINOR) {
+            number *= 2;
+        }
+        for (int i = 0; i < number; i++) {
+            float xValue = Random.Range(-7f, 7f);
+            float yValue = Random.Range(3f, 6f);
+            // float torqueValue = Random.Range(-10f, 10f);
+            GameObject ammo = Instantiate(ammoPack, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), Quaternion.identity);
+            ammo.GetComponent<Rigidbody2D>().velocity += new Vector2(xValue, yValue);
+            // ammo.GetComponent<Rigidbody2D>().AddTorque(torqueValue);
         }
     }
 
