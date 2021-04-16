@@ -36,8 +36,8 @@ TagManager:
   - EnemyRanges
   - Bullet
   - Pickup
-  - 
-  - 
+  - CameraBounds
+  - Hazard
   - 
   - 
   - 

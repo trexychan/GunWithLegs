@@ -429,7 +429,7 @@ public class StatePlayerController : MonoBehaviour
             Debug.Log("ran into enemy");
             CamController.Instance.Shake(5, 0.2f);
             if (isImmuneToDamage == false) {
-                playSound(gunSounds[gunSounds.Length-1]);
+                playSound(gunSounds[gunSounds.Length-1]); // player hurt is always, ALWAYS at the end
                 if (collision.gameObject.CompareTag("Enemy Projectile"))
                 {
                     float enemyRangedDamage = collision.gameObject.GetComponent<EnemyProjectile>().GetProjectileDamage();
@@ -581,6 +581,7 @@ public class StatePlayerController : MonoBehaviour
         {
             SetPlayerCurrentGun(currentGun);
         }
+        playSound(gunSounds[6]);
     }
 
 }

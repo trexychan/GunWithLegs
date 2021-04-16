@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public EnemyType maxHealth;
+    public int ammoDropCount;
     public Transform firept;
     public GameObject heavyprojectile;
     public GameObject lightprojectile;
@@ -30,6 +31,11 @@ public class EnemyController : MonoBehaviour
     void Start() {
         this.currentHealth = (int)maxHealth;
         this.isAlive = true;
+        if (ammoDropCount == 0)
+        {
+            ammoDropCount = (int)maxHealth;
+        }
+        
     }
     
     public void TurnToFacePlayer(Vector3 pos) {
@@ -54,7 +60,7 @@ public class EnemyController : MonoBehaviour
     public virtual void Die() {
         this.gameObject.SetActive(false);
         Instantiate(enemyDeathExplosion, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), Quaternion.identity);
-        DropHealth((int)maxHealth);
+        DropHealth(ammoDropCount);
     }
 
     public void TakeDamage(int damage) {
@@ -69,9 +75,6 @@ public class EnemyController : MonoBehaviour
 
     public void DropHealth(int number)
     {
-        if (maxHealth == EnemyType.MINOR || maxHealth == EnemyType.RATTANK) {
-            number *= 2;
-        }
         for (int i = 0; i < number; i++) {
             float xValue = Random.Range(-7f, 7f);
             float yValue = Random.Range(3f, 6f);
@@ -165,7 +168,7 @@ public class EnemyController : MonoBehaviour
 
 public enum EnemyType
 {
-    MINOR=2,
+    MINOR=1,
     BEEMON=3,
     RATTANK=10,
     CRUSHROOM=6,
