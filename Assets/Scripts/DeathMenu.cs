@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeathMenu : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class DeathMenu : MonoBehaviour
             src.Stop();
         }
         StartCoroutine(delayedAppearance());
+        StartCoroutine(restartGame());
     }
 
     IEnumerator delayedAppearance()
@@ -28,5 +30,11 @@ public class DeathMenu : MonoBehaviour
         deathscreen.SetActive(true);
         gameObject.GetComponent<AudioSource>().clip = deathnoise;
         gameObject.GetComponent<AudioSource>().Play();
+    }
+
+    IEnumerator restartGame() {
+        yield return new WaitForSeconds(4f);
+        Destroy(PlayerData.Instance);
+        SceneManager.LoadScene(0);
     }
 }
