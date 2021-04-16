@@ -42,10 +42,15 @@ public class DualPistols : RaycastGun
             bulletTrail.SetPosition(0,firePt.position);
             bulletTrail.SetPosition(1,hitInfoRight.point);
 
-            GameObject new_hit = (GameObject)Instantiate(hitEffect, hitInfoRight.point, Quaternion.identity);
-            Destroy(new_hit, 0.267f);
 
-            Debug.Log(hitInfoRight.transform.name);
+            EnemyController target = hitInfoRight.collider.gameObject.GetComponent<EnemyController>();
+            if (target) {
+                target.TakeDamage(this.damage);
+                GameObject new_hit = (GameObject)Instantiate(hitEffect, hitInfoRight.point, Quaternion.identity);
+                Destroy(new_hit, 0.267f);
+            } else {
+                Instantiate(player.deflectshotEffect,hitInfoRight.point,Quaternion.identity);
+            }
 
         } else 
         {
@@ -58,10 +63,14 @@ public class DualPistols : RaycastGun
             bulletTrailLeft.SetPosition(0,secondFirePoint.position);
             bulletTrailLeft.SetPosition(1,hitInfoLeft.point);
 
-            GameObject new_hit = (GameObject)Instantiate(hitEffect, hitInfoLeft.point, Quaternion.identity);
-            Destroy(new_hit, 0.267f);
-
-            Debug.Log(hitInfoLeft.transform.name);
+            EnemyController target = hitInfoLeft.collider.gameObject.GetComponent<EnemyController>();
+            if (target) {
+                target.TakeDamage(this.damage);
+                GameObject new_hit = (GameObject)Instantiate(hitEffect, hitInfoLeft.point, Quaternion.identity);
+                Destroy(new_hit, 0.267f);
+            } else {
+                Instantiate(player.deflectshotEffect,hitInfoLeft.point,Quaternion.identity);
+            }
 
         } else 
         {

@@ -16,5 +16,11 @@ public class GunPickupSpawner : MonoBehaviour
                 pickup.gameObject.SetActive(false);
             }
         }
+
+        AirJordans ajs = FindObjectOfType<AirJordans>();
+        if (PlayerData.Instance.hasAirJorguns)
+        {
+            ajs.gameObject.SetActive(false);
+        }
     }
 }

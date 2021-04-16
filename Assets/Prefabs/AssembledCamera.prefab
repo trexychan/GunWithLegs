@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2283891283234064612}
   - component: {fileID: 2283891283234064615}
   - component: {fileID: 2283891283234064614}
+  - component: {fileID: 8662451205434020249}
   m_Layer: 0
   m_Name: AssembledCamera
   m_TagString: Untagged
@@ -115,6 +116,23 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8662451205434020249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283891283234064617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2fba25a5cd15594e8f050a11e386c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ConfineMode: 0
+  m_BoundingVolume: {fileID: 0}
+  m_BoundingShape2D: {fileID: 0}
+  m_ConfineScreenEdges: 1
+  m_Damping: 0.15
 --- !u!1 &2283891283686595325
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0.2
+  m_LookaheadTime: 0.108
   m_LookaheadSmoothing: 10
   m_LookaheadIgnoreY: 1
   m_XDamping: 1
@@ -243,12 +261,12 @@ MonoBehaviour:
   m_ScreenX: 0.5
   m_ScreenY: 0.47499996
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.2
-  m_DeadZoneHeight: 0.1
+  m_DeadZoneWidth: 0
+  m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
+  m_SoftZoneWidth: 0.41
+  m_SoftZoneHeight: 0.395
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1

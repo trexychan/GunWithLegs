@@ -214,6 +214,7 @@ MonoBehaviour:
   currentPlayerHealth: 9
   maxPlayerHealth: 9
   healthbullets: []
+  deathscreen: {fileID: 0}
   loadedshell: {fileID: 7941453658311570693, guid: bd775038d07cb9646b91b0ef3fd5166a,
     type: 3}
   emptyshell: {fileID: 3331372922665665631, guid: bd775038d07cb9646b91b0ef3fd5166a,
@@ -258,6 +259,8 @@ MonoBehaviour:
     type: 3}
   hitEffects:
   - {fileID: 6152003406021164188, guid: 513c6cd46304aac43bd55fdc0b444720, type: 3}
+  deathExplosion: {fileID: 2354211482506408958, guid: 14e17e0fdc1154246a97648b862e620e,
+    type: 3}
   switchEffect: {fileID: 3383979459072766390, guid: 8d7f1818d245c044d9007850962960f9,
     type: 3}
   deflectshotEffect: {fileID: 7799869169407815770, guid: 85102af5c5c94204ca7b6ae52876b3bb,
@@ -280,6 +283,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2187eda6a59dc284cbf823b53932bb42, type: 3}
   - {fileID: 8300000, guid: 3027d9dd122c2304c86816086ce6e512, type: 3}
   - {fileID: 8300000, guid: 779a80904a4688e43a3bd661d7d6b417, type: 3}
+  - {fileID: 8300000, guid: 60488bcffa07d744ea86bd3c80997e39, type: 3}
+  - {fileID: 8300000, guid: 7b3d857cb39fd924ca49fe8981304d57, type: 3}
   - {fileID: 8300000, guid: cdc2bc0e2de0c7b48820de5fe9d60f9b, type: 3}
   audioSource: {fileID: 0}
   canDoubleJump: 0

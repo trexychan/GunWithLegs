@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 6
+  ammoDropCount: 6
   firept: {fileID: 0}
   heavyprojectile: {fileID: 0}
   lightprojectile: {fileID: 0}

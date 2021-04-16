@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class StatePlayerController : MonoBehaviour
 {
     public float moveSpeed = 3f, currentPlayerHealth = 9f, maxPlayerHealth = 9f;
     public Image[] healthbullets;
+    public GameObject deathscreen;
     public Sprite loadedshell;
     public Sprite emptyshell;
     public Sprite[] gunicons;
@@ -55,6 +57,7 @@ public class StatePlayerController : MonoBehaviour
     public Transform ejectPt;
     public GameObject ejected_shell;
     public GameObject[] hitEffects = new GameObject[5];
+    public GameObject deathExplosion;
     public GameObject switchEffect;
     public GameObject deflectshotEffect;
     public GameObject[] bulletObjs = new GameObject[5];
@@ -68,10 +71,11 @@ public class StatePlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     public bool damaged;
-
+    Scene currentScene;
 
     private void Awake() {
         playerControls = new PlayerControls();
+        currentScene = SceneManager.GetActiveScene();
     }
 
     void OnEnable() {
@@ -99,7 +103,13 @@ public class StatePlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+        if (currentScene.name == "Game_Start")
+        {
+            PlayerData.Instance.inTutorial = true;
+        } else
+        {
+            PlayerData.Instance.inTutorial = false;
+        }
         
         gameObject.transform.position = PlayerData.Instance.player_position;
         currentGun = 0;
@@ -107,7 +117,6 @@ public class StatePlayerController : MonoBehaviour
         foreach (int gunType in PlayerData.Instance.gunList) {
             addGun(gunType);
         }
-        Debug.Log(PlayerData.Instance.player_current_health);
         maxPlayerHealth = PlayerData.Instance.player_max_health;
         currentPlayerHealth = PlayerData.Instance.player_current_health;
         //gunList.Add(new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, null));
@@ -128,11 +137,7 @@ public class StatePlayerController : MonoBehaviour
             SetPlayerCurrentGun(currentGun);
         }
         canDoubleJump = PlayerData.Instance.hasAirJorguns;
-        //gunList.Add(new Shotgun(this, firePoint, hitEffects[0], gunSounds[1], GetComponent<LineRenderer>(), gunAnimControllers[1]));
-        //gunList.Add(new RPG(this, firePoint, hitEffects[0], bulletObjs[1], gunSounds[1], gunAnimControllers[2]));
-        // foreach (RuntimeAnimatorController anim in gunAnimControllers) {
-        //     Debug.Log(anim);
-        // }
+        
     }
 
     public void Update() {
@@ -180,7 +185,6 @@ public class StatePlayerController : MonoBehaviour
             else {healthbullets[i].sprite = emptyshell;}
             if (i < maxPlayerHealth)
             {
-                
                 healthbullets[i].enabled = true;
             } else
             {
@@ -425,7 +429,7 @@ public class StatePlayerController : MonoBehaviour
             Debug.Log("ran into enemy");
             CamController.Instance.Shake(5, 0.2f);
             if (isImmuneToDamage == false) {
-                playSound(gunSounds[gunSounds.Length-1]);
+                playSound(gunSounds[gunSounds.Length-1]); // player hurt is always, ALWAYS at the end
                 if (collision.gameObject.CompareTag("Enemy Projectile"))
                 {
                     float enemyRangedDamage = collision.gameObject.GetComponent<EnemyProjectile>().GetProjectileDamage();
@@ -477,16 +481,30 @@ public class StatePlayerController : MonoBehaviour
 
     public void DecreasePlayerCurrentHealth(float amount)
     {
-        currentPlayerHealth -= amount;
-        currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
-        SetPlayerHealthBar(currentPlayerHealth);
-        PlayerData.Instance.SetPlayerHealth(currentPlayerHealth, maxPlayerHealth); // storing health data
-        
-        if (currentPlayerHealth <= 0f) {
-            Debug.Log("player died :(");
-            // kill player
+        if (!PlayerData.Instance.inTutorial) 
+        {
+            currentPlayerHealth -= amount;
+            currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
+            SetPlayerHealthBar(currentPlayerHealth);
+            PlayerData.Instance.SetPlayerHealth(currentPlayerHealth, maxPlayerHealth); // storing health data
+            
+            if (currentPlayerHealth <= 0f) {
+                Debug.Log("player died :(");
+                Die();
+            }
         }
     }
+
+    public void Die()
+    {
+        Instantiate(deathExplosion, this.transform.position, this.transform.rotation);
+        PlayerData.Instance.isAlive = false;
+        DeathMenu dm = FindObjectOfType<DeathMenu>();
+        dm.playDeathScreen();
+        this.gameObject.SetActive(false);
+    }
+
+    
 
     public void SetPlayerImmunity(bool immunity) {
         this.isImmuneToDamage = immunity;
@@ -563,6 +581,7 @@ public class StatePlayerController : MonoBehaviour
         {
             SetPlayerCurrentGun(currentGun);
         }
+        playSound(gunSounds[6]);
     }
 
 }

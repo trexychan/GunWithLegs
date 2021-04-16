@@ -181,7 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4427adaad964d8f4db443e40490d317b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 1
+  ammoDropCount: 5
   firept: {fileID: 0}
   heavyprojectile: {fileID: 0}
   lightprojectile: {fileID: 0}
