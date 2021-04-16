@@ -13,19 +13,23 @@ public class PlayerData : MonoBehaviour
 
     public Vector3 player_position;
     public bool hasAirJorguns;
+    public bool inTutorial = false;
     public float player_current_health;
     public float player_max_health;
+    public bool isAlive;
 
 
     private void Awake()
     {
         if (instance != null && instance != this)
         {
+            Debug.Log("adios");
             Destroy(this.gameObject);
         } else {
             instance = this;
             gunList = new List<int>();
             hasAirJorguns = false;
+            isAlive = true;
             player_current_health = 9f;
             player_max_health = player_current_health;
             DontDestroyOnLoad(gameObject);

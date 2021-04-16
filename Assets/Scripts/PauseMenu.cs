@@ -46,7 +46,7 @@ public class PauseMenu : MonoBehaviour
     public void ReturnToMainMenu()
     {
         ResumeGame();
-        PlayerData.Instance.SetPlayerPosition(new Vector3(0, 1f, 0));
+        Destroy(PlayerData.Instance);
         SceneManager.LoadScene(0);
     }
 
