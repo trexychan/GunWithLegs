@@ -18,7 +18,7 @@ public class CrushroomIdleState : CrushroomState
     public override void Update(CrushroomStateInput stateInput)
     {
         RaycastHit2D hit = Physics2D.Raycast(stateInput.gameobj.transform.position, -stateInput.gameobj.transform.up, 20f, ~stateInput.crushroom.layermask);
-        Debug.Log(hit.collider.name);
+        
 
         // stateInput.enemy_controller.TurnToFacePlayer(stateInput.player.transform.position);
         if (hit) {

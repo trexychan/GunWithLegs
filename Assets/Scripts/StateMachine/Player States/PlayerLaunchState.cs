@@ -28,7 +28,7 @@ public class PlayerLaunchState : PlayerState
     public override void Update(PlayerStateInput stateInput)
     {
         stateInput.playerController.isGrounded = stateInput.playerController.checkIfGrounded();
-        Debug.Log(stateInput.rb.velocity);
+        
         if (stateInput.playerController.isGrounded && timer <= 0) {
             character.ChangeState<PlayerIdleState>();
         }
