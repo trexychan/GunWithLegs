@@ -5,7 +5,7 @@ using UnityEngine;
 public class RaycastGun : GunBase
 {
     public LineRenderer bulletTrail;
-    public LayerMask layermask = 1 << 8 | 1 << 2 | 1 << 16;
+    public LayerMask layermask = 1 << 8 | 1 << 2 | 1 << 16 | 1 << 19;
 
     public override void Shoot()
     {
