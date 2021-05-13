@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1053092031073558935}
   - component: {fileID: 1053092031073558932}
   - component: {fileID: 1053092031073558928}
-  m_Layer: 0
-  m_Name: shadow_hand
+  m_Layer: 18
+  m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

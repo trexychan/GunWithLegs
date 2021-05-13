@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &692104774737565932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 692104774737565935}
+  - component: {fileID: 692104774737565934}
+  m_Layer: 0
+  m_Name: AudioEventManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &692104774737565935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692104774737565932}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -36.955647, y: -0.76048714, z: 40.26837}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8372517453654453224}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &692104774737565934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692104774737565932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c663d152f7b5d6b4cb5b26679decf3f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSoundPrefab: {fileID: 4398508274983103420, guid: 98a50f3419f1ac246b2876ac66d79c55,
+    type: 3}
+  gunAddedAudio: {fileID: 8300000, guid: 7b3d857cb39fd924ca49fe8981304d57, type: 3}
+  itemAddedAudio: {fileID: 8300000, guid: 2a1ed02f69f165841ab4046edb669f5f, type: 3}
+  playerDamagedAudio: {fileID: 8300000, guid: cdc2bc0e2de0c7b48820de5fe9d60f9b, type: 3}
+  playerSoftLandAudio: {fileID: 0}
+  playerHardLandAudio: {fileID: 0}
+  playerDeathAudio: {fileID: 8300000, guid: 60488bcffa07d744ea86bd3c80997e39, type: 3}
+  playerDashAudio: {fileID: 8300000, guid: f0b0de23f28ffe64b9c5978d7356942d, type: 3}
+  playerSwitchAudio: {fileID: 8300000, guid: a3b5a791a44aa424abafcbd37cb6be24, type: 3}
+  playerFootStepAudio:
+  - {fileID: 8300000, guid: af8db75a8affd6b46b28776c3907b2f5, type: 3}
+  - {fileID: 8300000, guid: eb299a43435c2cd4fba11882a22d2ef7, type: 3}
+  - {fileID: 8300000, guid: 03484756be390424eba6767b779c0645, type: 3}
+  - {fileID: 8300000, guid: b31a36da9080c49439965475d2ae5a5b, type: 3}
+  pistolFireAudio: {fileID: 8300000, guid: 32279df05fd1de146893799b2769da6c, type: 3}
+  shotgunFireAudio: {fileID: 8300000, guid: f0af3d724c8fabf4caffcfa76ee61bb3, type: 3}
+  rpgFireAudio: {fileID: 8300000, guid: 2187eda6a59dc284cbf823b53932bb42, type: 3}
+  dualpistolsFireAudio: {fileID: 8300000, guid: 3027d9dd122c2304c86816086ce6e512,
+    type: 3}
+  railgunFireAudio: {fileID: 8300000, guid: 779a80904a4688e43a3bd661d7d6b417, type: 3}
+  bulletDeflect: {fileID: 8300000, guid: f82337989fa553d4d929ec23d1f81947, type: 3}
+  bulletHitEnemy:
+  - {fileID: 8300000, guid: b64edbe297eb2f041863a94b2653e2e7, type: 3}
+  - {fileID: 8300000, guid: 30322b61eda13484c9f705d5fb31fb6f, type: 3}
+  - {fileID: 8300000, guid: 70791ae374fd9b649ae85ed5df8cd801, type: 3}
+  - {fileID: 8300000, guid: 37f8962c3aeee6b4989e50774ba8a8a7, type: 3}
+  - {fileID: 8300000, guid: 065f4727ba8c3284eaf1bde91f3d585d, type: 3}
+  bulletHitGround: {fileID: 8300000, guid: edf0d93fd5a0ec64095ecfa528b33bdf, type: 3}
+  ratDeathAudio: {fileID: 8300000, guid: 2d48d34e444f7ee4d8f35330eccfe753, type: 3}
+  enemyDeathAudio: {fileID: 8300000, guid: af32500b780cdd444b7abefc3c7cf5a4, type: 3}
+  explosionAudio: {fileID: 8300000, guid: fe0ca8a3b3833da4fa72708c03bc9e0f, type: 3}
+--- !u!1 &6638087016147307355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6638087016147307349}
+  - component: {fileID: 6638087016147307354}
+  m_Layer: 0
+  m_Name: EventManager -- REQUIRED
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6638087016147307349
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6638087016147307355}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -78.15565, y: -4.6241345, z: 22.857271}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8372517453654453224}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6638087016147307354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6638087016147307355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b619881f37f73644aa38a69cf7ebdb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7383697305272892393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8372517453654453224}
+  m_Layer: 0
+  m_Name: Events
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8372517453654453224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383697305272892393}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 36.955647, y: 0.76048714, z: -40.26837}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 692104774737565935}
+  - {fileID: 6638087016147307349}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

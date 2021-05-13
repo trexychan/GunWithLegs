@@ -8,7 +8,7 @@ public class DualPistols : RaycastGun
     private Transform secondFirePoint;
     private LineRenderer bulletTrailLeft;
 
-    public DualPistols(StatePlayerController player, Transform firstFirePoint, Transform secondFirePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer rendererRight, LineRenderer rendererLeft, RuntimeAnimatorController animatorController, Sprite icon) {
+    public DualPistols(StatePlayerController player, Transform firstFirePoint, Transform secondFirePoint, GameObject hitEffect, AudioClip fireSound, LineRenderer rendererRight, LineRenderer rendererLeft, RuntimeAnimatorController animatorController,  GameObject shell, Transform ejectPt, Sprite icon) {
         this.size = Size.LIGHT;
         this.shotCost = 1f;
         this.damage = 1;
@@ -19,10 +19,19 @@ public class DualPistols : RaycastGun
         this.bulletTrailLeft = rendererLeft;
         this.hitEffect = hitEffect;
         this.fireSound = fireSound;
+        this.ejectPt = ejectPt;
         this.player = player;
+        this.shell = shell;
         this.animController = animatorController;
-        this.maxRange = 10f;
+        this.maxRange = 8f;
         this.icon = icon;
+
+        roundPool = new Queue<GameObject>();
+        for (int i = 0; i < 20; i++) {
+            GameObject round = Instantiate(shell, ejectPt.position, Quaternion.identity);
+            round.SetActive(false);
+            roundPool.Enqueue(round);
+        }
     }
 
     public override void Shoot()
@@ -34,7 +43,7 @@ public class DualPistols : RaycastGun
         // temp.y += Random.Range(-0.1f,0.1f);
 
         RaycastHit2D hitInfoRight = Physics2D.Raycast(firePt.position, temp1, maxRange, ~layermask);
-        RaycastHit2D hitInfoLeft = Physics2D.Raycast(secondFirePoint.position, temp2, maxRange, ~layermask);
+        RaycastHit2D hitInfoLeft = Physics2D.Raycast(secondFirePoint.position, temp2, maxRange/2, ~layermask);
         // Physics2D.IgnoreLayerCollision(8, Physics2D.IgnoreRaycastLayer);
 
         if (hitInfoRight)
@@ -75,11 +84,25 @@ public class DualPistols : RaycastGun
         } else 
         {
             bulletTrailLeft.SetPosition(0,secondFirePoint.position);
-            bulletTrailLeft.SetPosition(1,secondFirePoint.position + temp2*maxRange);
+            bulletTrailLeft.SetPosition(1,secondFirePoint.position + temp2*(maxRange/2));
         }
         player.playSound(fireSound);
         player.showBulletTrail(bulletTrail);
         player.showBulletTrail(bulletTrailLeft);
+        ejectRound();
         player.DecreasePlayerCurrentHealth(shotCost);
+        
+    }
+
+    public override void ejectRound()
+    {
+        //GameObject round_instance = Instantiate(shell,ejectPt.position,Quaternion.identity) as GameObject;
+        GameObject spawn = roundPool.Dequeue();
+
+        spawn.transform.position = ejectPt.position;
+        spawn.transform.rotation = Quaternion.identity;
+        spawn.SetActive(true);
+
+        roundPool.Enqueue(spawn);
     }
 }

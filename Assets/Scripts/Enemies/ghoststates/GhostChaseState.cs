@@ -25,7 +25,7 @@ public class GhostChaseState : GhostState
         }
         else
         {
-            Debug.Log("woooo");
+            
             stateInput.enemy_controller.TurnToFacePlayer(stateInput.player.transform.position);
             //stateInput.gameobj.transform.position = stateInput.player.transform.position;
             float distance = Vector2.Distance(stateInput.ghost.transform.position, stateInput.player.transform.position);

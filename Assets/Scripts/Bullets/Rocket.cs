@@ -8,7 +8,7 @@ public class Rocket : MonoBehaviour
     public float exp_radius = 1.8f;
     private float acceleration = 7f;
     public float maxSpeed = 25f;
-    public int damage = 2; // the rocket technically doesn't deal damage, the explosion does, however direct impacts by the rocket will deal a lil bit of damage
+    public int damage = 10; // the rocket technically doesn't deal damage, the explosion does, however direct impacts by the rocket will deal a lil bit of damage
 
     public Rigidbody2D rb;
     public GameObject impactEffect;
@@ -25,6 +25,7 @@ public class Rocket : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo) // if rocket hits something, explode
     {
+        Debug.Log(hitInfo.gameObject.layer);
         if (hitInfo.gameObject.layer != 8) {
             CamController.Instance.Shake(5, 0.3f);
             Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, exp_radius);

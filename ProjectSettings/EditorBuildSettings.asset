@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Game_Start.unity
     guid: aab7d4c801e8812428769d53dd01e946
   - enabled: 1
+    path: Assets/Scenes/GameAreas/Garden.unity
+    guid: b8b0b0e951c6c7f418c82a0b996e7e5b
+  - enabled: 1
     path: Assets/Scenes/GameAreas/Forest.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -17,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameAreas/Canopy.unity
     guid: 5e433ba98fe20244b80a6926c92ad5db
+  - enabled: 1
+    path: Assets/Scenes/GameAreas/Mountain.unity
+    guid: 3e404474a383d2840bb9e2e3e2674ead
+  - enabled: 1
+    path: Assets/Scenes/GameAreas/TVGunSpot.unity
+    guid: b5a6c75e5d548434cb32044cdb47ce4f
   m_configObjects: {}

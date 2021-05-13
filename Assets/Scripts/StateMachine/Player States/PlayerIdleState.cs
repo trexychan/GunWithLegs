@@ -40,10 +40,7 @@ public class PlayerIdleState : PlayerState {
             stateInput.playerController.switchGun(1);
         }
 
-        if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame() && stateInput.playerController.canFire) {
-            stateInput.anim.Play("Player_Fire");
-            stateInput.playerController.Shoot(); 
-        }
+        
         
         if (stateInput.playerControls.InGame.Jump.WasPressedThisFrame() && stateInput.playerController.canJump())
         {
@@ -68,6 +65,16 @@ public class PlayerIdleState : PlayerState {
         }
         stateInput.anim.SetFloat("speed", Mathf.Abs(horizontalMovement));
         stateInput.lastXDir = horizontalMovement;
+
+        if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame() && stateInput.playerController.canFire && horizontalMovement != 0) {
+            stateInput.anim.Play("Player_Fire_Moving");
+            stateInput.playerController.Shoot(); 
+        } else if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame() && stateInput.playerController.canFire && horizontalMovement == 0)
+        {
+            stateInput.anim.Play("Player_Fire_Idle");
+            stateInput.playerController.Shoot();
+        }
+        
     }
 
 

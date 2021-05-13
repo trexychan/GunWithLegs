@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7311910722378592951}
   - component: {fileID: 3426451219119842016}
   - component: {fileID: 1735795110986468785}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: DualPistolsPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

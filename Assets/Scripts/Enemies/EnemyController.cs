@@ -76,8 +76,8 @@ public class EnemyController : MonoBehaviour
     public void DropHealth(int number)
     {
         for (int i = 0; i < number; i++) {
-            float xValue = Random.Range(-7f, 7f);
-            float yValue = Random.Range(3f, 6f);
+            float xValue = Random.Range(-4f, 4f);
+            float yValue = Random.Range(8f,10f);
             // float torqueValue = Random.Range(-10f, 10f);
             GameObject ammo = Instantiate(ammoPack, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), Quaternion.identity);
             ammo.GetComponent<Rigidbody2D>().velocity += new Vector2(xValue, yValue);

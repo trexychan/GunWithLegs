@@ -9,6 +9,7 @@ public class AirJordans : MonoBehaviour
         if (hitCollider.gameObject.tag == "Player") {
             hitCollider.gameObject.GetComponent<StatePlayerController>().setDoubleJump(true);
             PlayerData.Instance.obtainAirJorguns();
+            EventManager.TriggerEvent<ItemAddedEvent, Vector3>(this.transform.position);
             Destroy(gameObject);
         }
     }

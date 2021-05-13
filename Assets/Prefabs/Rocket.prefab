@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 864169570177870495}
   - component: {fileID: 145669055668448367}
   - component: {fileID: -7950056604444938829}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Rocket
   m_TagString: Rocket
   m_Icon: {fileID: 0}
@@ -121,6 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  exp_radius: 1.8
+  maxSpeed: 25
+  damage: 10
   rb: {fileID: 5776542109103424521}
   impactEffect: {fileID: 2117236851428820190, guid: a5a967e6ecf7e414f8695fc265751dca,
     type: 3}

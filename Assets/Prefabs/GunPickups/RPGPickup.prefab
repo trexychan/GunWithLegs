@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 491781526500069909}
   - component: {fileID: 7311910722378592951}
   - component: {fileID: -4911218297049559088}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: RPGPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

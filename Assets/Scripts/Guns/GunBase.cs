@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class GunBase : MonoBehaviour
 {
+    public Queue<GameObject> roundPool;
     // Different guns consume your ammo at different rates. Some weapons might only take one bullet to fire a shot, but some may require several bullets to fire
     public float shotCost;
     public Size size;
@@ -21,7 +22,7 @@ public abstract class GunBase : MonoBehaviour
     public float charge = 0f;
     // public bool canFire;
 
-
+    
     public abstract void Shoot(); //handle
 
     public bool canDash()
@@ -32,6 +33,11 @@ public abstract class GunBase : MonoBehaviour
 
     public virtual void updateComponents() {
         
+    }
+
+    public virtual void ejectRound()
+    {
+
     }
 
     

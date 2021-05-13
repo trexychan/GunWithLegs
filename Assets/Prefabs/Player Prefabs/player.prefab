@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 2426624051722942717}
   - component: {fileID: 8926044290411686892}
   - component: {fileID: 6208033177375973517}
-  - component: {fileID: 2426624051722942715}
   - component: {fileID: 2426624051722942712}
   - component: {fileID: 6096317200623831514}
   - component: {fileID: 8802488606771251299}
@@ -173,19 +172,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8067297, y: 0.7470784}
   m_EdgeRadius: 0
---- !u!114 &2426624051722942715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2426624051722942692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0625d5fba561c0a45bf30c7b4fae327d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ammo: {fileID: 6356024776661082341, guid: 57fa6cfae3c0378439a03fcfd30035c7, type: 3}
 --- !u!114 &2426624051722942712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +212,7 @@ MonoBehaviour:
   - {fileID: -2559397733908335593, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
   - {fileID: -5441483886059572633, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
   - {fileID: -4160671016246182353, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
+  - {fileID: 8695612078647760324, guid: d67f7f5704b708e429b39ccbd8289f9b, type: 3}
   gunHUDSlots:
   - {fileID: 0}
   - {fileID: 0}
@@ -271,12 +258,15 @@ MonoBehaviour:
   - {fileID: 1053092031073558933, guid: 2a79630fabb9fa14cb32a16d66478841, type: 3}
   - {fileID: 25348785666808035, guid: 752f64f2db2c01c4c827cecfcb0a9fce, type: 3}
   - {fileID: 8666213990023224848, guid: d52fa1055914dcf42be3cc73fefeeacc, type: 3}
+  - {fileID: 3731085053459921914, guid: 0cef30466df12ea4aba31c91d9cd0918, type: 3}
   gunAnimControllers:
   - {fileID: 9100000, guid: 90cf34ee26f0b8542be194c5d117361a, type: 2}
   - {fileID: 9100000, guid: 77e373a4fac23854bbc20a577df68652, type: 2}
   - {fileID: 9100000, guid: b36319a770a854843adb420707fe40a6, type: 2}
   - {fileID: 9100000, guid: d321af7c7c079fb49891fbfe29e9fa25, type: 2}
   - {fileID: 9100000, guid: 80c00ebd05b8a1449b9ea503dd83cbad, type: 2}
+  - {fileID: 9100000, guid: 9b4f9c23ddfa8554eb2534d58dc1af16, type: 2}
+  - {fileID: 9100000, guid: 7f318eb69e270d541b3bbc9c4c33549f, type: 2}
   gunSounds:
   - {fileID: 8300000, guid: 32279df05fd1de146893799b2769da6c, type: 3}
   - {fileID: 8300000, guid: 2187eda6a59dc284cbf823b53932bb42, type: 3}
@@ -421,7 +411,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.324
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -688,7 +678,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8383219461300547348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.652, y: 0.714, z: 0}
+  m_LocalPosition: {x: -0.652, y: 0.21399999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2426624051722942713}
