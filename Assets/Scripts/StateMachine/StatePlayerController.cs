@@ -31,10 +31,10 @@ public class StatePlayerController : MonoBehaviour
 
     //the player's box collider
     public BoxCollider2D boxCollider;
+    public bool isGrounded;
 
     //Everything for being grounded
     [HideInInspector]
-    public bool isGrounded;
     public float checkRadius;
     public LayerMask whatIsGround;
     public Transform groundCheck;
@@ -223,7 +223,7 @@ public class StatePlayerController : MonoBehaviour
     public void Jump()
     {
         if (!isGrounded && canDoubleJump && hasJumpedOnce && canJump()) {
-            rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity * 1.2f);
+            rb.velocity = new Vector2(rb.velocity.x, maxJumpVelocity);
             hasJumpedOnce = false;
             hasDoubleJumped = true;
         } else if (isGrounded && !hasJumpedOnce) {
@@ -336,6 +336,7 @@ public class StatePlayerController : MonoBehaviour
         Debug.DrawRay(startingPoint2, Vector2.down, Color.blue, 0.2f);
         if (hit1 || hit2)
         {
+            hasDoubleJumped = false;
             return true;
         }
         else
@@ -424,7 +425,7 @@ public class StatePlayerController : MonoBehaviour
         //     transform.parent = collision.transform;
         // }
 
-        if (collision.gameObject.layer == 11 && !damaged) // if the collision is with an enemy 
+        if (collision.gameObject.layer == 11 && !damaged && !collision.gameObject.CompareTag("FakeEnemy")) // if the collision is with an enemy 
         { 
             Debug.Log("ran into enemy");
             CamController.Instance.Shake(5, 0.2f);
@@ -441,6 +442,9 @@ public class StatePlayerController : MonoBehaviour
                 setDamaged(true);
                 
             }
+        } else if (collision.gameObject.CompareTag("FakeEnemy"))
+        {
+            collision.gameObject.GetComponent<FakeEnemy>().Die();
         }
             
         // } else if (collision.gameObject.CompareTag("Enemy Projectile") && !takingDamage) // if collision is with an enemy ranged attack
@@ -549,11 +553,16 @@ public class StatePlayerController : MonoBehaviour
     public void setDoubleJump(bool canPlayerDoubleJump) {
         canDoubleJump = canPlayerDoubleJump;
     }
-
+    public void ExecuteFootstep()
+        {
+            EventManager.TriggerEvent<PlayerFootstepEvent, Vector3>(transform.position);
+        }
+    
     public void addGun(int gunType) {
         if (PlayerData.Instance.gunList.Contains(gunType) == false) {
             PlayerData.Instance.addGun(gunType);
         }
+        
         switch(gunType) {
             case (int)GunPickup.GunType.Pistol:
                 Pistol pistol = new Pistol(this, firePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), gunAnimControllers[0], ejected_shell, ejectPt, gunicons[0]);
@@ -569,12 +578,20 @@ public class StatePlayerController : MonoBehaviour
                 gunList.Add(shotgun);
             break;
             case (int)GunPickup.GunType.DualPistols:
-                DualPistols dualPistols = new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, gunAnimControllers[3], gunicons[3]);
+                DualPistols dualPistols = new DualPistols(this, firePoint, DPLeftFirePoint, hitEffects[0], gunSounds[0], GetComponent<LineRenderer>(), dualPistolsLeftFirePoint, gunAnimControllers[3], ejected_shell, ejectPt, gunicons[3]);
                 gunList.Add(dualPistols);
             break;
             case (int)GunPickup.GunType.RailGun:
                 RailGun railgun = new RailGun(this, firePoint, hitEffects[0], bulletObjs[4], gunSounds[4], gunAnimControllers[4], gunicons[4]);
                 gunList.Add(railgun);
+                break;
+            case (int)GunPickup.GunType.TVGun:
+                TVGun tvgun = new TVGun(this, firePoint, hitEffects[0], bulletObjs[2], gunSounds[0], gunAnimControllers[5], gunicons[5]);
+                gunList.Add(tvgun);
+                break;
+            case (int)GunPickup.GunType.ColtPython:
+                PythonGun pythonGun = new PythonGun(this, firePoint, hitEffects[0], bulletObjs[5], gunSounds[0], gunAnimControllers[6], gunicons[6]);
+                gunList.Add(pythonGun);
                 break;
         }
         if (gunHUDSlots != null)
@@ -583,5 +600,9 @@ public class StatePlayerController : MonoBehaviour
         }
         playSound(gunSounds[6]);
     }
+    
+    
 
+    
+    
 }

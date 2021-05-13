@@ -6,8 +6,8 @@ public class RailGun : ProjectileGun
 {
     public RailGun(StatePlayerController player, Transform firePt, GameObject hitEffect, GameObject shotObj, AudioClip fireSound, RuntimeAnimatorController animatorController,  Sprite icon) {
         size = Size.HEAVY;
-        shotCost = 10f;
-        damage = 10;
+        shotCost = 6f;
+        damage = 8;
         fireRate = 1.4f;
         this.firePt = firePt;
         this.hitEffect = hitEffect;

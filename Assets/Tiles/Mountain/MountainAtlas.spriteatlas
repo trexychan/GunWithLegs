@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MountainAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+    - {fileID: 2800000, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 2919565558565697475, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 284779521238309243, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 6368526734826837999, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -7530478310922280265, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 6019793365642226065, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -3153924740328723377, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -7168314310159721845, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -7808581866277218886, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 5833208829667180651, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 8418829692487605782, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -1608825702896956237, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 2502611816909138108, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -4977897079055367713, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -4253570726627327399, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 1306126402511213152, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -137115224910909160, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -8145991220381017714, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -3996428582452201725, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 5208776615505318032, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 6149333173885104548, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -7585822465599172833, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 4269304117965921135, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -958138765905662359, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -540759621316384189, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -4786074961381384355, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 3100885814009996769, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 8035016909441172838, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -7802262445169748066, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -7049816931977592004, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -8455059788013517345, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -4140162442612202779, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 1454443581549382956, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -7817787890727096491, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -1900211149477143814, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -6600791764331745714, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -3226901853281166074, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 3644028240362745557, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: 1939222022573699349, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -6135441802366543550, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -8837669998916633972, guid: fed39020087ed5e4a86ab062c5afe206, type: 3}
+  - {fileID: -7738973551491990628, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: 2151581888523426261, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -4366968874476364623, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -3231158311971649144, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: 7354474334488182224, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: 8724837961881262948, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: 6378557441668916477, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -8127949874417486662, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: 7156827907578221728, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: 6036445401082955142, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -2746526891423280048, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -6107697577411952755, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: 3371155589378271593, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: 2530460216590908756, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: 468399393194815789, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -6945165015422677879, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -1970048619994676110, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: 3464471099134226661, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -6510268804995109370, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -7327400021907900549, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -8079421453798068373, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -3611868452035641518, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -1018486269142009947, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -5967736983392919555, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: -2048088060759010644, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: 1126838943520068207, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  - {fileID: 6883972295938674101, guid: 1dd7f12eca7094944ba7773d8cba0986, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - ice_mountain_tileset_19
+  - ice_mountain_tileset_18
+  - ice_mountain_tileset_11
+  - ice_mountain_tileset_10
+  - ice_mountain_tileset_13
+  - ice_mountain_tileset_12
+  - ice_mountain_tileset_15
+  - ice_mountain_tileset_14
+  - ice_mountain_tileset_17
+  - ice_mountain_tileset_16
+  - ice_mountain_tileset_2
+  - ice_mountain_tileset_3
+  - ice_mountain_tileset_0
+  - ice_mountain_tileset_1
+  - ice_mountain_tileset_6
+  - ice_mountain_tileset_7
+  - ice_mountain_tileset_4
+  - ice_mountain_tileset_5
+  - ice_mountain_tileset_8
+  - ice_mountain_tileset_9
+  - ice_mountain_tileset_20
+  - ice_mountain_tileset_21
+  - ice_mountain_tileset_22
+  - ice_mountain_tileset_23
+  - ice_mountain_tileset_33
+  - ice_mountain_tileset_24
+  - ice_mountain_tileset_32
+  - ice_mountain_tileset_25
+  - ice_mountain_tileset_31
+  - ice_mountain_tileset_26
+  - ice_mountain_tileset_30
+  - ice_mountain_tileset_27
+  - ice_mountain_tileset_37
+  - ice_mountain_tileset_28
+  - ice_mountain_tileset_36
+  - ice_mountain_tileset_29
+  - ice_mountain_tileset_35
+  - ice_mountain_tileset_34
+  - ice_mountain_tileset_39
+  - ice_mountain_tileset_38
+  - ice_mountain_tileset 1_67
+  - ice_mountain_tileset 1_66
+  - ice_mountain_tileset 1_65
+  - ice_mountain_tileset 1_64
+  - ice_mountain_tileset 1_63
+  - ice_mountain_tileset 1_62
+  - ice_mountain_tileset 1_61
+  - ice_mountain_tileset 1_60
+  - ice_mountain_tileset 1_52
+  - ice_mountain_tileset 1_33
+  - ice_mountain_tileset 1_53
+  - ice_mountain_tileset 1_34
+  - ice_mountain_tileset 1_50
+  - ice_mountain_tileset 1_51
+  - ice_mountain_tileset 1_45
+  - ice_mountain_tileset 1_56
+  - ice_mountain_tileset 1_44
+  - ice_mountain_tileset 1_57
+  - ice_mountain_tileset 1_47
+  - ice_mountain_tileset 1_54
+  - ice_mountain_tileset 1_46
+  - ice_mountain_tileset 1_55
+  - ice_mountain_tileset 1_43
+  - ice_mountain_tileset 1_58
+  - ice_mountain_tileset 1_59
+  - ice_mountain_tileset 1_49
+  - ice_mountain_tileset 1_48
+  m_Tag: MountainAtlas
+  m_IsVariant: 0

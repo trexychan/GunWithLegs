@@ -6,8 +6,8 @@ public class TVGun : ProjectileGun
 {
     public TVGun(StatePlayerController player, Transform firePoint, GameObject hitEffect, GameObject shotObj, AudioClip fireSound, RuntimeAnimatorController animatorController, Sprite icon) {
         this.size = Size.NORMAL;
-        this.shotCost = 2f;
-        this.damage = 1;
+        this.shotCost = 4f;
+        this.damage = 0;
         this.fireRate = 1.5f;
         this.firePt = firePoint;
         this.bullet = shotObj;
@@ -22,7 +22,8 @@ public class TVGun : ProjectileGun
     public override void Shoot()
     {
         Instantiate(bullet, firePt.position, firePt.rotation);
-        // player.playSound(fireSound);
+        player.playSound(fireSound);
+        player.DecreasePlayerCurrentHealth(shotCost);
         
     }
 

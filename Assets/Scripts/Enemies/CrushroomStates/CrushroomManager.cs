@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CrushroomManager : MonoBehaviour
 {
-    public GameObject player;
+    
     bool doneWaiting = false;
     float originalY;
 
@@ -17,7 +17,7 @@ public class CrushroomManager : MonoBehaviour
     }
 
     IEnumerator WaitOnGround() {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         doneWaiting = true;
     }
 
@@ -33,13 +33,13 @@ public class CrushroomManager : MonoBehaviour
         return originalY;
     }
 
-    public void AddForceAtAngle(float force, float angle)
-    {  
-        float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force;
-        float ycomponent = Mathf.Sin(angle * Mathf.PI / 180) * force;
+    // public void AddForceAtAngle(float force, float angle)
+    // {  
+    //     float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force;
+    //     float ycomponent = Mathf.Sin(angle * Mathf.PI / 180) * force;
         
-        player.GetComponent<Rigidbody2D>().AddForce(new Vector2(xcomponent, ycomponent));
-    }
+    //     player.GetComponent<Rigidbody2D>().AddForce(new Vector2(xcomponent, ycomponent));
+    // }
 
     
 }
