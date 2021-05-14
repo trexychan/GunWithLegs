@@ -20,6 +20,7 @@ public abstract class GunBase : MonoBehaviour
     public Transform ejectPt;
     public Sprite icon;
     public float charge = 0f;
+    public Vector2 recoilVector;
     // public bool canFire;
 
     

@@ -403,7 +403,7 @@ public class StatePlayerController : MonoBehaviour
         }
 
         //sample code to fire camera shake
-        CamController.Instance.Shake(2, 0.1f);
+        CamController.Instance.Shake(5, 0.1f);
     }
 
     public IEnumerator delayNextShot()
@@ -427,8 +427,7 @@ public class StatePlayerController : MonoBehaviour
 
         if (collision.gameObject.layer == 11 && !damaged && !collision.gameObject.CompareTag("FakeEnemy")) // if the collision is with an enemy 
         { 
-            Debug.Log("ran into enemy");
-            CamController.Instance.Shake(5, 0.2f);
+            CamController.Instance.Shake(10, 0.2f);
             if (isImmuneToDamage == false) {
                 playSound(gunSounds[gunSounds.Length-1]); // player hurt is always, ALWAYS at the end
                 if (collision.gameObject.CompareTag("Enemy Projectile"))
@@ -599,6 +598,11 @@ public class StatePlayerController : MonoBehaviour
             SetPlayerCurrentGun(currentGun);
         }
         playSound(gunSounds[6]);
+    }
+
+    public Vector2 getRecoilVector()
+    {
+        return gunList[currentGun].recoilVector;
     }
     
     

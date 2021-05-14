@@ -59,6 +59,16 @@ public class AudioEventManager : MonoBehaviour
         EventManager.StartListening<PlayerFootstepEvent, Vector3>(playerFootstepEventListener);
     }
 
+    void OnDisable()
+    {
+        EventManager.StopListening<GunAddedEvent, Vector3>(gunAddedEventListener);
+        EventManager.StopListening<ItemAddedEvent, Vector3>(itemAddedEventListener);
+        EventManager.StopListening<PlayerDamagedEvent, Vector3>(playerDamagedEventListener);
+        EventManager.StopListening<PlayerLandEvent, Vector3, float>(playerLandEventListener);
+        EventManager.StopListening<PlayerDashEvent, Vector3>(playerDashEventListener);
+        EventManager.StopListening<PlayerFootstepEvent, Vector3>(playerFootstepEventListener);
+    }
+
     void gunAddedEventHandler(Vector3 pos)
     {
         if (gunAddedAudio)

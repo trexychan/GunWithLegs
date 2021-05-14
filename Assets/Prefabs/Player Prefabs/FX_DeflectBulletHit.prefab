@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7799869169407815771}
   - component: {fileID: 7799869169407815774}
   m_Layer: 16
-  m_Name: deflect_FX
+  m_Name: FX_DeflectBulletHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -21,6 +21,7 @@ public class RPG : ProjectileGun
         boxOffset = new Vector2(-0.09087026f, 0f);
         boxSize = new Vector2(1.417793f, 1.0625f);
         this.icon = icon;
+        this.recoilVector = new Vector2(35f,0);
     }
 
     public override void Shoot()

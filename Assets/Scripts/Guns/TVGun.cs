@@ -17,6 +17,7 @@ public class TVGun : ProjectileGun
         this.player = player;
         this.animController = animatorController;
         this.icon = icon;
+        this.recoilVector = new Vector2(0f,0);
     }
 
     public override void Shoot()

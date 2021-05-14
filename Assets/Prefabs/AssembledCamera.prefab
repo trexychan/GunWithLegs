@@ -394,7 +394,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
+  m_CustomBlends: {fileID: 11400000, guid: c0dc1206bb9d9a14b896f1491237dbac, type: 2}
   m_CameraCutEvent:
     m_PersistentCalls:
       m_Calls: []

@@ -17,6 +17,7 @@ TagManager:
   - UI
   - FakeEnemy
   - TempPlatform
+  - CameraHandler
   layers:
   - Default
   - TransparentFX

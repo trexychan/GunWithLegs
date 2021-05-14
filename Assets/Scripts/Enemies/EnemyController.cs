@@ -138,14 +138,15 @@ public class EnemyController : MonoBehaviour
     private IEnumerator DoFlash()
     {
         float lerpTime = 0;
-        while (lerpTime < 0.1f)
+        while (lerpTime < 0.15f)
         {
             lerpTime += Time.deltaTime;
-            float perc = lerpTime / 0.1f;
+            // float perc = lerpTime / 0.3f;
 
-            sprite.material.SetFloat("_FlashAmount", 1f - perc);
+            sprite.material.SetFloat("_FlashAmount", 1f);
             yield return null;
         }
+        
         sprite.material.SetFloat("_FlashAmount",0);
     }
 
@@ -172,7 +173,8 @@ public enum EnemyType
     BEEMON=3,
     RATTANK=10,
     CRUSHROOM=6,
-    GHOST=4
+    GHOST=4,
+    MAJORINCONVENIENCE=20
 }
 
 public enum Condition

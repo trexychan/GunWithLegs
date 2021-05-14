@@ -20,6 +20,7 @@ public class Pistol : RaycastGun
         this.shell = shell;
         this.ejectPt = ejectPt;
         this.icon = icon;
+        this.recoilVector = new Vector2(2f,0);
 
         roundPool = new Queue<GameObject>();
         for (int i = 0; i < 20; i++) {

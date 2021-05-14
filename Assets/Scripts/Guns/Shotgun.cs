@@ -20,6 +20,7 @@ public class Shotgun : RaycastGun
         this.animController = animatorController;
         this.maxRange = 3f;
         this.icon = icon;
+        this.recoilVector = new Vector2(20f,0);
     }
 
     // Update is called once per frame

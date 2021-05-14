@@ -18,6 +18,7 @@ public class RailGun : ProjectileGun
         this.animController = animatorController;
         this.icon = icon;
         this.charge = .5f;
+        this.recoilVector = new Vector2(20f,0);
     }
     
     // The Rail gun fires train tracks in a straight line, travelling through multiple enemies

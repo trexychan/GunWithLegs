@@ -27,7 +27,7 @@ public class Rocket : MonoBehaviour
     {
         Debug.Log(hitInfo.gameObject.layer);
         if (hitInfo.gameObject.layer != 8) {
-            CamController.Instance.Shake(5, 0.3f);
+            CamController.Instance.Shake(8, 0.2f);
             Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, exp_radius);
 
             foreach (Collider2D item in objects)
