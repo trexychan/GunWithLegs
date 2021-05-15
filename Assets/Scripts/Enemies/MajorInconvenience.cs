@@ -24,7 +24,7 @@ public class MajorInconvenience : Character<MajorInconvenience, MajorState, Majo
 
     protected override void SetInitialState()
     {
-        ChangeState<MajorIdleState>();
+        ChangeState<MajorSleepState>();
     }
 
     public MajorStateInput GetStateInput() {
