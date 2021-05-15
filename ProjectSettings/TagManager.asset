@@ -19,6 +19,7 @@ TagManager:
   - TempPlatform
   - CameraHandler
   - Boss
+  - HealthBar
   layers:
   - Default
   - TransparentFX

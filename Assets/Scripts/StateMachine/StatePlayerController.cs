@@ -8,11 +8,13 @@ public class StatePlayerController : MonoBehaviour
 {
     public float moveSpeed = 3f, currentPlayerHealth = 9f, maxPlayerHealth = 9f;
     public Image[] healthbullets;
+    public GameObject bulletDestroyedPrefab;
     public GameObject deathscreen;
     public Sprite loadedshell;
     public Sprite emptyshell;
     public Sprite[] gunicons;
     public Image[] gunHUDSlots;
+    private GameObject ui_canvas;
     public float accelerationTimeAirborne;
     public float accelerationTimeGrounded;
     private float velocityXSmoothing;
@@ -79,6 +81,7 @@ public class StatePlayerController : MonoBehaviour
     private void Awake() {
         playerControls = new PlayerControls();
         currentScene = SceneManager.GetActiveScene();
+        ui_canvas = GameObject.FindGameObjectWithTag("UI");
     }
 
     void OnEnable() {
@@ -185,8 +188,14 @@ public class StatePlayerController : MonoBehaviour
 
         for (int i = 0; i < healthbullets.Length; i++)
         {
-            if (i < currentHealth) {healthbullets[i].sprite = loadedshell;}
-            else {healthbullets[i].sprite = emptyshell;}
+            if (i < currentHealth)
+            {
+                healthbullets[i].sprite = loadedshell;
+            }
+            else 
+            {
+                healthbullets[i].sprite = emptyshell;
+            }
             if (i < maxPlayerHealth)
             {
                 healthbullets[i].enabled = true;
@@ -408,7 +417,7 @@ public class StatePlayerController : MonoBehaviour
         }
 
         //sample code to fire camera shake
-        CamController.Instance.Shake(5, 0.1f);
+        CamController.Instance.Shake(5, 0.2f);
     }
 
     public IEnumerator delayNextShot()
@@ -446,7 +455,7 @@ public class StatePlayerController : MonoBehaviour
                 setDamaged(true);
                 Instantiate(damageflash, gameObject.transform.position, Quaternion.identity);
                 if (PlayerData.Instance.isAlive) {HandleTimeStop(0.1f);}
-                CamController.Instance.Shake(10, 0.2f);
+                CamController.Instance.Shake(10, 0.4f);
             }
             
         } else if (collision.gameObject.CompareTag("FakeEnemy"))
@@ -496,6 +505,13 @@ public class StatePlayerController : MonoBehaviour
         {
             currentPlayerHealth -= amount;
             currentPlayerHealth = Mathf.Ceil(currentPlayerHealth);
+
+            for (int i = (int)currentPlayerHealth; i < currentPlayerHealth + amount; i++)            {
+                GameObject bullet_lost = Instantiate(bulletDestroyedPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+                bullet_lost.transform.SetParent(ui_canvas.transform, false);
+                bullet_lost.GetComponent<RectTransform>().anchoredPosition = healthbullets[i].gameObject.GetComponent<RectTransform>().anchoredPosition;
+            }
+
             SetPlayerHealthBar(currentPlayerHealth);
             PlayerData.Instance.SetPlayerHealth(currentPlayerHealth, maxPlayerHealth); // storing health data
             

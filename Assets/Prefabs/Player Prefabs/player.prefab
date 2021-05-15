@@ -200,6 +200,8 @@ MonoBehaviour:
   currentPlayerHealth: 9
   maxPlayerHealth: 9
   healthbullets: []
+  bulletDestroyedPrefab: {fileID: 7904080734751414719, guid: 25e802cf10f36cf43b47f5595c833f1a,
+    type: 3}
   deathscreen: {fileID: 0}
   loadedshell: {fileID: 7941453658311570693, guid: bd775038d07cb9646b91b0ef3fd5166a,
     type: 3}
