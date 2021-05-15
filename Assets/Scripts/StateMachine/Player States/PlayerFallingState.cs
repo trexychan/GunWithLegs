@@ -36,8 +36,13 @@ public class PlayerFallingState : PlayerState {
             stateInput.playerController.switchGun(1);
         }
 
-        if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame()) {
+        if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame() && stateInput.playerController.canFire) {
             stateInput.playerController.Shoot();
+            Vector2 launchDirection = stateInput.playerController.getRecoilVector();
+            if (stateInput.player.transform.rotation.y == 0) {
+                launchDirection.x = -launchDirection.x;
+            }
+            character.ChangeState<PlayerLaunchState>(new LaunchStateTransitionInfo(launchDirection, 0.1f, false));
         }
 
         if (stateInput.playerControls.InGame.Jump.WasPressedThisFrame() && stateInput.playerController.canJump())

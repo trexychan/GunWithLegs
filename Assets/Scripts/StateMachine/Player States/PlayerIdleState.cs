@@ -68,11 +68,21 @@ public class PlayerIdleState : PlayerState {
 
         if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame() && stateInput.playerController.canFire && horizontalMovement != 0) {
             stateInput.anim.Play("Player_Fire_Moving");
-            stateInput.playerController.Shoot(); 
+            stateInput.playerController.Shoot();
+            Vector2 launchDirection = stateInput.playerController.getRecoilVector();
+            if (stateInput.player.transform.rotation.y == 0) {
+                launchDirection.x = -launchDirection.x;
+            }
+            character.ChangeState<PlayerLaunchState>(new LaunchStateTransitionInfo(launchDirection, 0.1f, false)); 
         } else if (stateInput.playerControls.InGame.Shoot.WasPressedThisFrame() && stateInput.playerController.canFire && horizontalMovement == 0)
         {
             stateInput.anim.Play("Player_Fire_Idle");
             stateInput.playerController.Shoot();
+            Vector2 launchDirection = stateInput.playerController.getRecoilVector();
+            if (stateInput.player.transform.rotation.y == 0) {
+                launchDirection.x = -launchDirection.x;
+            }
+            character.ChangeState<PlayerLaunchState>(new LaunchStateTransitionInfo(launchDirection, 0.1f, false));
         }
         
     }

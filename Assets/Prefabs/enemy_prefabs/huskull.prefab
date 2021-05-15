@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484b2b90392f42a44bb29a3c76d66864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
+  maxSpeed: 4
   attackRate: 1
   attackStrength: 1
   waypoint: {fileID: 0}

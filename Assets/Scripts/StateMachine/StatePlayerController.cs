@@ -16,7 +16,9 @@ public class StatePlayerController : MonoBehaviour
     public float accelerationTimeAirborne;
     public float accelerationTimeGrounded;
     private float velocityXSmoothing;
-
+    
+    private float ts_restorespeed;
+    private bool restoretime;
     public Vector2 launchVelocity;
     public float moveAfterLaunchTime;
     [HideInInspector]
@@ -38,7 +40,6 @@ public class StatePlayerController : MonoBehaviour
     public float checkRadius;
     public LayerMask whatIsGround;
     public Transform groundCheck;
-
     public PlayerControls playerControls;
     public float dashTime;
     public float dashSpeed;
@@ -60,6 +61,8 @@ public class StatePlayerController : MonoBehaviour
     public GameObject deathExplosion;
     public GameObject switchEffect;
     public GameObject deflectshotEffect;
+    public GameObject muzzleflash;
+    public GameObject damageflash;
     public GameObject[] bulletObjs = new GameObject[5];
     public List<RuntimeAnimatorController> gunAnimControllers = new List<RuntimeAnimatorController>();
     public AudioClip[] gunSounds;
@@ -141,6 +144,7 @@ public class StatePlayerController : MonoBehaviour
     }
 
     public void Update() {
+        updateHitStop();
         updateDashCooldown();
         updateInvincibilityCooldown();
     }
@@ -400,10 +404,11 @@ public class StatePlayerController : MonoBehaviour
                 gunList[currentGun].Shoot();
                 StartCoroutine(delayNextShot());
             }
+            Instantiate(muzzleflash, firePoint.position, firePoint.rotation);
         }
 
         //sample code to fire camera shake
-        CamController.Instance.Shake(2, 0.1f);
+        CamController.Instance.Shake(5, 0.1f);
     }
 
     public IEnumerator delayNextShot()
@@ -426,11 +431,10 @@ public class StatePlayerController : MonoBehaviour
         // }
 
         if (collision.gameObject.layer == 11 && !damaged && !collision.gameObject.CompareTag("FakeEnemy")) // if the collision is with an enemy 
-        { 
-            Debug.Log("ran into enemy");
-            CamController.Instance.Shake(5, 0.2f);
+        {
+            
             if (isImmuneToDamage == false) {
-                playSound(gunSounds[gunSounds.Length-1]); // player hurt is always, ALWAYS at the end
+                playSound(gunSounds[gunSounds.Length-1]); // CHANGE TO USING AUDIO EVENTS
                 if (collision.gameObject.CompareTag("Enemy Projectile"))
                 {
                     float enemyRangedDamage = collision.gameObject.GetComponent<EnemyProjectile>().GetProjectileDamage();
@@ -440,8 +444,11 @@ public class StatePlayerController : MonoBehaviour
                     DecreasePlayerCurrentHealth(enemyMeleeDamage);
                 }
                 setDamaged(true);
-                
+                Instantiate(damageflash, gameObject.transform.position, Quaternion.identity);
+                if (PlayerData.Instance.isAlive) {HandleTimeStop(0.1f);}
+                CamController.Instance.Shake(10, 0.2f);
             }
+            
         } else if (collision.gameObject.CompareTag("FakeEnemy"))
         {
             collision.gameObject.GetComponent<FakeEnemy>().Die();
@@ -600,7 +607,46 @@ public class StatePlayerController : MonoBehaviour
         }
         playSound(gunSounds[6]);
     }
+
+    public Vector2 getRecoilVector()
+    {
+        return gunList[currentGun].recoilVector;
+    }
+
+    private void updateHitStop()
+    {
+        if (restoretime)
+        {
+            if (Time.timeScale < 1f) 
+            {
+                Time.timeScale += Time.deltaTime * ts_restorespeed;
+            } else
+            {
+                Time.timeScale = 1f;
+                restoretime = false;
+            }
+        }
+    }
+    private void HandleTimeStop(float delay)
+    {
+        ts_restorespeed = 10;
+        if (delay > 0)
+        {
+            StopCoroutine(StartTimeAgain(delay));
+            StartCoroutine(StartTimeAgain(delay));
+        } else {
+            restoretime = true;
+        }
+
+        Time.timeScale = 0;
+    }
     
+    private IEnumerator StartTimeAgain(float amt)
+    {
+        restoretime = true;
+        yield return new WaitForSeconds(amt);
+        
+    }
     
 
     

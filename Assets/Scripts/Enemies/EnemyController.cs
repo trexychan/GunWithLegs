@@ -5,14 +5,21 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public EnemyType maxHealth;
+    public Rigidbody2D rb;
     public int ammoDropCount;
     public Transform firept;
     public GameObject heavyprojectile;
     public GameObject lightprojectile;
     public GameObject ammoPack;
     public GameObject enemyDeathExplosion;
-    int currentHealth;
+
+    [HideInInspector]
+    public int currentHealth;
+
+    
     bool isAlive;
+    public bool canAct = true;
+    public bool isAwake = true;
     public bool facingRight = false;
     public Transform vision_origin = null; // location of vision raycast, mainly for ranged enemies
     public Condition currentCondition = Condition.NONE;
@@ -27,6 +34,7 @@ public class EnemyController : MonoBehaviour
     void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
+        rb = this.gameObject.GetComponent<Rigidbody2D>();
     }
     void Start() {
         this.currentHealth = (int)maxHealth;
@@ -45,6 +53,14 @@ public class EnemyController : MonoBehaviour
         } else {
             this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
             this.facingRight = false;
+        }
+    }
+
+    public void StopMoving()
+    {
+        if (rb)
+        {
+            rb.velocity = new Vector2(0,0);
         }
     }
 
@@ -138,14 +154,15 @@ public class EnemyController : MonoBehaviour
     private IEnumerator DoFlash()
     {
         float lerpTime = 0;
-        while (lerpTime < 0.1f)
+        while (lerpTime < 0.15f)
         {
             lerpTime += Time.deltaTime;
-            float perc = lerpTime / 0.1f;
+            // float perc = lerpTime / 0.3f;
 
-            sprite.material.SetFloat("_FlashAmount", 1f - perc);
+            sprite.material.SetFloat("_FlashAmount", 1f);
             yield return null;
         }
+        
         sprite.material.SetFloat("_FlashAmount",0);
     }
 
@@ -164,6 +181,18 @@ public class EnemyController : MonoBehaviour
     {
         return rangedAttackDamage;
     }
+
+    public void EnemyPause(float delay)
+    {
+        canAct = false;
+        StartCoroutine(PauseDelay(delay));
+    }
+
+    private IEnumerator PauseDelay(float d)
+    {
+        yield return new WaitForSeconds(d);
+        canAct = true;
+    }
 }
 
 public enum EnemyType
@@ -172,7 +201,8 @@ public enum EnemyType
     BEEMON=3,
     RATTANK=10,
     CRUSHROOM=6,
-    GHOST=4
+    GHOST=4,
+    MAJORINCONVENIENCE=25
 }
 
 public enum Condition

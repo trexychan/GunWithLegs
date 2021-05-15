@@ -25,6 +25,7 @@ public class DualPistols : RaycastGun
         this.animController = animatorController;
         this.maxRange = 8f;
         this.icon = icon;
+        this.recoilVector = new Vector2(1f,0);
 
         roundPool = new Queue<GameObject>();
         for (int i = 0; i < 20; i++) {
