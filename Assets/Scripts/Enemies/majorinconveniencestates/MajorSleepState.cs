@@ -10,7 +10,6 @@ public class MajorSleepState : MajorState
     {
         base.Enter(stateInput, transitionInfo);
         stateInput.anim.Play("major_sleep");
-        stateInput.enemyController.EnemyPause(1f);
         stateInput.enemyController.isAwake = false;
     }
 
@@ -19,6 +18,7 @@ public class MajorSleepState : MajorState
         if (stateInput.enemyController.isAwake)
         {
             character.ChangeState<MajorIdleState>();
+            return;
         }
         
     }

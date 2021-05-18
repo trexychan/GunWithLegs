@@ -55,7 +55,6 @@ public class Shotgun : RaycastGun
             }
             Destroy(temptrail, 0.05f);
         }
-        player.playSound(fireSound);
         player.DecreasePlayerCurrentHealth(shotCost);
 
     }

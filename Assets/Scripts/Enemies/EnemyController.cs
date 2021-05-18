@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public BoxCollider2D boxCollider;
     public EnemyType maxHealth;
     public Rigidbody2D rb;
     public int ammoDropCount;
@@ -12,6 +13,8 @@ public class EnemyController : MonoBehaviour
     public GameObject lightprojectile;
     public GameObject ammoPack;
     public GameObject enemyDeathExplosion;
+    public GameObject player;
+    public Animator anim;
 
     [HideInInspector]
     public int currentHealth;
@@ -33,8 +36,11 @@ public class EnemyController : MonoBehaviour
 
     void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         sprite = GetComponent<SpriteRenderer>();
         rb = this.gameObject.GetComponent<Rigidbody2D>();
+        boxCollider = this.gameObject.GetComponent<BoxCollider2D>();
+        anim = this.gameObject.GetComponent<Animator>();
     }
     void Start() {
         this.currentHealth = (int)maxHealth;
@@ -131,6 +137,24 @@ public class EnemyController : MonoBehaviour
         return false;
     }
 
+    public bool checkIsGrounded()
+    {
+        Vector2 startingPoint1 = new Vector2(boxCollider.bounds.center.x - boxCollider.bounds.extents.x , boxCollider.bounds.center.y - boxCollider.bounds.extents.y);
+        Vector2 startingPoint2 = new Vector2(boxCollider.bounds.center.x + boxCollider.bounds.extents.x, boxCollider.bounds.center.y - boxCollider.bounds.extents.y);
+        RaycastHit2D hit1 = Physics2D.Raycast(startingPoint1, Vector2.down, 0.05f, 1 << 9);
+        Debug.DrawRay(startingPoint1, Vector2.down, Color.blue, 0.05f);
+        RaycastHit2D hit2 = Physics2D.Raycast(startingPoint2, Vector2.down, 0.05f, 1 << 9);
+        Debug.DrawRay(startingPoint2, Vector2.down, Color.blue, 0.05f);
+        if (hit1 || hit2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void ShootRay()
     {
         Debug.Log("SHOT");
@@ -202,7 +226,7 @@ public enum EnemyType
     RATTANK=10,
     CRUSHROOM=6,
     GHOST=4,
-    MAJORINCONVENIENCE=25
+    MAJORINCONVENIENCE=40
 }
 
 public enum Condition

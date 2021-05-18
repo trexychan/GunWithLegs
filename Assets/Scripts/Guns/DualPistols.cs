@@ -87,7 +87,6 @@ public class DualPistols : RaycastGun
             bulletTrailLeft.SetPosition(0,secondFirePoint.position);
             bulletTrailLeft.SetPosition(1,secondFirePoint.position + temp2*(maxRange/2));
         }
-        player.playSound(fireSound);
         player.showBulletTrail(bulletTrail);
         player.showBulletTrail(bulletTrailLeft);
         ejectRound();

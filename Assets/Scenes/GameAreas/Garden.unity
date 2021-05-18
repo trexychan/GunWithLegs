@@ -21843,6 +21843,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1645650979}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1645650981 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6096317200623831514, guid: 9ca5e5c863af4f546afd01107b605538,
+    type: 3}
+  m_PrefabInstance: {fileID: 1645650979}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5b8b5408fe7f47bd8c5a6b7870aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1647127288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21855,6 +21867,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6235583048117848107, guid: d4bd2336e98f0094d90d1ef666ab6e9e,
+        type: 3}
+      propertyPath: playerStatePlayerController
+      value: 
+      objectReference: {fileID: 1645650981}
     - target: {fileID: 6235583048117848111, guid: d4bd2336e98f0094d90d1ef666ab6e9e,
         type: 3}
       propertyPath: m_Pivot.x

@@ -6,7 +6,6 @@ public class BeemonWanderState : BeemonState
 {
     public override void Enter(BeemonStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
-        stateInput.anim.Play("Enemy_Move");
         stateInput.rb.velocity = new Vector2(-stateInput.beemon.maxSpeed, 0f);
     }
 

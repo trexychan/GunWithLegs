@@ -11,7 +11,7 @@ public class PlayerDashState : PlayerState
         dashTimer = stateInput.playerController.dashTime;
         dir = stateInput.player.transform.rotation.eulerAngles.y == 180 ? -1 : 1;
         stateInput.anim.Play("Player_Dash");
-        EventManager.TriggerEvent<PlayerDashEvent, Vector3>(stateInput.player.transform.position);
+        stateInput.playerController.ExecuteDash();
     }
     
     public override void ForceCleanUp(PlayerStateInput stateInput)

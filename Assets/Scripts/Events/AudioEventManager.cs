@@ -36,8 +36,14 @@ public class AudioEventManager : MonoBehaviour
     private UnityAction<Vector3> itemAddedEventListener;
     private UnityAction<Vector3> playerDamagedEventListener;
     private UnityAction<Vector3, float> playerLandEventListener;
-    private UnityAction<Vector3> playerDashEventListener;
+    private UnityAction<Transform> playerDashEventListener;
     private UnityAction<Vector3> playerFootstepEventListener;
+    private UnityAction<Transform> pistolFireEventListener;
+    private UnityAction<Transform> shotgunFireEventListener;
+    private UnityAction<Transform> rpgFireEventListener;
+    private UnityAction<Transform> dualpistolsFireEventListener;
+    private UnityAction<Transform> railgunFireEventListener;
+
 
     void Awake()
     {
@@ -45,8 +51,10 @@ public class AudioEventManager : MonoBehaviour
         itemAddedEventListener = new UnityAction<Vector3>(itemAddedEventHandler);
         playerDamagedEventListener = new UnityAction<Vector3>(playerDamagedEventHandler);
         playerLandEventListener = new UnityAction<Vector3, float>(playerLandEventHandler);
-        playerDashEventListener = new UnityAction<Vector3>(playerDashEventHandler);
+        playerDashEventListener = new UnityAction<Transform>(playerDashEventHandler);
         playerFootstepEventListener = new UnityAction<Vector3>(playerFootstepEventHandler);
+        pistolFireEventListener = new UnityAction<Transform>(pistolFireEventHandler);
+        shotgunFireEventListener = new UnityAction<Transform>(shotgunFireEventHandler);
     }
 
     void OnEnable()
@@ -55,8 +63,10 @@ public class AudioEventManager : MonoBehaviour
         EventManager.StartListening<ItemAddedEvent, Vector3>(itemAddedEventListener);
         EventManager.StartListening<PlayerDamagedEvent, Vector3>(playerDamagedEventListener);
         EventManager.StartListening<PlayerLandEvent, Vector3, float>(playerLandEventListener);
-        EventManager.StartListening<PlayerDashEvent, Vector3>(playerDashEventListener);
+        EventManager.StartListening<PlayerDashEvent, Transform>(playerDashEventListener);
         EventManager.StartListening<PlayerFootstepEvent, Vector3>(playerFootstepEventListener);
+        EventManager.StartListening<PistolFireEvent, Transform>(pistolFireEventListener);
+
     }
 
     void OnDisable()
@@ -65,8 +75,9 @@ public class AudioEventManager : MonoBehaviour
         EventManager.StopListening<ItemAddedEvent, Vector3>(itemAddedEventListener);
         EventManager.StopListening<PlayerDamagedEvent, Vector3>(playerDamagedEventListener);
         EventManager.StopListening<PlayerLandEvent, Vector3, float>(playerLandEventListener);
-        EventManager.StopListening<PlayerDashEvent, Vector3>(playerDashEventListener);
+        EventManager.StopListening<PlayerDashEvent, Transform>(playerDashEventListener);
         EventManager.StopListening<PlayerFootstepEvent, Vector3>(playerFootstepEventListener);
+        EventManager.StopListening<PistolFireEvent, Transform>(pistolFireEventListener);
     }
 
     void gunAddedEventHandler(Vector3 pos)
@@ -118,11 +129,11 @@ public class AudioEventManager : MonoBehaviour
         }
     }
 
-    void playerDashEventHandler(Vector3 pos)
+    void playerDashEventHandler(Transform transform)
     {
         if (eventSoundPrefab)
         {
-            EventSound snd = Instantiate(eventSoundPrefab, pos, Quaternion.identity, null);
+            EventSound snd = Instantiate(eventSoundPrefab, transform.position, Quaternion.identity, null);
             snd.audioSrc.clip = this.playerDashAudio;
             snd.audioSrc.volume = 0.5f;
             snd.audioSrc.pitch = 1.3f;
@@ -136,6 +147,60 @@ public class AudioEventManager : MonoBehaviour
         {
             EventSound snd = Instantiate(eventSoundPrefab, pos, Quaternion.identity, null);
             snd.audioSrc.clip = this.playerFootStepAudio[Random.Range(0, playerFootStepAudio.Length)];
+            snd.audioSrc.volume = 0.5f;
+            snd.audioSrc.Play();
+        }
+    }
+    void pistolFireEventHandler(Transform transform)
+    {
+        if (eventSoundPrefab)
+        {
+            EventSound snd = Instantiate(eventSoundPrefab, transform.position, Quaternion.identity, null);
+            snd.audioSrc.clip  = this.pistolFireAudio;
+            snd.audioSrc.volume = 0.5f;
+            snd.audioSrc.Play();
+        }
+    }
+
+    void shotgunFireEventHandler(Transform transform)
+    {
+        if (eventSoundPrefab)
+        {
+            EventSound snd = Instantiate(eventSoundPrefab, transform.position, Quaternion.identity, null);
+            snd.audioSrc.clip  = this.shotgunFireAudio;
+            snd.audioSrc.volume = 0.5f;
+            snd.audioSrc.Play();
+        }
+    }
+
+    void rpgFireEventHandler(Transform transform)
+    {
+        if (eventSoundPrefab)
+        {
+            EventSound snd = Instantiate(eventSoundPrefab, transform.position, Quaternion.identity, null);
+            snd.audioSrc.clip  = this.rpgFireAudio;
+            snd.audioSrc.volume = 0.5f;
+            snd.audioSrc.Play();
+        }
+    }
+
+    void dualpistolFireEventHandler(Transform transform)
+    {
+        if (eventSoundPrefab)
+        {
+            EventSound snd = Instantiate(eventSoundPrefab, transform.position, Quaternion.identity, null);
+            snd.audioSrc.clip  = this.dualpistolsFireAudio;
+            snd.audioSrc.volume = 0.5f;
+            snd.audioSrc.Play();
+        }
+    }
+
+    void railgunFireEventHandler(Transform transform)
+    {
+        if (eventSoundPrefab)
+        {
+            EventSound snd = Instantiate(eventSoundPrefab, transform.position, Quaternion.identity, null);
+            snd.audioSrc.clip  = this.railgunFireAudio;
             snd.audioSrc.volume = 0.5f;
             snd.audioSrc.Play();
         }

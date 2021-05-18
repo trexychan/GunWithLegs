@@ -12,7 +12,7 @@ public class PlayerIdleState : PlayerState {
 
     public override void Update(PlayerStateInput stateInput)
     {
-        stateInput.playerController.isGrounded = stateInput.playerController.checkIfGrounded();
+        stateInput.playerController.isGrounded = (stateInput.playerController.jumpTimeWindow > 0);
 
 
         if (stateInput.playerController.dashAble() && stateInput.playerControls.InGame.Dash.WasPressedThisFrame()) {

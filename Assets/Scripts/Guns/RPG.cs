@@ -27,7 +27,6 @@ public class RPG : ProjectileGun
     public override void Shoot()
     {
         Instantiate(bullet, firePt.position, firePt.rotation);
-        player.playSound(fireSound);
         player.DecreasePlayerCurrentHealth(shotCost);
         
     }

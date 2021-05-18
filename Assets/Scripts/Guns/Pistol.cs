@@ -62,7 +62,6 @@ public class Pistol : RaycastGun
             bulletTrail.SetPosition(0,firePt.position);
             bulletTrail.SetPosition(1,firePt.position + temp*maxRange);
         }
-        player.playSound(fireSound);
         player.showBulletTrail(bulletTrail);
         ejectRound();
         player.DecreasePlayerCurrentHealth(shotCost);

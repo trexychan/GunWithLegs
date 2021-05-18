@@ -47,6 +47,7 @@ public class StatePlayerController : MonoBehaviour
     public float dashSpeed;
     public float dashCooldownTime;
     private float dashCooldownTimer;
+    public float jumpTimeWindow = 0.1f;
     public bool canFire = true;
     private bool isImmuneToDamage = false;
     public float invincibilityCooldownTime;
@@ -63,7 +64,6 @@ public class StatePlayerController : MonoBehaviour
     public GameObject deathExplosion;
     public GameObject switchEffect;
     public GameObject deflectshotEffect;
-    public GameObject muzzleflash;
     public GameObject damageflash;
     public GameObject[] bulletObjs = new GameObject[5];
     public List<RuntimeAnimatorController> gunAnimControllers = new List<RuntimeAnimatorController>();
@@ -139,7 +139,6 @@ public class StatePlayerController : MonoBehaviour
         SetPlayerHealthBar(currentPlayerHealth);
 
         if (gunHUDSlots != null) {
-            Debug.Log(gunHUDSlots.Length);
             SetPlayerCurrentGun(currentGun);
         }
         canDoubleJump = PlayerData.Instance.hasAirJorguns;
@@ -147,12 +146,17 @@ public class StatePlayerController : MonoBehaviour
     }
 
     public void Update() {
+        isGrounded = checkIfGrounded();
         updateHitStop();
         updateDashCooldown();
         updateInvincibilityCooldown();
+        updateJumpWindow();
     }
 
-    
+    private void updateJumpWindow()
+    {
+        jumpTimeWindow -= Time.deltaTime;
+    }
 
     public void AddHealth(float health)
     {
@@ -350,6 +354,7 @@ public class StatePlayerController : MonoBehaviour
         if (hit1 || hit2)
         {
             hasDoubleJumped = false;
+            jumpTimeWindow = 0.1f;
             return true;
         }
         else
@@ -413,7 +418,7 @@ public class StatePlayerController : MonoBehaviour
                 gunList[currentGun].Shoot();
                 StartCoroutine(delayNextShot());
             }
-            Instantiate(muzzleflash, firePoint.position, firePoint.rotation);
+            
         }
 
         //sample code to fire camera shake
@@ -577,9 +582,14 @@ public class StatePlayerController : MonoBehaviour
         canDoubleJump = canPlayerDoubleJump;
     }
     public void ExecuteFootstep()
-        {
-            EventManager.TriggerEvent<PlayerFootstepEvent, Vector3>(transform.position);
-        }
+    {
+        EventManager.TriggerEvent<PlayerFootstepEvent, Vector3>(this.gameObject.transform.position);
+    }
+
+    public void ExecuteDash()
+    {
+        EventManager.TriggerEvent<PlayerDashEvent, Transform>(this.gameObject.transform);
+    }
     
     public void addGun(int gunType) {
         if (PlayerData.Instance.gunList.Contains(gunType) == false) {

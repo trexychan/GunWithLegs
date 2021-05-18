@@ -8,14 +8,15 @@ public class MajorInconvenience : Character<MajorInconvenience, MajorState, Majo
     public float moveSpeed = 2.0f;
     public int attackRate = 1;
     public float attackStrength = 1.0f;
+    public bool hasJumped = false;
 
     protected override void Init()
     {
         stateInput.major_inconvenience = this;
         stateInput.anim = GetComponent<Animator>();
         stateInput.spriteRenderer = GetComponent<SpriteRenderer>();
-        stateInput.rb = GetComponent<Rigidbody2D>();
-        stateInput.collider = GetComponent<BoxCollider2D>();
+        stateInput.rb = GetComponentInParent<Rigidbody2D>();
+        stateInput.collider = GetComponentInParent<BoxCollider2D>();
         stateInput.stateChanged = false;
         stateInput.gameobj = gameObject;
         stateInput.enemyController = GetComponent<EnemyController>();
@@ -33,6 +34,17 @@ public class MajorInconvenience : Character<MajorInconvenience, MajorState, Majo
 
     public MajorState GetState() {
         return state;
+    }
+
+    public void JumpAttack()
+    {
+        hasJumped = true;
+        float distanceFromPlayer = stateInput.player.transform.position.x - stateInput.gameobj.transform.position.x;
+        if (stateInput.enemyController.checkIsGrounded())
+        {
+            Debug.Log("jumped");
+            stateInput.rb.AddForce(new Vector2(distanceFromPlayer, 7f), ForceMode2D.Impulse);
+        }
     }
 }
 

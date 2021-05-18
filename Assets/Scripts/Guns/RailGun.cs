@@ -26,7 +26,6 @@ public class RailGun : ProjectileGun
     {
         //Damage player based on ammo cost
         Instantiate(this.bullet, firePt.position, firePt.rotation);
-        player.playSound(fireSound);
         player.DecreasePlayerCurrentHealth(shotCost);
         
     }

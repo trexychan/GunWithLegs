@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8514623881780081819}
   - component: {fileID: 8514623881780081818}
-  - component: {fileID: -4533783773072180045}
+  - component: {fileID: -5438127480325491168}
   m_Layer: 16
   m_Name: damage_flash
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-4533783773072180045
+--- !u!114 &-5438127480325491168
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,8 +92,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8514623881780081816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebffcf0be8c185649be3294226dcb480, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b65ca68a20573747bcb2c4382858841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
-  lifetime: 0.1

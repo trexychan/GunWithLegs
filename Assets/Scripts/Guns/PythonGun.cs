@@ -31,7 +31,6 @@ public class PythonGun : ProjectileGun
             Instantiate(this.bullet, bulletpos, firePt.rotation);
 
         }
-        player.playSound(fireSound);
         player.DecreasePlayerCurrentHealth(shotCost);
         
     }

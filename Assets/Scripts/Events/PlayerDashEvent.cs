@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerDashEvent : UnityEvent<Vector3> {}
+public class PlayerDashEvent : UnityEvent<Transform> {}
 

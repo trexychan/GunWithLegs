@@ -10,7 +10,6 @@ public class GhostWanderState : GhostState
     public override void Enter(GhostStateInput stateInput, CharacterStateTransitionInfo transitionInfo = null)
     {
         //base.Enter(stateInput, transitionInfo);
-        stateInput.anim.Play("Enemy_Move");
         stateInput.rb.velocity = new Vector2(-stateInput.ghost.maxSpeed, 0f);
         targetedWaypoint = stateInput.ghost.waypoint_l;
     }
